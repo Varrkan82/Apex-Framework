@@ -20,15 +20,15 @@ if (_type isEqualTo 'onLoad') then {
 	{
 		(_x select 0) ctrlSetText (_x select 1);
 	} forEach [
-		[(_display displayCtrl 1802),'Radio Management'],
-		[(_display displayCtrl 1804),'Close'],
-		[(_display displayCtrl 1805),'Channels'],
-		[(_display displayCtrl 1806),'Status'],
-		[(_display displayCtrl 1807),'Subscribe']
+		[(_display displayCtrl 1802),'Налаштування Радiо'],
+		[(_display displayCtrl 1804),'Закрити'],
+		[(_display displayCtrl 1805),'Канали'],
+		[(_display displayCtrl 1806),'Статус'],
+		[(_display displayCtrl 1807),'Пiдписатись']
 	];
 	/*/CHANNEL 6 - GENERAL - 1808, 1816, 1827/*/
-	(_display displayCtrl 1808) ctrlSetText 'Side channel';
-	(_display displayCtrl 1808) ctrlSetTooltip 'Side channel';
+	(_display displayCtrl 1808) ctrlSetText 'Канал сторони';
+	(_display displayCtrl 1808) ctrlSetTooltip 'Канал сторони';
 	(_display displayCtrl 1816) ctrlSetText (if (1 in (missionNamespace getVariable 'QS_radioChannels')) then [{'Active'},{'Inactive'}]);
 	(_display displayCtrl 1827) cbSetChecked (1 in (missionNamespace getVariable 'QS_client_radioChannels'));
 	(_display displayCtrl 1827) ctrlSetTooltip '';
@@ -39,15 +39,15 @@ if (_type isEqualTo 'onLoad') then {
 	};
 	/*/
 	/*/CHANNEL 7 - AIRCRAFT - 1809, 1817, 1828/*/
-	(_display displayCtrl 1809) ctrlSetText 'Aircraft';
-	(_display displayCtrl 1809) ctrlSetTooltip 'Pilots and UAV operator';
+	(_display displayCtrl 1809) ctrlSetText 'Повiтря';
+	(_display displayCtrl 1809) ctrlSetTooltip 'Пiлоти та оператори БПЛА';
 	(_display displayCtrl 1817) ctrlSetText (if (2 in (missionNamespace getVariable 'QS_radioChannels')) then [{'Active - Encrypted'},{'Inactive - Encrypted'}]);
 	(_display displayCtrl 1828) cbSetChecked (2 in (missionNamespace getVariable 'QS_client_radioChannels'));
 	(_display displayCtrl 1828) ctrlSetTooltip '';
 	(_display displayCtrl 1828) ctrlEnable FALSE;
 	/*/CHANNEL 8 - AO - 1810, 1818, 1829, 1837/*/
-	(_display displayCtrl 1810) ctrlSetText 'Primary AO';
-	(_display displayCtrl 1810) ctrlSetTooltip 'Main AO channel';
+	(_display displayCtrl 1810) ctrlSetText 'Основної Мiсiї';
+	(_display displayCtrl 1810) ctrlSetTooltip 'Канал основної мiсiї';
 	(_display displayCtrl 1818) ctrlSetText (if (3 in (missionNamespace getVariable 'QS_radioChannels')) then [{'Active'},{'Inactive'}]);
 	(_display displayCtrl 1829) cbSetChecked ((missionNamespace getVariable 'QS_client_radioChannels_dynamic') select 0); /*/(3 in (missionNamespace getVariable 'QS_client_radioChannels'));/*/
 	(_display displayCtrl 1837) cbSetChecked ((missionNamespace getVariable 'QS_client_radioChannels_dynamic') select 0);
@@ -56,8 +56,8 @@ if (_type isEqualTo 'onLoad') then {
 	(_display displayCtrl 1837) ctrlEnable FALSE;
 	(_display displayCtrl 1837) ctrlShow FALSE;
 	/*/CHANNEL 9 - SM - 1811, 1819, 1830, 1838/*/
-	(_display displayCtrl 1811) ctrlSetText 'Secondary AO';
-	(_display displayCtrl 1811) ctrlSetTooltip 'Side Mission channel';
+	(_display displayCtrl 1811) ctrlSetText 'Другорядних Мiсiй';
+	(_display displayCtrl 1811) ctrlSetTooltip 'Канал Другорядних мiсiй';
 	(_display displayCtrl 1819) ctrlSetText (if (4 in (missionNamespace getVariable 'QS_radioChannels')) then [{'Active'},{'Inactive'}]);
 	(_display displayCtrl 1830) cbSetChecked ((missionNamespace getVariable 'QS_client_radioChannels_dynamic') select 1); /*/(4 in (missionNamespace getVariable 'QS_client_radioChannels'));/*/
 	(_display displayCtrl 1838) cbSetChecked ((missionNamespace getVariable 'QS_client_radioChannels_dynamic') select 1);
@@ -84,7 +84,7 @@ if (_type isEqualTo 'onLoad') then {
 	(_display displayCtrl 1833) cbSetChecked (7 in (missionNamespace getVariable 'QS_client_radioChannels'));
 	(_display displayCtrl 1833) ctrlSetTooltip '';
 	/*/CHANNEL 13 - Off-Duty - 1815, 1822, 1834/*/
-	(_display displayCtrl 1815) ctrlSetText 'General';
+	(_display displayCtrl 1815) ctrlSetText 'Основний';
 	(_display displayCtrl 1815) ctrlSetTooltip 'NSFW';
 	(_display displayCtrl 1822) ctrlSetText (if (8 in (missionNamespace getVariable 'QS_radioChannels')) then [{'Active'},{'Inactive'}]);
 	(_display displayCtrl 1834) cbSetChecked (8 in (missionNamespace getVariable 'QS_client_radioChannels'));

@@ -50,11 +50,7 @@ if (_type isEqualTo 0) exitWith {
 		if ((random 1) > 0) then {
 			_spawnPosition = ['RADIUS',_position,150,'LAND',[],FALSE,[],[],TRUE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
 			_v = createVehicle [(selectRandomWeighted ([4] call (missionNamespace getVariable 'QS_fnc_getAIMotorPool'))),_spawnPosition,[],0,'NONE'];
-			missionNamespace setVariable [
-				'QS_analytics_entities_created',
-				((missionNamespace getVariable 'QS_analytics_entities_created') + 1),
-				FALSE
-			];
+			missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + 1),FALSE];
 			_v lock 3;
 			_return pushBack _v;
 			_v addEventHandler ['Killed',(missionNamespace getVariable 'QS_fnc_vKilled2')];
@@ -65,13 +61,18 @@ if (_type isEqualTo 0) exitWith {
 			_v enableVehicleCargo FALSE;
 			_v setUnloadInCombat [TRUE,FALSE];
 			(missionNamespace getVariable 'QS_AI_vehicles') pushBack _v;
-			createVehicleCrew _v;
+			_grp = createVehicleCrew _v;
+			if (!((side _grp) in [EAST,RESISTANCE])) then {
+				_grp = createGroup [EAST,TRUE];
+				{
+					[_x] joinSilent _grp;
+				} forEach (crew _v);
+			};
 			missionNamespace setVariable [
 				'QS_analytics_entities_created',
 				((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _v))),
 				FALSE
 			];
-			_grp = group (effectiveCommander _v);
 			_grp addVehicle _v;
 			[_grp,_position,350,[],TRUE] call (missionNamespace getVariable 'QS_fnc_taskPatrolVehicle');
 			_grp setVariable ['QS_AI_GRP_CONFIG',['GENERAL','VEHICLE',(count (units _grp)),_v],(call (missionNamespace getVariable 'QS_fnc_AIOwners'))];

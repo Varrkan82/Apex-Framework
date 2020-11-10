@@ -23,7 +23,7 @@ _ammo = [
 _va = [
 	['B_MBT_01_arty_F','B_MBT_01_mlrs_F'],
 	['B_T_MBT_01_arty_F','B_T_MBT_01_mlrs_F']
-] select (worldName isEqualTo 'Tanoa');
+] select (worldName in ['Tanoa','Enoch']);
 if (_type isEqualTo 0) exitWith {
 	if ((!isNil {missionNamespace getVariable 'QS_arty'}) && (!isNull (missionNamespace getVariable 'QS_arty'))) exitWith {};
 	if (!((missionNamespace getVariable ['QS_missionConfig_arty',0]) isEqualTo 0)) then {
@@ -37,6 +37,9 @@ if (_type isEqualTo 0) exitWith {
 			};
 			if (worldName isEqualTo 'Malden') then {
 				_dir = 269.346;
+			};
+			if (worldName isEqualTo 'Enoch') then {
+				_dir = 313.506;
 			};
 		} else {
 			_dir = markerDir 'QS_marker_airbaseArtillery';
@@ -57,6 +60,7 @@ if (_type isEqualTo 0) exitWith {
 		_arty setPos _pos;
 		_arty setVariable ['QS_cleanup_protected',TRUE,TRUE];
 		_arty setVariable ['QS_inventory_disabled',TRUE,TRUE];
+		_arty lockInventory TRUE;
 		if (_arty isKindOf 'B_MBT_01_arty_F') then {
 			{
 				_arty removeMagazineTurret [_x,[0]];
@@ -116,7 +120,7 @@ if (_type isEqualTo 0) exitWith {
 						{
 							_unit = _x;
 							if (alive _unit) then {
-								[[],{50 cutText ['The artillery has depleted its allowed shells, no more can be fired until the AO is completed!','PLAIN DOWN',1];}] remoteExec ['call',_unit,FALSE];
+								[[],{50 cutText ['Артилеiя використала весь боєкомплект. Бiльше не можна користуватись, доки не буде завершено зону операцiї!','PLAIN DOWN',1];}] remoteExec ['call',_unit,FALSE];
 							};
 							moveOut _unit;
 						} count (crew (missionNamespace getVariable 'QS_arty'));

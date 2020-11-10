@@ -141,7 +141,7 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
-		briefingName="Invade & Annex: Apex Edition";
+		briefingName="Invade & Annex: Apex Edition [UA]";
 		overviewText="Relaxed, combined-arms coop with infantry focus";
 		startWeather=0.29999998;
 		startWind=0.099999994;
@@ -180,7 +180,7 @@ class Mission
 				disableSimulation=1;
 			};
 			id=98;
-			type="Land_Laptop_unfolded_F";
+			type="Land_Laptop_03_black_F";
 			class CustomAttributes
 			{
 				class Attribute0
@@ -344,7 +344,7 @@ class Mission
 				disableSimulation=1;
 			};
 			id=106;
-			type="Land_Laptop_unfolded_F";
+			type="Land_Laptop_03_black_F";
 			class CustomAttributes
 			{
 				class Attribute0
@@ -392,7 +392,7 @@ class Mission
 			dataType="Marker";
 			position[]={6957.8013,2.6600001,7384.5435};
 			name="QS_marker_base_marker";
-			text="Base";
+			text="База";
 			type="respawn_unknown";
 			colorName="ColorWEST";
 			alpha=0.5;

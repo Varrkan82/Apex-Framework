@@ -63,21 +63,14 @@ if (_type isEqualTo 1) then {
 	if (!isNull (attachedTo _object)) exitWith {};
 	if (!((stance player) isEqualTo 'STAND')) exitWith {};
 	private _chairTaken = FALSE;
-	_nearMen = (getPosATL _object) nearEntities ['Man',0.75];
-	if (!(_nearMen isEqualTo [])) then {
-		if ((count _nearMen) > 1) then {
+	if (!((((getPosATL _object) nearEntities ['Man',0.75]) select {(!(_x isEqualTo player))}) isEqualTo [])) then {
 			_chairTaken = TRUE;
-		} else {
-			if (!(player isEqualTo (_nearMen select 0))) then {
-				_chairTaken = TRUE;
-			};
-		};
 	};
 	if (_chairTaken) exitWith {
-		50 cutText ['Someone is too close to this chair!','PLAIN DOWN'];
+		50 cutText ['Хтось занадто близько до цього стiльця!','PLAIN DOWN'];
 	};
-	if ((toLower (animationState player)) in _sittingAnimations) exitWith {50 cutText ['Already seated!','PLAIN DOWN'];};
-	
+	if ((toLower (animationState player)) in _sittingAnimations) exitWith {50 cutText ['Вже сидить!','PLAIN DOWN'];};
+
 	if (local _object) then {
 		_object setVectorUp [0,0,1];
 	} else {
@@ -100,7 +93,7 @@ if (_type isEqualTo 1) then {
 	player attachTo [_object,[0,_attachY,0]];
 	player setVariable [
 		'QS_interact_actionStand',
-		(player addAction ['Stand',(missionNamespace getVariable 'QS_fnc_clientInteractSit'),0,49,FALSE,TRUE,'','TRUE',-1,FALSE]),
+		(player addAction ['Встати',(missionNamespace getVariable 'QS_fnc_clientInteractSit'),0,49,FALSE,TRUE,'','TRUE',-1,FALSE]),
 		FALSE
 	];
 	player setUserActionText [(player getVariable 'QS_interact_actionStand'),((player actionParams (player getVariable 'QS_interact_actionStand')) select 0),(format ["<t size='3'>%1</t>",((player actionParams (player getVariable 'QS_interact_actionStand')) select 0)])];

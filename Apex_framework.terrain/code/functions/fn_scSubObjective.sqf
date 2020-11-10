@@ -140,7 +140,7 @@ if (_type isEqualTo 1) exitWith {
 			_houseType = [
 				'Land_Cargo_House_V3_F',
 				'Land_Cargo_House_V4_F'
-			] select (worldName isEqualTo 'Tanoa');
+			] select (worldName in ['Tanoa','Enoch']);
 			_position set [2,0];
 			_house = createVehicle [_houseType,_position,[],0,'CAN_COLLIDE'];
 			_house allowDamage FALSE;
@@ -192,7 +192,7 @@ if (_type isEqualTo 1) exitWith {
 			private _grp = [_position,(random 360),EAST,(selectRandom _grpTypes),FALSE] call (missionNamespace getVariable 'QS_fnc_spawnGroup');
 			[(units _grp),2] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
 			{
-				_x setUnitLoadout (['o_soldier_uav_f','o_t_soldier_uav_f'] select (worldName isEqualTo 'Tanoa'));
+				_x setUnitLoadout (['o_soldier_uav_f','o_t_soldier_uav_f'] select (worldName in ['Tanoa','Enoch']));
 				_x allowDamage FALSE;
 				_x setUnitPosWeak (selectRandom ['UP','MIDDLE','UP']);
 				_x setVariable ['QS_hidden',TRUE,TRUE];
@@ -229,7 +229,7 @@ if (_type isEqualTo 1) exitWith {
 			_marker1 setMarkerShape 'ICON';
 			_marker1 setMarkerType 'mil_dot';
 			_marker1 setMarkerColor 'ColorOPFOR';
-			_marker1 setMarkerText (format ['%1Datalink',(toString [32,32,32])]);
+			_marker1 setMarkerText (format ['%1Дата Центр',(toString [32,32,32])]);
 			_marker1 setMarkerSize [0.5,0.5];
 			_marker1 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_1_markers') pushBack _marker1;
@@ -242,9 +242,9 @@ if (_type isEqualTo 1) exitWith {
 			_marker2 setMarkerSize [100,100];
 			_marker2 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_1_markers') pushBack _marker2;
-			_description = 'Locate and secure the enemy datalink.<br/><br/>The enemy datalink allows the enemy to more easily communicate and share information on our troop movements, strength and force disposition. With this data they can adapt and better counter our attacks.<br/><br/> This datalink also allows them to call in UAV recon support. Securing the datalink will deny the enemy these benefits.';
-			_title = 'Secure Datalink';
-			_tooltip = 'Datalink';
+			_description = 'Знайти та знищити ворожий канал звязку.<br/><br/>Дата центр дозволяє ворогу бiльш легко обмiнюватися та дiлитися iнформацiєю про маневри наших бiйцiв. За допомогою цих даних вони можуть адаптуватися та краще протидiяти нашим атакам.<br/><br/> Також дата центр дозволяє їм викликати БПЛА. Знищiть дата центр.';
+			_title = 'Знищити дата центр';
+			_tooltip = 'Дата центр';
 			_icon = 'intel';
 			[
 				'QS_virtualSectors_sub_1_task',
@@ -375,7 +375,7 @@ if (_type isEqualTo 1) exitWith {
 			_marker1 setMarkerShape 'ICON';
 			_marker1 setMarkerType 'mil_dot';
 			_marker1 setMarkerColor 'ColorOPFOR';
-			_marker1 setMarkerText (format ['%1Radio Tower',(toString [32,32,32])]);
+			_marker1 setMarkerText (format ['%1Радiо антена',(toString [32,32,32])]);
 			_marker1 setMarkerSize [0.5,0.5];
 			_marker1 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_2_markers') pushBack _marker1;
@@ -388,9 +388,9 @@ if (_type isEqualTo 1) exitWith {
 			_marker2 setMarkerSize [100,100];
 			_marker2 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_2_markers') pushBack _marker2;
-			_description = 'Destroy the enemy radio tower!<br/><br/>The enemy relies on radio communications to call in helicopter and armored vehicle reinforcements.<br/><br/>Destroying this target will greatly reduce the enemies ability to call in these force multipliers.';
-			_title = 'Destroy Radio Tower';
-			_tooltip = 'Radio Tower';
+			_description = 'Знищити ворожу радiо антену!<br/><br/>Ворог використовує радiозвязок для виклику для пiдкрiплення гвинтокрилiв та броньованого транспорту.<br/><br/>Знищення цiєї цiлi значно зменшить кiлькiсть ворожого транспорту.';
+			_title = 'Знищити радiовежу';
+			_tooltip = 'Радiовежа';
 			_icon = 'destroy';
 			[
 				'QS_virtualSectors_sub_2_task',
@@ -515,7 +515,7 @@ if (_type isEqualTo 1) exitWith {
 			_marker1 setMarkerShape 'ICON';
 			_marker1 setMarkerType 'mil_dot';
 			_marker1 setMarkerColor 'ColorOPFOR';
-			_marker1 setMarkerText (format ['%1Supply Depot',(toString [32,32,32])]);
+			_marker1 setMarkerText (format ['%1Ворожий склад',(toString [32,32,32])]);
 			_marker1 setMarkerSize [0.5,0.5];
 			_marker1 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_3_markers') pushBack _marker1;
@@ -529,9 +529,9 @@ if (_type isEqualTo 1) exitWith {
 			_marker2 setMarkerPos _uncertaintyPos;
 			(missionNamespace getVariable 'QS_virtualSectors_sub_3_markers') pushBack _marker2;
 			missionNamespace setVariable ['QS_virtualSectors_sd_position',_position,FALSE];
-			_description = 'Secure the enemy supply depot.<br/><br/>The enemy relies on this supply depot to distribute advanced gear to the enemy. This depot allows the enemy to equip with more Anti-Air, Anti-Tank and even call in the dreaded Viper units.<br/><br/>Securing this depot will greatly reduce the enemies ability to spawn AA teams, AT teams and Viper teams.<br/><br/>To secure the supply depot, simply use your Scroll Menu on the Taru pod located inside the fortifications.';
-			_title = 'Enemy Supply Depot';
-			_tooltip = 'Suppy Depot';
+			_description = 'Знищити склад противника.<br/><br/>Ворог використовує цей склад для поширення зброї. Цей склад дозволяє ворогам споряджати солдат ПТ i ПП.<br/><br/>Знищення цього складу зменшить кiлькiсть ПП i ПТ бiйцiв<br/><br/>Щоб убезпечити його - просто використай своє Скролл-меню на нижнiй частинi Taru всерединi укрiплення.';
+			_title = 'Ворожий склад';
+			_tooltip = 'Ворожий склад';
 			_icon = 'rearm';
 			[
 				'QS_virtualSectors_sub_3_task',
@@ -554,10 +554,10 @@ if (_type isEqualTo 1) exitWith {
 		};
 	};
 	if (_subType isEqualTo 'SUPPORT') then {
-		comment 'Vehicle support base';
-		
-		
-		
+		comment 'База пiдтримки транспортних засобiв';
+
+
+
 	};
 	if (_subType isEqualTo 'JAMMER') then {
 		private _position = [0,0,0];

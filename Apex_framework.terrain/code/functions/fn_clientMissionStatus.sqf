@@ -6,7 +6,7 @@ Author:
 	
 Last Modified:
 
-	9/12/2017 A3 1.80 by Quiksilver
+	16/07/2019 A3 1.94 by Quiksilver
 
 Description:
 
@@ -54,7 +54,7 @@ _fn_sectorHint = {
 			};
 			if (!(missionNamespace getVariable 'QS_client_vs_msgEnteredCaptureArea')) then {
 				missionNamespace setVariable ['QS_client_vs_msgEnteredCaptureArea',TRUE,FALSE];
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Entering CAPTURE area',[],(serverTime + 15)];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Входимо в зону ЗАХОПЛЕННЯ',[],(serverTime + 15)];
 			};
 			if (missionNamespace getVariable 'QS_client_vs_msgEnteredControlArea') then {
 				missionNamespace setVariable ['QS_client_vs_msgEnteredControlArea',FALSE,FALSE];
@@ -69,11 +69,11 @@ _fn_sectorHint = {
 			};
 			if (!(missionNamespace getVariable 'QS_client_vs_msgEnteredControlArea')) then {
 				missionNamespace setVariable ['QS_client_vs_msgEnteredControlArea',TRUE,FALSE];
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Entering CONTROL area',[],(serverTime + 15)];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Входимо в зону КОНТРОЛЮ',[],(serverTime + 15)];
 			};
 			if (missionNamespace getVariable 'QS_client_vs_msgEnteredCaptureArea') then {
 				missionNamespace setVariable ['QS_client_vs_msgEnteredCaptureArea',FALSE,FALSE];
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Leaving CAPTURE area, entering CONTROL area',[],(serverTime + 15)];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Залишаємо зону ЗАХОПЛЕННЯ, входимо в зону КОНТРОЛЮ',[],(serverTime + 15)];
 			};
 		};
 	} else {
@@ -86,13 +86,13 @@ _fn_sectorHint = {
 		if (missionNamespace getVariable 'QS_client_vs_msgEnteredCaptureArea') then {
 			missionNamespace setVariable ['QS_client_vs_msgEnteredCaptureArea',FALSE,FALSE];
 			if ((_playerPos distance2D _position) < (_radiusControl * 1.5)) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Leaving CAPTURE area',[],(serverTime + 15)];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Залишаємо зону ЗАХОПЛЕННЯ',[],(serverTime + 15)];
 			};
 		};
 		if (missionNamespace getVariable 'QS_client_vs_msgEnteredControlArea') then {
 			missionNamespace setVariable ['QS_client_vs_msgEnteredControlArea',FALSE,FALSE];
 			if ((_playerPos distance2D _position) < (_radiusControl * 1.5)) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Leaving CONTROL area',[],(serverTime + 15)];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [1,FALSE,3,-1,'Залишаємо зону КОНТРОЛЮ',[],(serverTime + 15)];
 			};
 		};
 	};
@@ -775,7 +775,6 @@ _QS_ctrl24_scale = 1.333;
 _QS_ctrl24 ctrlSetScale _QS_ctrl24_scale;
 _QS_ctrl24 ctrlCommit 0;
 
-/*/
 _productVersionCtrl = _display ctrlCreate ['RscText',5678];
 _productVersionCtrl ctrlShow FALSE;
 _productVersionCtrl ctrlSetPosition [
@@ -786,9 +785,8 @@ _productVersionCtrl ctrlSetPosition [
 ];  
 _productVersionCtrl ctrlSetTextColor [1,1,1,0.075];
 _productVersionCtrl ctrlSetFont 'TahomaB';
-_productVersionCtrl ctrlSetText (missionNamespace getVariable ['QS_system_devBuild_text','Apex Framework 1.1.4 (Dev)']);
+_productVersionCtrl ctrlSetText (missionNamespace getVariable ['QS_system_devBuild_text','Apex Framework 1.1.7 (Beta)']);
 _productVersionCtrl ctrlCommit 0;
-/*/
 
 private _virtualSectorsData = [];
 private _progress1 = 0;
@@ -847,9 +845,42 @@ _client_uiCtrl_earplugs ctrlSetPosition [
 	0.075,
 	0.075
 ];
-_client_uiCtrl_earplugs ctrlSetTextColor [0.8,0.8,0.8,1];/*/_QS_color_profile;[1,1,1,0.5];/*/
+_client_uiCtrl_earplugs ctrlSetTextColor [0.8,0.8,0.8,1];
 _client_uiCtrl_earplugs ctrlCommit 0;
 _client_uiCtrl_earplugs = nil;
+
+private _ctrl_aps_1_type = 'APS';
+private _ctrl_aps_count = 0;
+private _ctrl_aps_textSize = 0.8;
+private _ctrl_aps_color_default = [
+	(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0]),
+	(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1]),
+	(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1]),
+	(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])
+];
+private _ctrl_aps_color = _ctrl_aps_color_default;
+_ctrl_aps_1_ctrl = (findDisplay 46) ctrlCreate ['RscStructuredText',30001];
+_ctrl_aps_1_ctrl ctrlSetStructuredText (parseText (format ['<t size="%1">%2</t>',_ctrl_aps_textSize,_ctrl_aps_1_type]));
+_ctrl_aps_1_ctrl ctrlSetTextColor _ctrl_aps_color;
+_ctrl_aps_1_ctrl ctrlSetPosition [
+	(profileNamespace getVariable 'igui_grid_weapon_x') + 0.2275,
+	(profileNamespace getVariable 'igui_grid_weapon_y') + 0.127,
+	0.135,
+	0.04
+];
+_ctrl_aps_1_ctrl ctrlShow FALSE;
+_ctrl_aps_1_ctrl ctrlCommit 0;
+_ctrl_aps_2_ctrl = (findDisplay 46) ctrlCreate ['RscStructuredText',30002];
+_ctrl_aps_2_ctrl ctrlSetStructuredText (parseText (format ['<t size="%1">%2</t>',_ctrl_aps_textSize,_ctrl_aps_count]));
+_ctrl_aps_2_ctrl ctrlSetTextColor _ctrl_aps_color;
+_ctrl_aps_2_ctrl ctrlSetPosition [
+	(profileNamespace getVariable 'igui_grid_weapon_x') + 0.389,
+	(profileNamespace getVariable 'igui_grid_weapon_y') + 0.127,
+	0.06,
+	0.04
+];
+_ctrl_aps_2_ctrl ctrlShow FALSE;
+_ctrl_aps_2_ctrl ctrlCommit 0;
 {
 	_x ctrlCommit 0;
 } forEach [
@@ -879,11 +910,11 @@ _client_uiCtrl_earplugs = nil;
 	_QS_ctrl23,
 	_QS_ctrl24
 ];
-
 _fn_inString = missionNamespace getVariable 'QS_fnc_inString';
 _fn_secondsToString = missionNamespace getVariable 'QS_fnc_secondsToString';
-
+_fn_vehicleAPSParams = missionNamespace getVariable 'QS_fnc_vehicleAPSParams';
 private _isStreamFriendly = isStreamFriendlyUIEnabled;
+private _objectParent = objNull;
 _true = TRUE;
 _false = FALSE;
 //_productVersionCtrl ctrlShow TRUE;
@@ -892,6 +923,7 @@ for '_x' from 0 to 1 step 0 do {
 	_isStreamFriendly = isStreamFriendlyUIEnabled;
 	_currentTask = currentTask player;
 	_currentTaskStr = str _currentTask;
+	_objectParent = objectParent player;
 	if ((missionNamespace getVariable ['QS_mission_aoType','']) isEqualTo 'SC') then {
 		uiSleep 0.05;
 		_virtualSectorsData = missionNamespace getVariable ['QS_virtualSectors_data_public',[]];
@@ -1281,9 +1313,9 @@ for '_x' from 0 to 1 step 0 do {
 			_keyText = _key select [1,((count _key) - 2)];
 		};
 		if (ctrlShown _QS_ctrl0) then {
-			_QS_ctrl_text10 = format ['Press [%1] to hide',_keyText];
+			_QS_ctrl_text10 = format ['Натиснiть [%1] щоб приховати',_keyText];
 		} else {
-			_QS_ctrl_text10 = format ['Press [%1] to show mission status',_keyText];
+			_QS_ctrl_text10 = format ['Натиснiть [%1] щоб вiдобразити статус мiсiї',_keyText];
 		};
 		_QS_ctrl01 ctrlSetTextColor _QS_ctrl01_backgroundColor;
 		{
@@ -1362,10 +1394,6 @@ for '_x' from 0 to 1 step 0 do {
 							'_currentTaskTimerData',
 							'_currentTaskProgressData'
 						];
-						//_currentTaskID = _currentTaskData # 0;
-						//_currentTaskCustomData = _currentTaskData # 1; 
-						//_currentTaskTimerData = _currentTaskData # 2;
-						//_currentTaskProgressData = _currentTaskData # 3;
 						if ([_currentTaskID,_currentTaskStr,_false] call _fn_inString) then {
 							_exit = _true;
 							_currentTaskCustomData params [
@@ -1373,9 +1401,6 @@ for '_x' from 0 to 1 step 0 do {
 								'_currentTaskTooltip',
 								'_currentTaskDescription'
 							];
-							//_currentTaskType = _currentTaskCustomData # 0; 
-							//_currentTaskTooltip = _currentTaskCustomData # 1;
-							//_currentTaskDescription = _currentTaskCustomData # 2;
 							_currentTaskTimer = _currentTaskTimerData # 0; 
 							_currentTaskTimeout = _currentTaskTimerData # 1; 
 							_currentTaskProgress = _currentTaskProgressData # 0; 
@@ -1510,6 +1535,28 @@ for '_x' from 0 to 1 step 0 do {
 			_QS_ctrl24
 		];
 	};
+	if (
+		(!isNull _objectParent) &&
+		{(_objectParent isKindOf 'LandVehicle')} &&
+		{(!((assignedVehicleRole player) isEqualTo [])) && {(((assignedVehicleRole player) # 0) in ['driver','Turret'])}} &&
+		{(!isTurnedOut player)} &&
+		{['APS_VEHICLE',_objectParent] call _fn_vehicleAPSParams}
+	) then {
+		if (!(ctrlShown _ctrl_aps_1_ctrl)) then {
+			_ctrl_aps_1_ctrl ctrlShow _true;
+			_ctrl_aps_2_ctrl ctrlShow _true;
+		};
+		_ctrl_aps_1_ctrl ctrlSetStructuredText (parseText (format ['<t size="%1">%2</t>',_ctrl_aps_textSize,((_objectParent getVariable ['QS_aps_params',[_true,[0,0,0],-1,30,50,-0.3,20,1,_false,'APS']]) # 9)]));
+		_ctrl_aps_2_ctrl ctrlSetStructuredText (parseText (format ['<t size="%1">%2</t>',_ctrl_aps_textSize,(_objectParent getVariable ['QS_aps_ammo',0])]));
+		_ctrl_aps_color = [[1,0,0,0.8],_ctrl_aps_color_default] select (((_objectParent getVariable ['QS_aps_ammo',0]) > 0) && (serverTime > (_objectParent getVariable ['QS_aps_reloadDelay',-1])));
+		_ctrl_aps_1_ctrl ctrlSetTextColor _ctrl_aps_color;
+		_ctrl_aps_2_ctrl ctrlSetTextColor _ctrl_aps_color;
+	} else {
+		if (ctrlShown _ctrl_aps_1_ctrl) then {
+			_ctrl_aps_1_ctrl ctrlShow _false;
+			_ctrl_aps_2_ctrl ctrlShow _false;
+		};
+	};	
 	if (!(_side isEqualTo (player getVariable ['QS_unit_side',_west]))) then {
 		_side = player getVariable ['QS_unit_side',_west];
 	};

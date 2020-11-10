@@ -86,11 +86,7 @@ if (_roadRoadValid isEqualTo [0,0,0]) then {
 _randomRoadPosition = _roadRoadValid;
 _vehicleType = selectRandomWeighted ([1] call (missionNamespace getVariable 'QS_fnc_getAIMotorPool'));
 _vehicle = createVehicle [_vehicleType,[(_randomRoadPosition select 0),(_randomRoadPosition select 1),((_randomRoadPosition select 2) + 5)],[],0,'NONE'];
-missionNamespace setVariable [
-	'QS_analytics_entities_created',
-	((missionNamespace getVariable 'QS_analytics_entities_created') + 1),
-	FALSE
-];	
+missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + 1),FALSE];	
 _arrayVehicles pushBack _vehicle;
 _vehicle lock 3;
 (missionNamespace getVariable 'QS_AI_vehicles') pushBack _vehicle;
@@ -130,8 +126,7 @@ if ((toLower _vehicleType) in ['b_apc_tracked_01_rcws_f','b_t_apc_tracked_01_rcw
 	_unit assignAsCommander _vehicle;
 	_unit moveInCommander _vehicle;
 } else {
-	createVehicleCrew _vehicle;
-	_grp = group (effectiveCommander _vehicle);
+	_grp = createVehicleCrew _vehicle;
 };
 if (!isNull (roadAt _randomRoadPosition)) then {
 	_vehicle setDir (_randomRoadPosition getDir (position ((roadsConnectedTo (roadAt _randomRoadPosition)) select 0)));

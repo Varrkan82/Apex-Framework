@@ -6,7 +6,7 @@ Author:
 	
 Last Modified:
 
-	28/01/2019 A3 1.88 by Quiksilver
+	15/10/2020 A3 2.00 by Quiksilver
 	
 Description:
 
@@ -30,6 +30,7 @@ Notes:
 _______________________________________________________/*/
 
 //=========================================== GET PLAYER ROLE
+
 params [
 	['_side',WEST],
 	['_role','rifleman']
@@ -263,7 +264,11 @@ _backpacksStatic = [
 ];
 // UAV backpacks
 _backpacksUAV = [
-	'b_uav_01_backpack_f','b_uav_06_medical_backpack_f'
+	'b_uav_01_backpack_f','b_uav_06_medical_backpack_f','b_ugv_02_demining_backpack_f','b_ugv_02_science_backpack_f'
+];
+// Radio backpacks
+_backpacksRadio = [
+	'b_radiobag_01_black_f','b_radiobag_01_digi_f','b_radiobag_01_eaf_f','b_radiobag_01_ghex_f','b_radiobag_01_hex_f','b_radiobag_01_mtp_f','b_radiobag_01_tropic_f','b_radiobag_01_oucamo_f','b_radiobag_01_wdl_f'
 ];
 // all goggles
 _gogglesAll = [

@@ -26,7 +26,7 @@ if (isNull (ropeAttachedTo _attachedObject)) then {
 						if (_displayName isEqualTo '') then {
 							_displayName = getText (configFile >> 'CfgVehicles' >> (typeOf _attachedObject) >> 'displayName');
 						};
-						_text = format ['%1 reset for FOB resupply',_displayName];
+						_text = format ['%1 скинуто для переспорядження FOB',_displayName];
 						50 cutText [_text,'PLAIN DOWN',0.5];
 					};
 				};

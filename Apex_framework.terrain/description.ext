@@ -6,7 +6,7 @@ Author:
 
 Last modified:
 
-	30/04/2019 A3 1.92 by Quiksilver
+	19/10/2020 A3 2.00 by Quiksilver
 	
 Description:
 
@@ -50,6 +50,8 @@ disableRandomization[] = {};
 disableGateRandomization = 1;
 class CfgUnitTemplates {};
 class CfgVehicleTemplates {};
+arsenalRestrictedItems[] = {};
+unsafeCVL=1;					// Setting to 0 will disable nighttime AO illumination (ambient fire).  https://community.bistudio.com/wiki/createVehicleLocal
 class CfgDisabledCommands {
     class CREATEUNIT
     {
@@ -173,18 +175,27 @@ class CfgDisabledCommands {
             args[] = {{},{"STRING","TEXT"}};
         };
     };
+    class ONEACHFRAME
+    {
+        class SYNTAX1
+        {
+            targets[] = {0,0,0};
+            args[] = {{},{"STRING","CODE"}};
+        };
+    };
+
 };
 class CfgRemoteExec {
 	class Commands {
-		mode = 2;
+		mode = 1;
 	};
 	class Functions {
-		mode = 2;
+		mode = 1;
 		jip = 0;
 		allowedTargets = 0;
 		class BIS_fnc_callScriptedEventHandler {};
 		class BIS_fnc_curatorRespawn {};
-		class BIS_fnc_deleteTask {jip = 1;};
+		class BIS_fnc_deleteTask {jip = 1;}; 
 		class BIS_fnc_dynamicGroups {};
 		class BIS_fnc_effectKilled {};
 		class BIS_fnc_effectKilledSecondaries {};
@@ -195,6 +206,7 @@ class CfgRemoteExec {
 		class BIS_fnc_objectVar {};
 		class BIS_fnc_playSound {allowedTargets = 1;};
 		class BIS_fnc_sayMessage {allowedTargets = 1;};
+		class BIS_fnc_setCustomSoundController {};
 		class BIS_fnc_setIdentity {};
 		class BIS_fnc_setTask {jip = 1;};
 		class BIS_fnc_setTaskLocal {jip = 1;};
@@ -220,53 +232,53 @@ reviveBleedOutDelay = 120;
 debriefing = 1;
 class CfgDebriefing {
 	class QS_RD_end_1 {
-		title = "Role whitelisted";
-		description = "You have joined a whitelisted role, please re-assign. If you would like to be on the whitelist, please speak to staff.";
+	title = "Роль з Бiлого списку";
+	description = "Ви приєднались до ролi з Бiлого списку. Будь ласка, оберiть iншу. Якщо Ви хочете потрапити до Бiлого списку - зв’яжiться з персоналом.";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_2 {
-		title = "Imperfect connection";
-		description = "Your connection was imperfect, please re-connect. This measure reduces the prevalence of bugs and glitches caused by de-sync/packet loss during initialization. Thank you for your patience.";
+	title = "Погане з’єднання";
+	description = "У Вас погане з’єднанняб будь ласка, перез’єднайтесь. Це допоможе зменшити кiлькiсть помилок та збоїв, що викликає розсинхронiзацiя/втрата пакетiв в процесi iнiцiалiзацiї. Дякуємо за терпiння.";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_3 {
-		title = "Blacklisted";
-		description = "You have been temporarily blacklisted from this role, please re-assign.";
+	title = "У Чорному списку";
+	description = "Вам тимчасово заборонено обирати цю роль (Чорний список). Будь ласка, оберiть iншу.";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_4 {
-		title = "Reserved Profile Name";
-		description = "Your profile name is reserved for a staff member or supporter on this server, please use a different profile name!";
+	title = "Зарезервоване Ім’я";
+	description = "Ваше iм’я зарезервовано за персоналом цього сервера. Будь ласка, скристайтесь профiлем з iншим iм’ям!";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_5 {
-		title = "Invalid Profile Name";
-		description = "Your profile name has been rejected by this server. Please use a different profile name.";
+	title = "Не Вiрне Ім’я профiлю";
+	description = "Ім’я Вашого профiлю заборонено на цьому серверi. Будь ласка, використайте iнше iм’я профiлю.";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_6 {
-		title = "Fighter Pilot Whitelist";
-		description = "You are not whitelisted as a Fighter Pilot.";
+	title = "Бойовий Пiлот (Бiлий список)";
+	description = "Ви не значитесь в Бiлому списку як Бойовий пiлот.";
 		picture = "\a3\UI_F_Jets\Data\CfgUnitInsignia\jets_patch_01.paa";
 	};
 	class QS_RD_end_7 {
-		title = "Depleted Assets";
-		description = "You have depleted your pool of aircraft (3), it will refresh after server restart!";
+	title = "Ресурс вичерпано";
+	description = "Ви вичерпали свiй ресурс на повiтрянi судна (3). Оновиться пiсля рестарту сервера!";
 		picture = "\a3\UI_F_Jets\Data\CfgUnitInsignia\jets_patch_01.paa";	
 	};
 	class QS_RD_end_8 {
-		title = "Role Disabled";
-		description = "This role is currently disabled!";
+	title = "Роль вимкнено";
+	description = "Цю роль зараз вимкнено!";
 		picture = "media\images\insignia\comm_patch.paa";
 	};
 	class QS_RD_end_9 {
-		title = "Insufficient Transport Score";
-		description = "You have insufficient Transport Score as a helipilot, please fly transport!";
+	title = "Недостатньо балiв Транспортувальника";
+	description = "У Вас не достатньо балiв Транспортувальника, як пiлота вертольота. Лiтайте бiльше!";
 		picture = "\a3\UI_F_Jets\Data\CfgUnitInsignia\jets_patch_01.paa";
 	};
 	class QS_RD_end_10 {
-		title = "Insufficient Playtime";
-		description = "You must play on the server more prior to using the Pilot roles";
+	title = "Недостатньо Ігрового часу";
+	description = "Вам треба бiльше грати на цьому серверi щоб скористуватися роллю Пiлота!";
 		picture = "\a3\UI_F_Jets\Data\CfgUnitInsignia\jets_patch_01.paa";	
 	};
 };
@@ -313,6 +325,7 @@ class CfgFunctions {
 			class AIXHeliInsertLanding {file = "code\functions\fn_AIXHeliInsertLanding.sqf";};
 			class AIXHeliInsertVehicle {file = "code\functions\fn_AIXHeliInsertVehicle.sqf";};
 			class AIXHitEvade {file = "code\functions\fn_AIXHitEvade.sqf";};
+			class AIXMissileCountermeasure {file = "code\functions\fn_AIXMissileCountermeasure.sqf";};
 			class AIXRepairVehicle {file = "code\functions\fn_AIXRepairVehicle.sqf";};
 			class AIXSetMine {file = "code\functions\fn_AIXSetMine.sqf";};
 			class AIXSuppressiveFire {file = "code\functions\fn_AIXSuppressiveFire.sqf";};
@@ -323,6 +336,7 @@ class CfgFunctions {
 			class aoBoatPatrol {file = "code\functions\fn_aoBoatPatrol.sqf";};
 			class aoBriefing {file = "code\functions\fn_aoBriefing.sqf";};
 			class aoCreateUXOfield {file = "code\functions\fn_aoCreateUXOfield.sqf";};
+			class aoCustomize {file = "code\functions\fn_aoCustomize.sqf";};
 			class aoDefend {file = "code\functions\fn_aoDefend.sqf";};
 			class aoEnemy {file = "code\functions\fn_aoEnemy.sqf";};
 			class aoEnemyReinforce {file = "code\functions\fn_aoEnemyReinforce.sqf";};
@@ -384,6 +398,7 @@ class CfgFunctions {
 			class clientEventCuratorObjectRegistered {file = "code\functions\fn_clientEventCuratorObjectRegistered.sqf";};
 			class clientEventCuratorWaypointPlaced {file = "code\functions\fn_clientEventCuratorWaypointPlaced.sqf";};
 			class clientEventDraw3D {file = "code\functions\fn_clientEventDraw3D.sqf";};
+			class clientEventEachFrame {file = "code\functions\fn_clientEventEachFrame.sqf";};
 			class clientEventExplosion {file = "code\functions\fn_clientEventExplosion.sqf";};
 			class clientEventFired {file = "code\functions\fn_clientEventFired.sqf";};
 			class clientEventFiredMan {file = "code\functions\fn_clientEventFiredMan.sqf";};
@@ -502,6 +517,7 @@ class CfgFunctions {
 			class clientMFindHealer {file = "code\functions\fn_clientMFindHealer.sqf";};
 			class clientMissionStatus {file = "code\functions\fn_clientMissionStatus.sqf";};
 			class clientProgressVisualization {file = "code\functions\fn_clientProgressVisualization.sqf";};
+			class clientProjectileManager {file = "code\functions\fn_clientProjectileManager.sqf";};
 			class clientRadio {file = "code\functions\fn_clientRadio.sqf";};
 			class clientRepackMagazines {file = "code\functions\fn_clientRepackMagazines.sqf";};
 			class clientRequestMedevac {file = "code\functions\fn_clientRequestMedevac.sqf";};
@@ -539,6 +555,7 @@ class CfgFunctions {
 			class config {file = "code\functions\fn_config.sqf";};
 			class core {file = "code\functions\fn_core.sqf";};
 			class createAAVehicle {file = "code\functions\fn_createAAVehicle.sqf";};
+			class createEntityComposition {file = "code\functions\fn_createEntityComposition.sqf";};
 			class createHQComposition {file = "code\functions\fn_createHQComposition.sqf";};
 			class createMinefield {file = "code\functions\fn_createMinefield.sqf";};
 			class createWell {file = "code\functions\fn_createWell.sqf";};
@@ -558,6 +575,7 @@ class CfgFunctions {
 			class explosiveVestMP {file = "code\functions\fn_explosiveVestMP.sqf";};
 			class eventAgentKilled {file = "code\functions\fn_eventAgentKilled.sqf";};
 			class eventEachFrame {file = "code\functions\fn_eventEachFrame.sqf";};
+			class eventEachFrame2 {file = "code\functions\fn_eventEachFrame2.sqf";};
 			class eventEntityKilled {file = "code\functions\fn_eventEntityKilled.sqf";};
 			class eventEntityRespawned {file = "code\functions\fn_eventEntityRespawned.sqf";};
 			class eventHandleDisconnect {file = "code\functions\fn_eventHandleDisconnect.sqf";};
@@ -568,6 +586,7 @@ class CfgFunctions {
 			class findOverwatchPos {file = "code\functions\fn_findOverwatchPos.sqf";};
 			class findRandomPos {file = "code\functions\fn_findRandomPos.sqf";};
 			class findSafePos {file = "code\functions\fn_findSafePos.sqf";};
+			class fobAssets {file = "code\functions\fn_fobAssets.sqf";};
 			class fobEnable {file = "code\functions\fn_fobEnable.sqf";};
 			class fobEnemyAssault {file = "code\functions\fn_fobEnemyAssault.sqf";};
 			class fobPrepare {file = "code\functions\fn_fobPrepare.sqf";};
@@ -637,6 +656,7 @@ class CfgFunctions {
 			class registerVehicle {file = "code\functions\fn_registerVehicle.sqf";};
 			class remoteExec {file = "code\functions\fn_remoteExec.sqf";};
 			class remoteExecCmd {file = "code\functions\fn_remoteExecCmd.sqf";};
+			class removeWeapon {file = "code\functions\fn_removeWeapon.sqf";};
 			class replaceWithVehicle {file = "code\functions\fn_replaceWithVehicle.sqf";};
 			class respawnOPFOR {file = "code\functions\fn_respawnOPFOR.sqf";};
 			class respawnPilot {file = "code\functions\fn_respawnPilot.sqf";};
@@ -710,6 +730,7 @@ class CfgFunctions {
 			class uavOperator {file = "code\functions\fn_uavOperator2.sqf";};
 			class unitSetup {file = "code\functions\fn_unitSetup.sqf";};
 			class utilityLights {file = "code\functions\fn_utilityLights.sqf";};
+			class vehicleAPSParams {file = "code\functions\fn_vehicleAPSParams.sqf";};
 			class vehicleLoadouts {file = "code\functions\fn_vehicleLoadouts.sqf";};
 			class vEventControlsShifted {file = "code\functions\fn_vEventControlsShifted.sqf";};
 			class vEventRopeAttach {file = "code\functions\fn_vEventRopeAttach.sqf";};
@@ -2380,7 +2401,7 @@ class QS_RD_client_dialog_menu_main {
 		class QS_RD_client_dialog_menu_main_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1000;
-			text = "Client Menu";
+			text = "Меню гравця";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.0955624 * safezoneW;
@@ -2410,7 +2431,7 @@ class QS_RD_client_dialog_menu_main {
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 			text = "";
-			tooltip = "Score, Rating, Health, Equipment";
+			tooltip = "Рахунок, Рейтинг, Здоров’я, Екiпировка";
 		};
 		class QS_RD_client_dialog_menu_main_text_2: QS_RD_dialog_RscText {
 			moving = 1;
@@ -2422,7 +2443,7 @@ class QS_RD_client_dialog_menu_main {
 			sizeEx = 0.028;
 			shadow = 0;
 			colorText[] = {1,1,1,1};
-			tooltip = "FPS, Time to server restart (estimated)";
+			tooltip = "FPS, Час до рестарту сервера (приблизно)";
 		};
 		
 		class QS_RD_client_dialog_menu_main_button_1: QS_RD_dialog_RscButton {
@@ -2537,7 +2558,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 		class QS_RD_client_dialog_menu_view_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Visibility";
+			text = "Видимiсть";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.0955624 * safezoneW;
@@ -2566,7 +2587,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			sizeEx = 0.028;
 			shadow = 0;
 			colorText[] = {1,1,1,1};
-			tooltip = "Health, Equipment load (kg), FPS";
+			tooltip = "Здоров’я, Вага екiпировки (кг), FPS";
 		};
 		class QS_RD_client_dialog_menu_view_button_1: QS_RD_dialog_RscButtonInvisible {
 			moving = 1;
@@ -2578,7 +2599,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			h = 0.0410023 * safezoneH;
 			shadow = 0;
 			onButtonClick = "['onButtonClick',0] call (missionNamespace getVariable 'QS_fnc_clientViewOptions');";
-			tooltip = "Visibility on foot";
+			tooltip = "Видимiсть пiшки";
 		};
 		class QS_RD_client_dialog_menu_view_picture_2: QS_RD_dialog_RscPictureKeepAspect {
 			moving = 1;
@@ -2593,7 +2614,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 		class QS_RD_client_dialog_menu_view_text_2: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1806;
-			text = "Overall";
+			text = "Загалом";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.655 * safezoneH + safezoneY;
 			w = 0.05 * safezoneW;
@@ -2650,7 +2671,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			h = 0.0410023 * safezoneH;
 			shadow = 0;
 			onButtonClick = "['onButtonClick',1] call (missionNamespace getVariable 'QS_fnc_clientViewOptions');";
-			tooltip = "Visibility in land vehicle or boat";
+			tooltip = "Видимiсть в наземному транспортi або в човнах";
 		};
 		class QS_RD_client_dialog_menu_view_picture_3: QS_RD_dialog_RscPictureKeepAspect {
 			moving = 1;
@@ -2722,7 +2743,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			h = 0.0410023 * safezoneH;
 			shadow = 0;
 			onButtonClick = "['onButtonClick',2] call (missionNamespace getVariable 'QS_fnc_clientViewOptions');";
-			tooltip = "Visibility in helicopter";
+			tooltip = "Видимiсть в гелiкоптерах";
 		};
 		class QS_RD_client_dialog_menu_view_picture_4: QS_RD_dialog_RscPictureKeepAspect {
 			moving = 1;
@@ -2737,7 +2758,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 		class QS_RD_client_dialog_menu_view_text_6: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1816;
-			text = "Shadow";
+			text = "Тiнь";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.755 * safezoneH + safezoneY;
 			w = 0.05 * safezoneW;
@@ -2794,7 +2815,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			h = 0.0410023 * safezoneH;
 			shadow = 0;
 			onButtonClick = "['onButtonClick',3] call (missionNamespace getVariable 'QS_fnc_clientViewOptions');";
-			tooltip = "Visibility in plane";
+			tooltip = "Видимiсть в лiтаках";
 		};
 		class QS_RD_client_dialog_menu_view_picture_5: QS_RD_dialog_RscPictureKeepAspect {
 			moving = 1;
@@ -2809,7 +2830,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 		class QS_RD_client_dialog_menu_view_text_8: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1821;
-			text = "Grass";
+			text = "Трава";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.805 * safezoneH + safezoneY;
 			w = 0.05 * safezoneW;
@@ -2824,7 +2845,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0,0};
-			tooltip = "Terrain resolution. Lower = more detail. Higher = less detail.";
+			tooltip = "Роздiльна здатнiсть землi. Нижче = детальнiше. Вище = менш детально.";
 		};
 		class QS_RD_client_dialog_menu_view_xslider_4 : QS_RD_XSlider {
 			moving = 1;
@@ -2860,7 +2881,7 @@ class QS_RD_client_dialog_menu_viewSettings {
 		class QS_RD_client_dialog_menu_view_button_5: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1824;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -2901,7 +2922,7 @@ class QS_RD_client_dialog_menu_options {
 		class QS_RD_client_dialog_menu_options_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Options";
+			text = "Опцii";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.0955624 * safezoneW;
@@ -2924,8 +2945,8 @@ class QS_RD_client_dialog_menu_options {
 		class QS_RD_client_dialog_menu_options_text_2: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1804;
-			text = "Stamina";
-			tooltip = "ArmA 3 Stamina";
+			text = "Витривалiсть";
+			tooltip = "Витривалiсть ArmA 3";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.59 * safezoneH + safezoneY;
 			w = 0.045 * safezoneW;
@@ -2949,13 +2970,13 @@ class QS_RD_client_dialog_menu_options {
 			y = 0.585 * safezoneH + safezoneY;
 			w = 0.02 * safezoneW;
 			h = 0.04 * safezoneH;
-			tooltip = "Click to toggle Stamina";
+			tooltip = "Натиснiть щоб увiмкнути Витривалiсть";
 			onCheckedChanged = "['StaminaCheckbox',_this select 0,_this select 1] call (missionNamespace getVariable 'QS_fnc_clientMenuOptions');";
 		};
 		class QS_RD_client_dialog_menu_options_text_3: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1806;
-			text = "Weapon Sway";
+			text = "Коливання зброi";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.63 * safezoneH + safezoneY;
 			w = 0.08 * safezoneW;
@@ -2970,7 +2991,7 @@ class QS_RD_client_dialog_menu_options {
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0,0};
-			tooltip = "Aim Coefficient";
+			tooltip = "Коефiцiент прицiлювання";
 		};
 		class QS_RD_client_dialog_menu_options_xslider_1 : QS_RD_XSlider {
 			moving = 1;
@@ -3007,7 +3028,7 @@ class QS_RD_client_dialog_menu_options {
 		class QS_RD_client_dialog_menu_options_text_5: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1809;
-			text = "First-Person";
+			text = "Вид вiд першоі особи";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.695 * safezoneH + safezoneY;
 			w = 0.08 * safezoneW;
@@ -3022,7 +3043,7 @@ class QS_RD_client_dialog_menu_options {
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0,0};
-			tooltip = "Lock to first-person. Can only change once per 20 minutes or by re-connect.";
+			tooltip = "Блокування виду вiд першоi особи. Можна змiнити раз на 20 хвилин або пiсля реконекту.";
 		};
 		class QS_RD_client_dialog_menu_options_checkbox_2 : QS_RD_RscCheckbox {
 			moving = 1;
@@ -3031,13 +3052,13 @@ class QS_RD_client_dialog_menu_options {
 			y = 0.69 * safezoneH + safezoneY;
 			w = 0.02 * safezoneW;
 			h = 0.04 * safezoneH;
-			tooltip = "Toggle First-Person Lock";
+			tooltip = "Перемкнути вид вiд першоі особи";
 			onCheckedChanged = "['1PVCheckbox',(_this select 0),(_this select 1)] spawn (missionNamespace getVariable 'QS_fnc_clientMenuOptions');";
 		};
 		class QS_RD_client_dialog_menu_options_button_1: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1811;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3050,7 +3071,7 @@ class QS_RD_client_dialog_menu_options {
 		class QS_RD_client_dialog_menu_options_text_6: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1812;
-			text = "Squad Radar";
+			text = "Радар пiдроздiлу";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.735 * safezoneH + safezoneY;
 			w = 0.08 * safezoneW;
@@ -3079,8 +3100,8 @@ class QS_RD_client_dialog_menu_options {
 		class QS_RD_client_dialog_menu_options_text_7: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1814;
-			text = "Ambient Life";
-			tooltip = "Ambient Life (snakes, fish, rabbits) use some CPU calculations. Disabling will slightly raise FPS.";
+			text = "Навколишнє життя";
+			tooltip = "Навколишнє життя (змii, риби, кролi) трохи вiдбирають потожностi CPU. Вiдключення дещу збiльшить FPS.";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.78 * safezoneH + safezoneY;
 			w = 0.08 * safezoneW;
@@ -3103,14 +3124,14 @@ class QS_RD_client_dialog_menu_options {
 			y = 0.775 * safezoneH + safezoneY;
 			w = 0.02 * safezoneW;
 			h = 0.04 * safezoneH;
-			tooltip = "Toggle Ambient Life (fish, snakes, rabbits)";
+			tooltip = "Перемкнути Навколишнє життя (змii, риби, кролi)";
 			onCheckedChanged = "['AmbientCheckbox',(_this select 0),(_this select 1)] spawn (missionNamespace getVariable 'QS_fnc_clientMenuOptions');";
 		};
 		class QS_RD_client_dialog_menu_options_text_8: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1816;
-			text = "Dynamic Simulation";
-			tooltip = "Experimental (Use at own risk!). Reduces CPU calculations from distant and non-visible entities. Enabling may raise FPS in some situations. Not available for pilots.";
+			text = "Динамiчна симуляцiя";
+			tooltip = "Експериментально (Використовуйте на власний ризик!). Знижує навантаження на CPU вiд вiддалених та невидимих об’єктiв. Увiмкнення може збiльшити FPS iв деяких ситуяцiях. Не доступно для пiлотiв.";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.825 * safezoneH + safezoneY;
 			w = 0.08 * safezoneW;
@@ -3133,7 +3154,7 @@ class QS_RD_client_dialog_menu_options {
 			y = 0.82 * safezoneH + safezoneY;
 			w = 0.02 * safezoneW;
 			h = 0.04 * safezoneH;
-			tooltip = "Toggle Dynamic Simulation";
+			tooltip = "Перемикнути Динамiчну симуляцiю";
 			onCheckedChanged = "['DynSimCheckbox',(_this select 0),(_this select 1)] spawn (missionNamespace getVariable 'QS_fnc_clientMenuOptions');";
 		};
 	};
@@ -3167,7 +3188,7 @@ class QS_RD_client_dialog_menu_supporters {
 		class QS_RD_client_dialog_menu_supporters_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Area 51";
+			text = "Зона 51";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.0955624 * safezoneW;
@@ -3203,7 +3224,7 @@ class QS_RD_client_dialog_menu_supporters {
 		class QS_RD_client_dialog_menu_supporters_button_2: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1805;
-			text = "Insignia";
+			text = "Знаки розпізнавання";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.625 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3212,12 +3233,12 @@ class QS_RD_client_dialog_menu_supporters {
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 			onButtonClick = "['B2',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuSupporters');";
-			tooltip = "Shoulder patches";
+			tooltip = "Наліпки на плече";
 		};
 		class QS_RD_client_dialog_menu_supporters_button_3: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1806;
-			text = "Uniform Textures";
+			text = "Текстури уніформи";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.67 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3226,12 +3247,12 @@ class QS_RD_client_dialog_menu_supporters {
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 			onButtonClick = "['B3',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuSupporters');";
-			tooltip = "Custom uniform textures";
+			tooltip = "Користувацькі текстури уніформи";
 		};
 		class QS_RD_client_dialog_menu_supporters_button_4: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1807;
-			text = "Vehicle Textures";
+			text = "Текстури транспорта";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.715 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3240,7 +3261,7 @@ class QS_RD_client_dialog_menu_supporters {
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 			onButtonClick = "['B4',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuSupporters');";
-			tooltip = "Custom vehicle textures";
+			tooltip = "Користувацькі текстури транспорту";
 		};
 		class QS_RD_client_dialog_menu_supporters_button_5: QS_RD_dialog_RscButton {
 			moving = 1;
@@ -3259,7 +3280,7 @@ class QS_RD_client_dialog_menu_supporters {
 		class QS_RD_client_dialog_menu_supporters_button_6: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1809;
-			text = "Change Log";
+			text = "Перелік змін";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.805 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3268,12 +3289,12 @@ class QS_RD_client_dialog_menu_supporters {
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 			onButtonClick = "['B6',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuSupporters');";
-			tooltip = "Latest updates";
+			tooltip = "Останні зміни";
 		};
 		class QS_RD_client_dialog_menu_supporters_button_7: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3314,7 +3335,7 @@ class QS_RD_client_dialog_menu_vtexture {
 		class QS_RD_client_dialog_menu_vtexture_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Vehicle";
+			text = "Транспорт";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.139 * safezoneW;
@@ -3326,7 +3347,7 @@ class QS_RD_client_dialog_menu_vtexture {
 		class QS_RD_client_dialog_menu_vtexture_button_1: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Select";
+			text = "Обрати";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.815 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3339,7 +3360,7 @@ class QS_RD_client_dialog_menu_vtexture {
 		class QS_RD_client_dialog_menu_vtexture_button_2: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1811;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3402,7 +3423,7 @@ class QS_RD_client_dialog_menu_wounded {
 			moving = 1;
 			idc = 1000;
 			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 1};
-			text = "Revive Menu";
+			text = "Меню Оживлення";
 			font = "RobotoCondensed";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1.05)";
 			shadow = 1;
@@ -3441,7 +3462,7 @@ class QS_RD_client_dialog_menu_wounded {
 		class QS_Menu_Wounded_Text_RespawnAt01: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1003;
-			text = "Respawn at:";
+			text = "Респаун в :";
 			font = "RobotoCondensed";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			shadow = 1;
@@ -3454,20 +3475,20 @@ class QS_RD_client_dialog_menu_wounded {
 		class QS_Menu_Wounded_Button_Wait01: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1600;
-			text = "Wait for Medic";
+			text = "Чекати Медика";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			x = 0.636581 * safezoneW + safezoneX;
 			y = 0.647874 * safezoneH + safezoneY;
 			w = 0.175695 * safezoneW;
 			h = 0.0381268 * safezoneH;
 			onButtonClick="[1] call (missionNamespace getVariable 'QS_fnc_clientMenuWounded')";
-			tooltip = "Commit to waiting for medic. Will disable respawn buttons";
+			tooltip = "Очікувати на медика. Кнопку відродження буде вимкнуто";
 			colorText[] = {1,1,1,1};
 		};
 		class QS_Menu_Wounded_Button_Spectate01: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1601;
-			text = "Spectate Group Members";
+			text = "Спостерігати за членами групи";
 			font = "RobotoCondensed";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			x = 0.636581 * safezoneW + safezoneX;
@@ -3475,13 +3496,13 @@ class QS_RD_client_dialog_menu_wounded {
 			w = 0.175695 * safezoneW;
 			h = 0.0381268 * safezoneH;
 			onButtonClick="[2] call (missionNamespace getVariable 'QS_fnc_clientMenuWounded')";
-			tooltip = "Spectate members of your group while you wait";
+			tooltip = "Спостерігайте за членами групи доки ви очікуєте";
 			colorText[] = {1,1,1,1};
 		};
 		class QS_Menu_Wounded_Button_Camera01: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1602;
-			text = "Camera Mode";
+			text = "Режим камери";
 			font = "RobotoCondensed";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			x = 0.636581 * safezoneW + safezoneX;
@@ -3489,7 +3510,7 @@ class QS_RD_client_dialog_menu_wounded {
 			w = 0.175695 * safezoneW;
 			h = 0.0381268 * safezoneH;
 			onButtonClick="[3] call (missionNamespace getVariable 'QS_fnc_clientMenuWounded')";
-			tooltip = "Toggle night vision";
+			tooltip = "Увімкнути нічне бачення";
 			colorText[] = {1,1,1,1};
 		};
 		class QS_Menu_Wounded_Button_Placeholder01: QS_RD_dialog_RscButton {
@@ -3508,7 +3529,7 @@ class QS_RD_client_dialog_menu_wounded {
 		class QS_Menu_Wounded_Button_Respawn01: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1604;
-			text = "BASE";
+			text = "БАЗА";
 			font = "RobotoCondensed";
 			SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			x = 0.636581 * safezoneW + safezoneX;
@@ -3516,7 +3537,7 @@ class QS_RD_client_dialog_menu_wounded {
 			w = 0.0863985 * safezoneW;
 			h = 0.0602632 * safezoneH;
 			onButtonClick="[5] call (missionNamespace getVariable 'QS_fnc_clientMenuWounded')";
-			tooltip = "Respawn at main base";
+			tooltip = "Відродження на базі";
 			colorText[] = {1,1,1,1};
 		};
 		class QS_Menu_Wounded_Button_Respawn02: QS_RD_dialog_RscButton {
@@ -3530,7 +3551,7 @@ class QS_RD_client_dialog_menu_wounded {
 			w = 0.0853985 * safezoneW;
 			h = 0.0602632 * safezoneH;
 			onButtonClick="[6] call (missionNamespace getVariable 'QS_fnc_clientMenuWounded')";
-			tooltip = "Soon™";
+			tooltip = "Скоро™";
 			colorText[] = {1,1,1,1};
 		};		
 	};
@@ -3564,7 +3585,7 @@ class QS_RD_client_dialog_menu_insignia {
 		class QS_RD_client_dialog_menu_insignia_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Insignia";
+			text = "Знаки розпізнавання";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.139 * safezoneW;
@@ -3576,7 +3597,7 @@ class QS_RD_client_dialog_menu_insignia {
 		class QS_RD_client_dialog_menu_insignia_button_1: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Select";
+			text = "Обрати";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.815 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3589,7 +3610,7 @@ class QS_RD_client_dialog_menu_insignia {
 		class QS_RD_client_dialog_menu_insignia_button_2: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1811;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3652,7 +3673,7 @@ class QS_RD_client_dialog_menu_utexture {
 		class QS_RD_client_dialog_menu_utexture_button_1: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Select";
+			text = "Обрати";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.815 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3665,7 +3686,7 @@ class QS_RD_client_dialog_menu_utexture {
 		class QS_RD_client_dialog_menu_utexture_button_2: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1811;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3723,7 +3744,7 @@ class QS_RD_client_dialog_menu_hub {
 		class QS_RD_client_dialog_menu_hub_text_1: QS_RD_dialog_RscText {
 			moving = 1;
 			idc = 1802;
-			text = "Comm-Link";
+			text = "Зв'язок";
 			x = 0.374500 * safezoneW + safezoneX;
 			y = 0.525 * safezoneH + safezoneY;
 			w = 0.0955624 * safezoneW;
@@ -3823,7 +3844,7 @@ class QS_RD_client_dialog_menu_hub {
 		class QS_RD_client_dialog_menu_hub_button_6: QS_RD_RscStructuredText {
 			moving = 1;
 			idc = 1809;
-			text = "Community Donation";
+			text = "Донат Спільноті";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.6225 * safezoneH + safezoneY; //y = 0.63 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
@@ -3841,13 +3862,13 @@ class QS_RD_client_dialog_menu_hub {
 		class QS_RD_client_dialog_menu_hub_button_7: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Back";
+			text = "Назад";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
 			h = 0.0340016 * safezoneH;
 			sizeEx = 0.03;
-			onButtonClick = "['Back',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuHub');";
+			onButtonClick = "['Назад',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuHub');";
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 		};
@@ -4028,13 +4049,13 @@ class QS_RD_client_dialog_menu_context {
 		class QS_RD_client_dialog_menu_context_button_7: QS_RD_dialog_RscButton {
 			moving = 1;
 			idc = 1810;
-			text = "Close";
+			text = "Закрити";
 			x = 0.38 * safezoneW + safezoneX;
 			y = 0.87 * safezoneH + safezoneY;
 			w = 0.13 * safezoneW;
 			h = 0.0340016 * safezoneH;
 			sizeEx = 0.03;
-			onButtonClick = "['Close',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuContext');";
+			onButtonClick = "['Закрити',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuContext');";
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 		};
@@ -4088,7 +4109,7 @@ class QS_RD_client_dialog_menu_entry {
 		};
 		class QS_RD_client_dialog_menu_entry_button_1: QS_RD_dialog_RscButton {
 			idc = 1804;
-			text = "Continue";
+			text = "Продовжити";
 			x = 0.65 * safezoneW + safezoneX;
 			y = 0.855 * safezoneH + safezoneY;
 			w = 0.10 * safezoneW;

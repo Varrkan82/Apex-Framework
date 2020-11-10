@@ -16,7 +16,7 @@ __________________________________________________________/*/
 params ['','_key','_shift','_ctrl','_alt'];
 private _c = FALSE; 
 player setVariable ['QS_client_afkTimeout',time,FALSE]; 
-if (_key isEqualTo 5) then { 	
+if (_key isEqualTo 5) then {
 	if (commandingMenu isEqualTo '') then {
 		if (isNull (objectParent player)) then {
 			if (isNull (attachedTo player)) then {
@@ -75,13 +75,15 @@ if (_key in (actionKeys 'PushToTalk')) then {
 				};
 			} else {
 				if (currentChannel isEqualTo 7) then {
-					if (!(player getUnitTrait 'QS_trait_pilot')) then {
-						if (!(player getUnitTrait 'uavhacker')) then {
-							if (!(player getUnitTrait 'QS_trait_HQ')) then {
-								if (!((getPlayerUID player) in (['ALL'] call (missionNamespace getVariable 'QS_fnc_whitelist')))) then {
-									setCurrentChannel 5;
-									50 cutText ['Only Pilots and UAV Operator can transmit voice on Aircraft channel','PLAIN DOWN'];
-									_c = TRUE;
+					if (!(player getUnitTrait 'QS_trait_fighterPilot')) then {
+						if (!(player getUnitTrait 'QS_trait_pilot')) then {
+							if (!(player getUnitTrait 'uavhacker')) then {
+								if (!(player getUnitTrait 'QS_trait_HQ')) then {
+									if (!((getPlayerUID player) in (['ALL'] call (missionNamespace getVariable 'QS_fnc_whitelist')))) then {
+										setCurrentChannel 5;
+										50 cutText ['Only Pilots and UAV Operator can transmit voice on Aircraft channel','PLAIN DOWN'];
+										_c = TRUE;
+									};
 								};
 							};
 						};
@@ -458,5 +460,9 @@ if (_key in (actionKeys 'HeliManualFire')) then {
 			};
 		};
 	};
+};
+if (_key isEqualTo 219) then {
+	uiNamespace setVariable ['QS_client_menu_interaction',TRUE];
+	//systemChat 'Interaction key down';
 };
 _c;

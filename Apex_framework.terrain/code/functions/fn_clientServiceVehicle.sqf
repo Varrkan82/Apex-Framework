@@ -16,9 +16,9 @@ __________________________________________________/*/
 private ['_v','_t','_c','_rt','_nearestServiceSite','_fuel'];
 _t = cursorTarget;
 _v = vehicle player;
-if (_t getVariable 'under_service') exitWith {50 cutText ['Vehicle currently being serviced','PLAIN DOWN',0.5];};
-if (_v getVariable 'under_service') exitWith {50 cutText ['Vehicle currently being serviced','PLAIN DOWN',0.5];};
-if (missionNamespace getVariable 'QS_repairing_vehicle') exitWith {50 cutText ['Already servicing a vehicle','PLAIN DOWN',0.5];};
+if (_t getVariable 'under_service') exitWith {50 cutText ['Щойно виконано технiчне обслуговування транспорту','PLAIN DOWN',0.5];};
+if (_v getVariable 'under_service') exitWith {50 cutText ['Щойно виконано технiчне обслуговування транспорту','PLAIN DOWN',0.5];};
+if (missionNamespace getVariable 'QS_repairing_vehicle') exitWith {50 cutText ['Вже виконується технiчне обслуговування транспорту','PLAIN DOWN',0.5];};
 private _isUAV = unitIsUav cameraOn;
 if (_isUAV) then {
 	_v = cameraOn;
@@ -61,6 +61,10 @@ if (!((missionNamespace getVariable ['QS_missionConfig_destroyerEnabled',0]) isE
 
 /*/=========================================== BASE SERVICE/*/
 private _isDepot = [_v] call (missionNamespace getVariable 'QS_fnc_isNearRepairDepot');
+if (_isDepot) then {
+	_fieldService = FALSE;
+	_baseService = TRUE
+};
 private _isQualified = TRUE;
 if ((_baseService) || (_isDepot)) then {
 	/*/=========================================== QUALIFY BY VEHICLE TYPE/*/
@@ -68,27 +72,27 @@ if ((_baseService) || (_isDepot)) then {
 		if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_landservice_mkrs')) then {
 			if (!(_v isKindOf 'LandVehicle')) then {
 				_isQualified = FALSE;
-				50 cutText ['This service area is for Land Vehicles only, soldier!','PLAIN DOWN',0.5];
+				50 cutText ['Ця зона тех.обслуговування тiльки для наземного транспорту, солдате!','PLAIN DOWN',0.5];
 			};
 		};
 		if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_planeservice_mkrs')) then {
 			if (!(_v isKindOf 'Plane')) then {
 				_isQualified = FALSE;
-				50 cutText ['This service area is for Planes/VTOL only, soldier!','PLAIN DOWN',0.5];
+				50 cutText ['Ця зона тех.обслуговування тiльки для  Лiтакiв/VTOL-iв, солдате!','PLAIN DOWN',0.5];
 			};
 		};
 		
 		if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_heliservice_mkrs')) then {
 			if (!(_v isKindOf 'Helicopter')) then {
 				_isQualified = FALSE;
-				50 cutText ['This service area is for Helicopters (not VTOL) only, soldier!','PLAIN DOWN',0.5];
+				50 cutText ['Ця зона тех.обслуговування тiльки для гелiкоптерiв (не VTOL), солдате!','PLAIN DOWN',0.5];
 			};
 		};
 	};
 	if (!(local _v)) then {_isQualified = FALSE;};
 	if (!(_isQualified)) exitWith {};
 	if ((!(player isEqualTo (effectiveCommander _v))) && (!(_isUAV))) exitWith {
-		(missionNamespace getVariable 'QS_managed_hints') pushBack [2,FALSE,7.5,-1,'At base, you must be the vehicle commander/driver to commence service!',[],-1];
+		(missionNamespace getVariable 'QS_managed_hints') pushBack [2,FALSE,7.5,-1,'На базi, ви маєте бути командиром/водiєм транспорту щоб початку обслуговування!',[],-1];
 	};
 	_rt = 10 + (60 * (damage _v));
 	if (_v isKindOf 'Plane') then {
@@ -99,7 +103,7 @@ if ((_baseService) || (_isDepot)) then {
 	_sv = TRUE;
 	_onCompleted = {
 		params ['_v'];
-		50 cutText ['Vehicle service finished','PLAIN DOWN',0.5];
+		50 cutText ['Обслуговування транспорту закiнчено','PLAIN DOWN',0.5];
 		_v setDamage [0,FALSE];
 		if (local _v) then {
 			_v setFuel 1;
@@ -115,6 +119,9 @@ if ((_baseService) || (_isDepot)) then {
 		_v setFuelCargo 1;
 		_v setRepairCargo 1;
 		_v setAmmoCargo 1;
+		if (_v isKindOf 'LandVehicle') then {
+			[_v] call (missionNamespace getVariable 'QS_fnc_vehicleAPSParams');
+		};
 		if ((['medical',(typeOf _v),FALSE] call (missionNamespace getVariable 'QS_fnc_inString')) || {(['medevac',(typeOf _v),FALSE] call (missionNamespace getVariable 'QS_fnc_inString'))}) then {
 			_v setVariable ['QS_medicalVehicle_reviveTickets',(getNumber (configFile >> 'CfgVehicles' >> (typeOf _v) >> 'transportSoldier')),TRUE];
 		};
@@ -173,8 +180,8 @@ if ((_baseService) || (_isDepot)) then {
 			]) then {
 				if (diag_tickTime > (uiNamespace getVariable ['QS_fighterPilot_lastMsg',(diag_tickTime - 1)])) then {
 					uiNamespace setVariable ['QS_fighterPilot_lastMsg',(diag_tickTime + 300)];
-					[63,[4,['CAS_1',['','Close Air Support online!']]]] remoteExec ['QS_fnc_remoteExec',-2,FALSE];
-					['sideChat',[WEST,'AirBase'],(format ['Close Air Support (%1) is available. Pilot: %2',(getText (configFile >> 'CfgVehicles' >> (typeOf _v) >> 'displayName')),profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+					[63,[4,['CAS_1',['','Повiтряна пiдтримка в мережi!']]]] remoteExec ['QS_fnc_remoteExec',-2,FALSE];
+					['sideChat',[WEST,'AirBase'],(format ['Повiтряна пiдтримка (%1) доступна. Пiлот: %2',(getText (configFile >> 'CfgVehicles' >> (typeOf _v) >> 'displayName')),profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 				};
 			};
 		};
@@ -193,7 +200,7 @@ if ((_baseService) || (_isDepot)) then {
 		if (!(player isEqualTo player)) then {_c = TRUE;};
 		if (!alive _v) then {_c = TRUE;};
 		if ((isEngineOn _v) && (!(unitIsUav cameraOn))) then {
-			50 cutText ['Engine must be off to service vehicle','PLAIN DOWN',0.3];
+			50 cutText ['Двигун має бути вимкнено для обслуговування транспорту','PLAIN DOWN',0.3];
 			_c = TRUE;
 		};
 		if (_c) then {
@@ -202,7 +209,7 @@ if ((_baseService) || (_isDepot)) then {
 		_c;
 	};
 	[
-		'Servicing vehicle ...',
+		'Обслуговування транспорту ...',
 		_rt,
 		0,
 		[[_v],{FALSE}],							/*/onProgress/*/
@@ -239,34 +246,34 @@ if ((_baseService) || (_isDepot)) then {
 
 if (_fieldService) then {
 	if ((isNull (objectParent player)) && (!alive _t)) exitWith {
-		50 cutText ['Even duct tape cannot save this vehicle, sorry','PLAIN DOWN',0.5];
+		50 cutText ['Навiть iзолента вже не допоможе цьому транспорту, вибач.','PLAIN DOWN',0.5];
 	};
 	if (!(_v isKindOf 'Man')) exitWith {
-		50 cutText ['In the field, service must be done manually. Get out of the vehicle, soldier!','PLAIN DOWN',1];
+		50 cutText ['В полi, обслуговування треба виконати вручну. Вилазь з машини, солдате!','PLAIN DOWN',1];
 	};
 	/*/=========================================== QUALIFY BY VEHICLE TYPE/*/
 	if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_landservice_mkrs')) then {
 		if (!(_t isKindOf 'LandVehicle')) then {
 			_isQualified = FALSE;
-			50 cutText ['This service area is for Land Vehicles only, soldier!','PLAIN DOWN',1];
+			50 cutText ['Ця зона тех.обслуговування тiльки для наземного транспорту, солдате!','PLAIN DOWN',1];
 		};
 	};
 	if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_planeservice_mkrs')) then {
 		if (!(_t isKindOf 'Plane')) then {
 			_isQualified = FALSE;
-			50 cutText ['This service area is for Planes / VTOL only, soldier!','PLAIN DOWN',1];
+			50 cutText ['Ця зона тех.обслуговування тiльки для  Лiтакiв/VTOL-iв, солдате!','PLAIN DOWN',1];
 		};
 	};
 	if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_heliservice_mkrs')) then {
 		if (!(_t isKindOf 'Helicopter')) then {
 			_isQualified = FALSE;
-			50 cutText ['This service area is for Helicopters (not VTOL) only, soldier!','PLAIN DOWN',1];
+			50 cutText ['Ця зона тех.обслуговування тiльки для гелiкоптерiв (не VTOL), солдате!','PLAIN DOWN',1];
 		};
 	};
 	if (_nearestServiceSite in (missionNamespace getVariable 'QS_veh_airservice_mkrs')) then {
 		if (!(_t isKindOf 'Air')) then {
 			_isQualified = FALSE;
-			50 cutText ['This service area is for Aircraft only, soldier!','PLAIN DOWN',1];
+			50 cutText ['Ця зона тех.обслуговування тiльки для повiтряних суден, солдате!','PLAIN DOWN',1];
 		};
 	};
 	if (_isCarrier) then {
@@ -283,21 +290,24 @@ if (_fieldService) then {
 		_fuel = fuel _t;
 		if (!(_isCarrier)) then {
 			if (!(missionNamespace getVariable 'QS_module_fob_services_ammo')) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'REAMMO service is not available here yet.',[],-1];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'ПЕРЕЗАРЯДКА тут ще не доступна.',[],-1];
 			};
 			if (!(missionNamespace getVariable 'QS_module_fob_services_repair')) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'REPAIR service is not available here yet.',[],-1];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'РЕМОНТ ще не доступний тут.',[],-1];
 			};
 			if (!(missionNamespace getVariable 'QS_module_fob_services_fuel')) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'REFUEL service is not available here yet.',[],-1];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'ПЕРЕЗАПРАВКА ще не доступна тут.',[],-1];
 			};
 		};
 		_onCompleted = {
 			params ['_t','_fuel','_isCarrier'];
-			50 cutText ['Vehicle service finished','PLAIN DOWN',0.5];
+			50 cutText ['Обслуговування транспорту закiнчено','PLAIN DOWN',0.5];
 			player playActionNow 'stop';
 			if ((missionNamespace getVariable 'QS_module_fob_services_repair') || {(_isCarrier)}) then {
 				_t setDamage [0,FALSE];
+			};
+			if (_t isKindOf 'LandVehicle') then {
+				[_t] call (missionNamespace getVariable 'QS_fnc_vehicleAPSParams');
 			};
 			if (local _t) then {
 				_t setFuel ([_fuel,1] select ((missionNamespace getVariable 'QS_module_fob_services_fuel') || {(_isCarrier)}));
@@ -350,7 +360,7 @@ if (_fieldService) then {
 			if (!alive _t) then {_c = TRUE;};
 			if (!((vehicle player) isKindOf 'Man')) then {_c = TRUE;};
 			if (isEngineOn _t) then {
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Engine must be off to service vehicle',[],-1];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Двигуна має бути вимкнено для обслуговування',[],-1];
 				_c = TRUE;
 			};
 			if (!(_t in [cursorObject,cursorTarget])) then {_c = TRUE;};
@@ -366,7 +376,7 @@ if (_fieldService) then {
 			_c;
 		};
 		[
-			'Servicing vehicle ...',
+			'Обслуговування транспорту ...',
 			_rt,
 			0,
 			[[],{FALSE}],								/*/onProgress/*/

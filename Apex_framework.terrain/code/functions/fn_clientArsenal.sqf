@@ -92,7 +92,8 @@ private _QS_restrictedItems = [
 	'integrated_nvg_ti_1_f',
 	'o_uavterminal',
 	'i_uavterminal',
-	'c_uavterminal'
+	'c_uavterminal',
+	'i_e_uavterminal'
 ];
 private _QS_restrictedWeapons = [
 	'apersminedispenser_mag'
@@ -111,6 +112,22 @@ private _QS_restrictedBackpacks = [
 	'b_hmg_01_a_weapon_f',
 	'o_hmg_01_a_weapon_f',
 	'i_hmg_01_a_weapon_f',
+	'i_hmg_02_support_f',
+	'i_e_hmg_02_support_f',
+	//'i_c_hmg_02_support_f',		// These are allowed in Arsenal until BIS fixes the Blufor variant
+	'i_g_hmg_02_support_f',
+	'i_hmg_02_support_high_f',
+	'i_e_hmg_02_support_high_f',
+	//'i_c_hmg_02_support_high_f',
+	'i_g_hmg_02_support_high_f',
+	'i_hmg_02_weapon_f',
+	'i_e_hmg_02_weapon_f',
+	//'i_c_hmg_02_weapon_f',
+	'i_g_hmg_02_weapon_f',
+	'i_hmg_02_high_weapon_f',
+	'i_e_hmg_02_high_weapon_f',
+	//'i_c_hmg_02_high_weapon_f',
+	'i_g_hmg_02_high_weapon_f',
 	'o_gmg_01_weapon_f',
 	'i_gmg_01_weapon_f',
 	'b_gmg_01_a_weapon_f',
@@ -149,7 +166,29 @@ private _QS_restrictedBackpacks = [
 	'o_uav_06_medical_backpack_f',
 	'i_uav_06_medical_backpack_f',
 	'c_idap_uav_06_medical_backpack_f',
-	'c_uav_06_medical_backpack_f'
+	'c_uav_06_medical_backpack_f',
+	'i_e_mortar_01_support_f',
+	'i_e_mortar_01_weapon_f',
+	'i_e_hmg_01_support_high_f',
+	'i_e_hmg_01_support_f',
+	'i_e_gmg_01_a_weapon_f',
+	'i_e_hmg_01_a_weapon_f',
+	'i_e_hmg_01_high_weapon_f',
+	'i_e_hmg_01_weapon_f',
+	'i_e_gmg_01_high_weapon_f',
+	'i_e_gmg_01_weapon_f',
+	'i_e_ugv_02_demining_backpack_f',
+	'i_ugv_02_science_backpack_f',
+	'o_ugv_02_science_backpack_f',
+	'i_e_ugv_02_science_backpack_f',
+	'i_e_aa_01_weapon_f',
+	'i_e_at_01_weapon_f',
+	'i_e_uav_06_backpack_f',
+	'i_e_uav_06_medical_backpack_f',
+	'i_e_uav_01_backpack_f',
+	'c_idap_ugv_02_demining_backpack_f',
+	'i_ugv_02_demining_backpack_f',
+	'o_ugv_02_demining_backpack_f'
 ];
 if ((player getVariable ['QS_unit_side',WEST]) in [EAST,RESISTANCE]) then {
 	_QS_restrictedItems = _QS_restrictedItems -	[
@@ -245,7 +284,7 @@ if ((_isBlacklisted) || {((missionNamespace getVariable ['QS_missionConfig_Arsen
 			} foreach (getarray (_weapon >> 'magazines'));
 		};
 	} foreach (_cfgWeapons + ['throw','put']);
-	_cfgBackpacks = ("isclass _x && getnumber (_x >> 'scope') isEqualTo 2 && getnumber (_x >> 'isBackpack') isEqualTo 1") configClasses (configFile >> 'cfgvehicles');
+	_cfgBackpacks = ("isclass _x && getnumber (_x >> 'scope') >= 1 && getnumber (_x >> 'isBackpack') isEqualTo 1") configClasses (configFile >> 'cfgvehicles');
 	_cfgBackpacks = _cfgBackpacks apply { (configName _x) };
 	_cfgBackpacks = _cfgBackpacks select {((_x call (missionNamespace getVariable 'QS_fnc_baseBackpack')) == _x)};
 	_cfgBackpacks = _cfgBackpacks arrayIntersect _cfgBackpacks;

@@ -6,7 +6,7 @@ Author:
 	
 Last Modified:
 
-	12/05/2019 A3 1.92 by Quiksilver
+	19/10/2020 A3 2.00 by Quiksilver
 	
 Description:
 
@@ -114,7 +114,7 @@ disableSerialization;
 _QS_productVersion = productVersion;
 _QS_missionVersion = missionNamespace getVariable ['QS_system_devBuild_text',''];
 _QS_resolution = getResolution;
-_missionStart = missionStart;
+_missionStart = systemTime;
 _QS_worldName = worldName;
 _QS_worldSize = worldSize;
 _QS_clientDLCs = [(getDLCs 0),(getDLCs 1),(getDLCs 2)];
@@ -298,53 +298,53 @@ _noObjectParent = TRUE;
 _QS_actions = [];
 _QS_interaction_escort = FALSE;
 _QS_action_escort = nil;
-_QS_action_escort_text = 'Escort';
+_QS_action_escort_text = 'Супроводити';
 _QS_action_escort_array = [_QS_action_escort_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractEscort')},[],95,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_load = FALSE;
 _QS_interaction_load2 = FALSE;
 _QS_action_load = nil;
-_QS_action_load_text = 'Load';
+_QS_action_load_text = 'Завантажити';
 _QS_action_load_array = [_QS_action_load_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractLoad')},[],94,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_unload = FALSE;
 _QS_action_unload = nil;
-_QS_action_unload_text = 'Unload';
+_QS_action_unload_text = 'Вивантажити';
 _QS_action_unload_array = [_QS_action_unload_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUnload')},[],-10,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_questionCivilian = FALSE;
 _QS_action_questionCivilian = nil;
-_QS_action_questionCivilian_text = 'Question civilian';
+_QS_action_questionCivilian_text = 'Опитати цивільного';
 _QS_action_questionCivilian_array = [_QS_action_questionCivilian_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCivilian')},[],92,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_drag = FALSE;
 _QS_action_drag = nil;
-_QS_action_drag_text = 'Drag';
+_QS_action_drag_text = 'Тягти';
 _QS_action_drag_array = [_QS_action_drag_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractDrag')},[],-9,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_carry = FALSE;
 _QS_action_carry = nil;
-_QS_action_carry_text = 'Carry';
+_QS_action_carry_text = 'Нести';
 _QS_action_carry_array = [_QS_action_carry_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCarry')},[],-10,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_follow = FALSE;
 _QS_action_follow = nil;
-_QS_action_follow_text = 'Command Follow';
+_QS_action_follow_text = 'Слiдувати';
 _QS_action_follow_array = [_QS_action_follow_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractFollow')},[],89,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_recruit = FALSE;
 _QS_action_recruit = nil;
-_QS_action_recruit_text = 'Command Recruit';
+_QS_action_recruit_text = 'Вербувати';
 _QS_action_recruit_array = [_QS_action_recruit_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRecruit')},[],88,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_dismiss = FALSE;
 _QS_action_dismiss = nil;
-_QS_action_dismiss_text = 'Command Dismiss';
+_QS_action_dismiss_text = 'Команда Вiдпустити';
 _QS_action_dismiss_array = [_QS_action_dismiss_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractDismiss')},[],-81,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_release = FALSE;
 _QS_action_release = nil;
-_QS_action_release_text = 'Release';
+_QS_action_release_text = 'Вiдпустити';
 _QS_action_release_array = [_QS_action_release_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRelease')},[],88,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_respawnVehicle = FALSE;
 _QS_action_respawnVehicle = nil;
-_QS_action_respawnVehicle_text = 'Respawn vehicle';
+_QS_action_respawnVehicle_text = 'Респаун транспорту';
 _QS_action_respawnVehicle_array = [_QS_action_respawnVehicle_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRespawnVehicle')},[],-80,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_vehDoors = FALSE;				
 _QS_action_vehDoors = nil;
-_QS_action_vehDoors_textOpen = 'Open cargo doors';
-_QS_action_vehDoors_textClose = 'Close cargo doors';
+_QS_action_vehDoors_textOpen = 'Вiдкрити дверi для вантажiв';
+_QS_action_vehDoors_textClose = 'Закрити дверi для вантажiв';
 _QS_action_vehDoors_array = [_QS_action_vehDoors_textOpen,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractVehicleDoors')},[],-10,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_action_vehDoors_vehicles = [
 	'b_heli_transport_01_f','b_heli_transport_01_camo_f','o_heli_light_02_unarmed_f','o_heli_light_02_f','o_heli_light_02_v2_f','o_heli_attack_02_f',
@@ -357,10 +357,10 @@ _QS_action_vehDoors_vehicles = [
 	'b_ctrg_heli_transport_01_tropic_f','b_ctrg_heli_transport_01_sand_f','o_heli_light_02_dynamicloadout_f','o_heli_attack_02_dynamicloadout_black_f','o_heli_attack_02_dynamicloadout_f',
 	'c_van_02_medevac_f','c_van_02_vehicle_f','c_van_02_service_f','c_van_02_transport_f','c_idap_van_02_medevac_f','c_idap_van_02_vehicle_f','c_idap_van_02_transport_f',
 	'b_g_van_02_vehicle_f','b_g_van_02_transport_f','o_g_van_02_vehicle_f','o_g_van_02_transport_f','i_c_van_02_vehicle_f','i_c_van_02_transport_f','i_g_van_02_vehicle_f','i_g_van_02_transport_f',
-	'b_gen_van_02_vehicle_f','b_gen_van_02_transport_f'
+	'b_gen_van_02_vehicle_f','b_gen_van_02_transport_f','i_e_van_02_medevac_f','i_e_van_02_transport_mp_f'
 ];
 _QS_action_serviceVehicle = nil;
-_QS_action_serviceVehicle_text = 'Service';
+_QS_action_serviceVehicle_text = 'Транспортний сервiс';
 _QS_action_serviceVehicle_array = [_QS_action_serviceVehicle_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractServiceVehicle')},[],10,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_serviceVehicle = FALSE;
 _isNearRepairDepot = FALSE;
@@ -369,13 +369,13 @@ _nearSite = FALSE;
 _nearSite2 = FALSE;
 _nearSite3 = FALSE;
 _QS_action_unflipVehicle = nil;
-_QS_action_unflipVehicle_text = 'Unflip';
+_QS_action_unflipVehicle_text = 'Перевернути';
 _QS_action_unflipVehicle_array = [_QS_action_unflipVehicle_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUnflipVehicle')},[],10,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_unflipVehicle = FALSE;
 
 /*/== Revive Anim/*/
 _QS_action_revive = nil;
-_QS_action_revive_text = 'Revive';
+_QS_action_revive_text = 'Оживити';
 _QS_action_revive_array = [_QS_action_revive_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRevive')},[],99,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_revive = FALSE;
 _QS_revive_injuredAnims = [
@@ -386,7 +386,7 @@ _QS_revive_injuredAnims = [
 _checkworldtime = time + 30 + (random 600);
 /*/===== Stabilise/*/
 _QS_action_stabilise = nil;
-_QS_action_stabilise_text = 'Stabilise';
+_QS_action_stabilise_text = 'Стабiлiзувати';
 _QS_action_stabilise_array = [_QS_action_stabilise_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractStabilise')},nil,91,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_stabilise = FALSE;
 /*/===== Arsenal/*/
@@ -397,14 +397,14 @@ _QS_interaction_arsenal = FALSE;
 _QS_arsenal_model = 'a3\weapons_f\ammoboxes\supplydrop.p3d';
 /*/===== Role Selection/*/
 _QS_action_RSS = nil;
-_QS_action_RSS_text = 'Role Selection';
+_QS_action_RSS_text = 'Вибiр ролi';
 _QS_action_RSS_array = [_QS_action_RSS_text,{closeDialog 2;uiSleep 0.1;createDialog 'QS_client_dialog_menu_roles';},[],89,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_RSS = FALSE;
 
 /*/===== Utility offroad/*/
 _QS_action_utilityOffroad = nil;
-_QS_action_utilityOffroad_textOn = 'Beacons On';
-_QS_action_utilityOffroad_textOff = 'Beacons Off';
+_QS_action_utilityOffroad_textOn = 'Увiмкнути маячки';
+_QS_action_utilityOffroad_textOff = 'Вимкнути маячки';
 _QS_action_utilityOffroad_array = [_QS_action_utilityOffroad_textOn,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUtilityOffroad')},[],-10,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_utilityOffroad = FALSE;
 _offroadTypes = [
@@ -414,49 +414,49 @@ _offroadTypes = [
 ];
 /*/===== Tow/*/
 _QS_action_tow = nil;
-_QS_action_tow_text = 'Tow';
+_QS_action_tow_text = 'Буксирувати';
 _QS_action_tow_array = [_QS_action_tow_text,{_this spawn (missionNamespace getVariable 'QS_fnc_vTow')},[],21,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_tow = FALSE;
 /*/===== Surrender/*/
 _QS_action_commandSurrender = nil;
-_QS_action_commandSurrender_text = 'Command Surrender';
+_QS_action_commandSurrender_text = 'Наказати Капiтулювати';
 _QS_action_commandSurrender_array = [_QS_action_commandSurrender_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSurrender')},[],90,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_commandSurrender = FALSE;
 /*/===== Rescue/*/
 _QS_action_rescue = nil;
-_QS_action_rescue_text = 'Rescue';
+_QS_action_rescue_text = 'Врятувати';
 _QS_action_rescue_array = [_QS_action_rescue_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRescue')},[],95,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_rescue = FALSE;
 /*/===== Secure/*/
 _QS_action_secure = nil;
-_QS_action_secure_text = 'Secure';
+_QS_action_secure_text = 'Знешкодити';
 _QS_action_secure_array = [_QS_action_secure_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSecure')},[],95,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_secure = FALSE;
 /*/===== Examine/*/
 _QS_action_examine = nil;
-_QS_action_examine_text = 'Examine';
+_QS_action_examine_text = 'Розглянути';
 _QS_action_examine_array = [_QS_action_examine_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractExamine')},[],94,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_examine = FALSE;
 /*/===== Turret safety/*/
 _QS_action_turretSafety = nil;
-_QS_action_turretSafety_text = 'Turret safety';
+_QS_action_turretSafety_text = 'Безпека турелi';
 _QS_action_turretSafety_array = [_QS_action_turretSafety_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractTurretControl')},[],-50,FALSE,FALSE,'','TRUE',-1,FALSE,''];
 _QS_interaction_turretSafety = FALSE;
 missionNamespace setVariable ['QS_inturretloop',FALSE,FALSE];
 _QS_turretSafety_heliTypes = ['B_Heli_Transport_01_camo_F','B_Heli_Transport_01_F','B_Heli_Transport_03_F','B_CTRG_Heli_Transport_01_sand_F','B_CTRG_Heli_Transport_01_tropic_F'];
 /*/===== Ear collector/*/
 _QS_action_ears = nil;
-_QS_action_ears_text = 'Collect ear';
+_QS_action_ears_text = 'Забрати вухо';
 _QS_action_ears_array = [_QS_action_ears_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractEar')},[],-51,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_ears = FALSE;
 /*/===== Teeth collector/*/
 _QS_action_teeth = nil;
-_QS_action_teeth_text = 'Collect gold tooth';
+_QS_action_teeth_text = 'Забрати золотий зуб';
 _QS_action_teeth_array = [_QS_action_teeth_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractTooth')},[],-52,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_teeth = FALSE;
 /*/===== Join group/*/
 _QS_action_joinGroup = nil;
-_QS_action_joinGroup_text = 'Join group';
+_QS_action_joinGroup_text = 'Приєднатись до групи';
 _QS_action_joinGroup_array = [_QS_action_joinGroup_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractJoinGroup')},[],-50,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_joinGroup = FALSE;
 _QS_joinGroup_privateVar = 'BIS_dg_pri';
@@ -464,51 +464,51 @@ _grpTarget = grpNull;
 /*/===== Fob status terminal/*/
 _QS_action_fob_terminals = [];
 _QS_action_fob_status = nil;
-_QS_action_fob_status_text = 'FOB Status';
+_QS_action_fob_status_text = 'Статус FOB';
 _QS_action_fob_status_array = [_QS_action_fob_status_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractFOBTerminal')},1,25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_fob_status = FALSE;
 /*/===== Activate FOB/*/
 _QS_action_names = worldName;
 _QS_action_fob_activate = nil;
-_QS_action_fob_activate_text = 'Activate FOB';
+_QS_action_fob_activate_text = 'Активувати FOB';
 _QS_action_fob_activate_array = [_QS_action_fob_activate_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractFOBTerminal')},2,25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_fob_activate = FALSE;
 /*/===== Enable FOB Respawn/*/
 _QS_action_fob_respawn = nil;
-_QS_action_fob_respawn_text = 'Enable FOB Respawn';
+_QS_action_fob_respawn_text = 'Активувати FOB респаун';
 _QS_action_fob_respawn_array = [_QS_action_fob_respawn_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractFOBTerminal')},3,25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_fob_respawn = FALSE;
 /*/===== Crate Customization/*/
 _QS_action_crate_customize = nil;
-_QS_action_crate_customize_text = 'Edit Inventory';
+_QS_action_crate_customize_text = 'Редагувати Інвентар';
 _QS_action_crate_array = [_QS_action_crate_customize_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCustomizeInventory')},[],25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_customizeCrate = FALSE;
 _nearInvSite = FALSE;
 /*/===== Push Vehicle/*/
 _QS_action_pushVehicle = nil;
-_QS_action_pushVehicle_text = 'Push vehicle';
+_QS_action_pushVehicle_text = 'Перевернути транспорт';
 _QS_action_pushVehicle_array = [_QS_action_pushVehicle_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractPush')},[],25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_pushVehicle = FALSE;
 /*/===== Create Boat/*/
 _QS_action_createBoat = nil;
-_QS_action_createBoat_text = 'Inflate boat';
+_QS_action_createBoat_text = 'Надути човен';
 _QS_action_createBoat_array = [_QS_action_createBoat_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCreateBoat')},[],25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_createBoat = FALSE;
 /*/===== Recover Boat (boat rack)/*/
 _QS_action_recoverBoat = nil;
-_QS_action_recoverBoat_text = if (isLocalized 'STR_A3_action_Recover_Boat') then {localize 'STR_A3_action_Recover_Boat'} else {'Recover boat'};
+_QS_action_recoverBoat_text = if (isLocalized 'STR_A3_action_Recover_Boat') then {localize 'STR_A3_action_Recover_Boat'} else {'Вiдновити човен'};
 _QS_action_recoverBoat_array = [_QS_action_recoverBoat_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRecoverBoat')},[],25,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_recoverBoat = FALSE;
 /*/===== Sit/*/
 _QS_action_sit = nil;
-_QS_action_sit_text = 'Sit';
+_QS_action_sit_text = 'Сісти';
 _QS_action_sit_array = [_QS_action_sit_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSit')},1,50,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_sit = FALSE;
 _QS_action_sit_chairTypes = ['Land_CampingChair_V1_F','Land_CampingChair_V2_F','Land_ChairPlastic_F','Land_RattanChair_01_F','Land_ChairWood_F','Land_OfficeChair_01_F','Land_ArmChair_01_F'];
 _QS_action_sit_chairModels = ['campingchair_v1_f.p3d','campingchair_v2_f.p3d','chairplastic_f.p3d','rattanchair_01_f.p3d','chairwood_f.p3d','officechair_01_f.p3d','armchair_01_f.p3d'];
 /*/===== Load Cargo/*/
 _QS_action_loadCargo = nil;
-_QS_action_loadCargo_text = 'Load cargo';
+_QS_action_loadCargo_text = 'Завантажити вантаж';
 _QS_action_loadCargo_array = [_QS_action_loadCargo_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractLoadCargo')},[],50,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_loadCargo = FALSE;
 _QS_action_loadCargo_vTypes = [
@@ -523,7 +523,7 @@ _QS_action_loadCargo_vehicle = objNull;
 _nearCargoVehicles = [];
 /*/===== Unload Cargo/*/
 _QS_action_unloadCargo = nil;
-_QS_action_unloadCargo_text = 'Unload cargo';
+_QS_action_unloadCargo_text = 'Вивантажити вантаж';
 _QS_action_unloadCargo_array = [_QS_action_unloadCargo_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUnloadCargo')},[],-30,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_unloadCargo = FALSE;
 _QS_action_unloadCargo_vTypes = [];
@@ -533,12 +533,12 @@ _QS_action_unloadCargo_vehicle = objNull;
 _nearUnloadCargoVehicles = [];
 /*/===== Interact Activate Vehicle/*/
 _QS_action_activateVehicle = nil;
-_QS_action_activateVehicle_text = 'Activate vehicle';
+_QS_action_activateVehicle_text = 'Активувати транспорт';
 _QS_action_activateVehicle_array = [_QS_action_activateVehicle_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractActivateVehicle')},nil,49,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_activateVehicle = FALSE;
 /*/===== Huron Medical Container (Simple Object)/*/
 _QS_action_huronContainer = nil;
-_QS_action_huronContainer_text = 'Treat at Medical Station';
+_QS_action_huronContainer_text = 'Вилiкуватись в лазареті';
 _QS_action_huronContainer_array = [_QS_action_huronContainer_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractMedStation')},nil,48,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_huronContainer = FALSE;
 _QS_action_medevac_models = [
@@ -551,15 +551,16 @@ _QS_action_medevac_models = [
 	'a3\soft_f_gamma\truck_02\truck_02_medevac_f.p3d',
 	'a3\soft_f_epc\truck_03\truck_03_medevac_f.p3d',
 	'a3\soft_f_gamma\truck_01\truck_01_medevac_f.p3d',
-	'a3\air_f_orange\uav_06\box_uav_06_f.p3d'
+	'a3\air_f_orange\uav_06\box_uav_06_f.p3d',
+	'a3\props_f_enoch\military\camps\portablecabinet_01_medical_f.p3d'
 ];
 /*/===== Sensor Target/*/
 _QS_action_sensorTarget = nil;
-_QS_action_sensorTarget_array = ['Report target',{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSensorTarget')},nil,60,TRUE,TRUE,'','TRUE',-1,FALSE,''];
+_QS_action_sensorTarget_array = ['Повiдомити про цiль',{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSensorTarget')},nil,60,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_sensorTarget = FALSE;
 /*/===== Attach Explosive (underwater)/*/
 _QS_action_attachExp = nil;
-_QS_action_attachExp_text = 'Put Explosive Charge';
+_QS_action_attachExp_text = 'Встановити пiдривний заряд';
 _QS_action_attachExp_textReal = '';
 _QS_action_attachExp_array = [_QS_action_attachExp_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUnderwaterDemo')},nil,59,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_attachExp = FALSE;
@@ -570,31 +571,33 @@ _QS_action_ugv_types = [
 	'o_ugv_01_f',
 	'o_t_ugv_01_ghex_f',
 	'i_ugv_01_f',
-	'c_idap_ugv_01_f'
+	'c_idap_ugv_01_f',
+	'i_e_ugv_01_f',
+	'i_e_ugv_01_rcws_f'
 ];
 _QS_uav = objNull;
 _QS_ugv = objNull;
 _QS_ugvTow = objNull;
 _QS_action_ugv_stretcherModel = 'a3\props_f_orange\humanitarian\camps\stretcher_01_f.p3d';
 _QS_action_ugvLoad = nil;
-_QS_action_ugvLoad_text = 'Load';
+_QS_action_ugvLoad_text = 'Завантажити';
 _QS_action_ugvLoad_array = [_QS_action_ugvLoad_text,{(_this # 3) spawn (missionNamespace getVariable 'QS_fnc_clientInteractUGV');},[_QS_ugv,4],50,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_ugvLoad = FALSE;
 _QS_action_ugvUnload = nil;
-_QS_action_ugvUnload_text = 'Unload';
+_QS_action_ugvUnload_text = 'Вивантажити';
 _QS_action_ugvUnload_array = [_QS_action_ugvUnload_text,{(_this # 3) spawn (missionNamespace getVariable 'QS_fnc_clientInteractUGV');},[_QS_ugv,5],50,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_ugvUnload = FALSE;
 _QS_interaction_serviceDrone = FALSE;
 _QS_interaction_towUGV = FALSE;
 _QS_action_towUGV = nil;
 _QS_action_uavSelfDestruct = nil;
-_QS_action_uavSelfDestruct_text = 'Self destruct';
+_QS_action_uavSelfDestruct_text = 'Самознищення';
 _QS_action_uavSelfDestruct_array = [_QS_action_uavSelfDestruct_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractUAVSelfDestruct')},nil,-20,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_uavSelfDestruct = FALSE;
 _QS_ugvSD = objNull;
 /*/===== Carrier Launch/*/
 _QS_action_carrierLaunch = nil;
-_QS_action_carrierLaunch_text = 'Initiate Launch Sequence';
+_QS_action_carrierLaunch_text = 'Розпочати запуск';
 _QS_action_carrierLaunch_array = [_QS_action_carrierLaunch_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCarrierLaunch')},nil,85,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_carrierLaunch = FALSE;
 _QS_carrier_cameraOn = objNull;
@@ -606,16 +609,16 @@ _QS_carrierEnabled = missionNamespace getVariable ['QS_missionConfig_carrierEnab
 _QS_destroyerEnabled = missionNamespace getVariable ['QS_missionConfig_destroyerEnabled',0];
 /*/===== Armor Camonets/*/
 _QS_action_camonetArmor = nil;
-_QS_action_camonetArmor_textA = 'Deploy camo net';
-_QS_action_camonetArmor_textB = 'Remove camo net';
+_QS_action_camonetArmor_textA = 'Розгорнути маскувальну сiтку';
+_QS_action_camonetArmor_textB = 'Згорнути маскувальну сiтку';
 _QS_action_camonetArmor_array = [_QS_action_camonetArmor_textA,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractCamoNet')},[objNull,0],-10,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_camonetArmor = FALSE;
 _QS_action_camonetArmor_anims = ['showcamonethull','showcamonetcannon','showcamonetcannon1','showcamonetturret','showcamonetplates1','showcamonetplates2'];
 _QS_action_camonetArmor_vAnims = [];
 /*/===== Armor Slat/*/
 _QS_action_slatArmor = nil;
-_QS_action_slatArmor_textA = 'Mount slat armor';
-_QS_action_slatArmor_textB = 'Remove slat armor';
+_QS_action_slatArmor_textA = 'Встановити зовнiшню броню';
+_QS_action_slatArmor_textB = 'Зняти зовнiшню броню';
 _QS_action_slatArmor_array = [_QS_action_slatArmor_textA,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractSlatArmor')},[objNull,0],9,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 _QS_interaction_slatArmor = FALSE;
 _QS_action_slatArmor_anims = ['showslathull','showslatturret'];
@@ -626,23 +629,34 @@ _animationSource = configNull;
 _QS_rappelling = TRUE;
 if (_QS_rappelling) then {
 	_QS_action_rappelSelf = nil;
-	_QS_action_rappelSelf_text = 'Fastrope';
+	_QS_action_rappelSelf_text = 'Швидкий спуск';
 	_QS_action_rappelSelf_array = [_QS_action_rappelSelf_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRappel')},1,-10,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 	_QS_interaction_rappelSelf = FALSE;
 	_QS_action_rappelAI = nil;
-	_QS_action_rappelAI_text = 'Fastrope AI units';
+	_QS_action_rappelAI_text = 'Швидко спустити ботiв';
 	_QS_action_rappelAI_array = [_QS_action_rappelAI_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRappel')},2,-11,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 	_QS_interaction_rappelAI = FALSE;
 	_QS_action_rappelDetach = nil;
-	_QS_action_rappelDetach_text = 'Detach fastrope';
+	_QS_action_rappelDetach_text = 'Вiд’єднати мотузку';
 	_QS_action_rappelDetach_array = [_QS_action_rappelDetach_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRappel')},3,48,TRUE,TRUE,'','TRUE',-1,FALSE,''];
 	_QS_interaction_rappelDetach = FALSE;
 	_QS_action_rappelSafety = nil;
-	_QS_action_rappelSafety_textDisable = 'Disable fastrope';
-	_QS_action_rappelSafety_textEnable = 'Enable fastrope';
+	_QS_action_rappelSafety_textDisable = 'Вимкнути швидкий спуск';
+	_QS_action_rappelSafety_textEnable = 'Увiмкнути швидкий спуск';
 	_QS_action_rappelSafety_array = [_QS_action_rappelSafety_textDisable,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractRappel')},4,-12,FALSE,TRUE,'','TRUE',-1,FALSE,''];
 	_QS_interaction_rappelSafety = FALSE;
 };
+/*/============================ Sandbags/*/
+_QS_action_sandbagDeploy = nil;
+_QS_action_sandbagDeploy_text = 'Розгорнути стіну з мішків з піском';
+_QS_action_sandbagDeploy_array = [];
+_QS_interaction_sandbagDeploy = FALSE;
+
+_QS_action_sandbagRetract = nil;
+_QS_action_sandbagRetract_text = 'Розібрати';
+_QS_action_sandbagRetract_array = [];
+_QS_interaction_sandbagRetract = FALSE;
+
 /*/============================ Live feed module/*/
 _QS_module_liveFeed = TRUE;
 if (_QS_module_liveFeed) then {
@@ -659,16 +673,16 @@ if (_QS_module_liveFeed) then {
 	'qs_rd_lfe' setPiPEffect [0];
 	_QS_liveFeed_camera_offset = [-0.18,0.08,0.05];
 	_QS_liveFeed_vehicle_current = objNull;
-	_QS_liveFeed_text = 'Helmet Cam (Live Feed):';
+	_QS_liveFeed_text = 'Нашоломна камера (Наживо):';
 	player setVariable ['QS_RD_client_liveFeed',FALSE,FALSE];
 	_QS_liveFeed_action_1 = _QS_liveFeed_display addAction [
-		'Turn on live feed',
+		'Увiмкнути трансляцiю наживо',
 		{
 			if (isPipEnabled) then {
 				player setVariable ['QS_RD_client_liveFeed',TRUE,FALSE];
-				50 cutText ['Acquiring signal, please wait ...','PLAIN DOWN',0.5];
+				50 cutText ['Отримання сигналу, будь ласка, зачекайте ...','PLAIN DOWN',0.5];
 			} else {
-				50 cutText ['Enable PiP to view the live feed','PLAIN DOWN',0.5];
+				50 cutText ['Увiмкнiть PiP для перегляду зображення наживо','PLAIN DOWN',0.5];
 			};
 		},
 		[],
@@ -681,12 +695,12 @@ if (_QS_module_liveFeed) then {
 		FALSE,
 		''
 	];
-	_QS_liveFeed_display setUserActionText [_QS_liveFeed_action_1,'Turn on live feed',(format ["<t size='3'>%1</t>",'Turn on live feed'])];
+	_QS_liveFeed_display setUserActionText [_QS_liveFeed_action_1,'Увiмкнути трансляцiю наживо',(format ["<t size='3'>%1</t>",'Увiмкнути трансляцiю наживо'])];
 	_QS_liveFeed_action_2 = _QS_liveFeed_display addAction [
-		'Turn off live feed',
+		'Вимкнути трансляцiю наживо',
 		{
 			player setVariable ['QS_RD_client_liveFeed',FALSE,FALSE];
-			50 cutText ['Live feed off','PLAIN DOWN',0.5];
+			50 cutText ['Вимкнути трансляцiю наживо','PLAIN DOWN',0.5];
 		},
 		[],
 		89,
@@ -698,7 +712,7 @@ if (_QS_module_liveFeed) then {
 		FALSE,
 		''
 	];
-	_QS_liveFeed_display setUserActionText [_QS_liveFeed_action_2,'Turn off live feed',(format ["<t size='3'>%1</t>",'Turn off live feed'])];
+	_QS_liveFeed_display setUserActionText [_QS_liveFeed_action_2,'Вимкнути трансляцiю наживо',(format ["<t size='3'>%1</t>",'Вимкнути трансляцiю наживо'])];
 };
 
 /*/======================= Vehicle manifest module/*/
@@ -763,15 +777,15 @@ if (!isNull (missionNamespace getVariable ['QS_airdefense_laptop',objNull])) the
 	if (_airDefenseLaptop isEqualType objNull) then {
 		if (!isNull _airDefenseLaptop) then {
 			_QS_airbaseDefense_action_1 = _airDefenseLaptop addAction [
-				'Activate air defense',
+				'Активувати ППО',
 				{
 					if (missionNamespace getVariable ['QS_airbaseDefense',FALSE]) exitWith {
-						50 cutText ['Air Defense on cooldown','PLAIN DOWN',0.5];
+						50 cutText ['Очiкування ППО','PLAIN DOWN',0.5];
 					};
 					missionNamespace setVariable ['QS_airbaseDefense',TRUE,TRUE];
 					player playAction 'PutDown';
 					playSound ['Orange_Access_FM',FALSE];
-					50 cutText ['Activating Air Defense','PLAIN DOWN',0.5];
+					50 cutText ['Активацiя ППО','PLAIN DOWN',0.5];
 				},
 				[],
 				90,
@@ -783,7 +797,7 @@ if (!isNull (missionNamespace getVariable ['QS_airdefense_laptop',objNull])) the
 				FALSE,
 				''
 			];
-			_airDefenseLaptop setUserActionText [_QS_airbaseDefense_action_1,'Activate air defense',(format ["<t size='3'>%1</t>",'Activate air defense'])];
+			_airDefenseLaptop setUserActionText [_QS_airbaseDefense_action_1,'Активувати ППО',(format ["<t size='3'>%1</t>",'Активувати ППО'])];
 		};
 	};
 };
@@ -797,13 +811,13 @@ _QS_module_safezone_isInSafezone = FALSE;
 _QS_module_safezone_pos = markerPos 'QS_marker_base_marker';
 _QS_module_safezone_radius = 500;
 _QS_module_safezone_playerProtection = 1;
-_QS_safeZoneText_entering = 'Entering safezone';
-_QS_safeZoneText_leaving = 'Leaving safezone';
+_QS_safeZoneText_entering = 'Вхiд в безпечну зону';
+_QS_safeZoneText_leaving = 'Вихiд з безпечної зони';
 _QS_firstRun2 = TRUE;
 player addRating (0 - (rating player));
 _QS_safezone_action = -1;
 _QS_action_safezone = nil;
-_QS_action_safezone_text = 'Weapons safe on base';
+_QS_action_safezone_text = 'Зброя на запобiжнику';
 _QS_action_safezone_array = [_QS_action_safezone_text,{_this spawn (missionNamespace getVariable 'QS_fnc_clientInteractWeaponSafety')},nil,-99,FALSE,TRUE,'DefaultAction','TRUE',-1,FALSE];
 _QS_module_safezone_speedlimit_enabled = TRUE;
 _QS_module_safezone_speedlimit_event = nil;
@@ -844,7 +858,7 @@ _QS_module_safezone_speedlimit_code = {
 									if (!(profileNamespace getVariable ['QS_system_speedLimitMsg',FALSE])) then {
 										profileNamespace setVariable ['QS_system_speedLimitMsg',TRUE];
 										saveProfileNamespace;
-										50 cutText ['<t color="#ff0000">This is a speed-restricted area.</t>','PLAIN',1,FALSE,TRUE];
+										50 cutText ['<t color="#ff0000">Це зона обмеженної швидкостi.</t>','PLAIN',1,FALSE,TRUE];
 									};
 									_velocityModelSpace = velocityModelSpace _vehicle;
 									_newVelocity = _velocityModelSpace vectorMultiply 0.90;
@@ -1079,7 +1093,26 @@ _QS_module_gpsJammer_signalDelay = 10;
 _QS_module_gpsJammer_signalCheck = _QS_uiTime + _QS_module_gpsJammer_signalDelay;
 _QS_module_gpsJammer_ctrlPlayer = (findDisplay 12) displayCtrl 1202;
 _QS_module_gpsJammer_inArea = FALSE;
-/*/===== Operational Security Module - will detect some low-hanging fruit. To date it has caught around 30 cheaters./*/
+/*/===== Operational Security Module - will detect some low-hanging fruit. To date it has caught around 60 cheaters./*/
+if (!((uiNamespace getVariable ['BIS_shownChat',TRUE]) isEqualType TRUE)) exitWith {
+	[
+		40,
+		[
+			time,
+			serverTime,
+			(name player),
+			profileName,
+			profileNameSteam,
+			(getPlayerUID player),
+			2,
+			(format ['Anti-Hack * BIS_shownChat : %1',(uiNamespace getVariable 'BIS_shownChat'),2]),
+			player,
+			productVersion
+		]
+	] remoteExec ['QS_fnc_remoteExec',2,FALSE];
+	//disableUserInput TRUE;
+	endMission 'QS_RD_end_2';
+};
 _QS_productVersionSync = ((_QS_productVersion # 2) isEqualTo (call (missionNamespace getVariable 'QS_fnc_getAHCompat')));
 _QS_module_opsec = (call (missionNamespace getVariable ['QS_missionConfig_AH',{1}])) isEqualTo 1;
 if (_QS_module_opsec) then {
@@ -1089,15 +1122,15 @@ if (_QS_module_opsec) then {
 	_QS_module_opsec_hidden = TRUE;												/*/ check hidden /*/
 	_QS_module_opsec_menus = TRUE;												/*/ check menus /*/
 	_QS_module_opsec_vars = FALSE;												/*/ check variables /*/
-	_QS_module_opsec_patches = _QS_productVersionSync;							/*/ check patches /*/
+	_QS_module_opsec_patches = TRUE && _QS_productVersionSync;							/*/ check patches /*/
 	_QS_module_opsec_checkScripts = FALSE;										/*/ check scripts /*/
 	_QS_module_opsec_checkActions = TRUE;										/*/ check action menu /*/
 	_QS_module_opsec_checkMarkers = FALSE;										/*/ check map markers /*/
 	_QS_module_opsec_chatIntercept = TRUE;										/*/ check chat box /*/
-	_QS_module_opsec_memory = _QS_productVersionSync;								/*/ check memory editing /*/
+	_QS_module_opsec_memory = TRUE && _QS_productVersionSync;					/*/ check memory editing /*/
 	_QS_module_opsec_memoryMission = TRUE;										/*/ check memory editing of mission displays /*/
-	_QS_module_opsec_iguiDisplays = _QS_productVersionSync;						/*/ check memory editing of igui displays/*/
-	_QS_module_opsec_rsctitles = _QS_productVersionSync;							/*/ check memory editing of titles /*/
+	_QS_module_opsec_iguiDisplays = TRUE && _QS_productVersionSync;				/*/ check memory editing of igui displays/*/
+	_QS_module_opsec_rsctitles = TRUE && _QS_productVersionSync;				/*/ check memory editing of titles /*/
 	_QS_module_opsec_rsctitlesMission = TRUE;									/*/ check memory editing of titles (mission)/*/
 	_QS_module_opsec_hints = TRUE && (!(_puid in (['ALL'] call (missionNamespace getVariable 'QS_fnc_whitelist'))));
 	_QS_module_opsec_detected = 0;
@@ -1129,7 +1162,7 @@ if (_QS_module_opsec) then {
 			_chatTextLower = toLower _chatText;
 			if ((count _chatText) > _maxCharacters) then {
 				//comment 'Too many characters';
-				50 cutText [(format ['Character limit (140) exceeded',(count _chatText),_maxCharacters]),'PLAIN DOWN',1];
+				50 cutText [(format ['Перевищено кiлькiсь символiв (140)',(count _chatText),_maxCharacters]),'PLAIN DOWN',1];
 				((findDisplay 24) displayCtrl 101) ctrlSetText (_chatText select [0,140]);
 			};
 			if ([_chatTextLower,0,_fn_inString] call (missionNamespace getVariable 'QS_fnc_ahScanString')) then {
@@ -1140,7 +1173,7 @@ if (_QS_module_opsec) then {
 			};
 			if (!('ItemRadio' in (assignedItems player))) then {
 				if (!(currentChannel isEqualTo 5)) then {
-					50 cutText ['You need a radio to use the radio channels!','PLAIN DOWN',1];
+					50 cutText ['Вам потрiбно мати рацiю щоб спiлкуватися в радiоканалах!','PLAIN DOWN',1];
 					if (!isNull (findDisplay 24)) then {
 						(findDisplay 24) closeDisplay 2;
 					};
@@ -1163,12 +1196,12 @@ if (_QS_module_opsec) then {
 		if (_type isEqualTo 'RscDisplay') then {
 			{
 				_onLoad = toArray (getText (configFile >> (_x # 1) >> 'onLoad'));
-				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo ''))) then {
+				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo '')) && (!(_onLoad isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified Display Method OL: %1 (Memory Hack)',(_x # 1)];
 				};
 				_onUnload = toArray (getText (configFile >> (_x # 1) >> 'onUnload'));
-				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo ''))) then {
+				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo '')) && (!(_onUnload isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified Display Method OUL: %1 (Memory Hack)',(_x # 1)];
 				};
@@ -1180,7 +1213,7 @@ if (_QS_module_opsec) then {
 		if (_type isEqualTo 'IGUIDisplay') then {
 			{
 				_onLoad = toArray (getText (configFile >> 'RscInGameUI' >> (_x # 1) >> 'onLoad'));
-				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo ''))) then {
+				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo '')) && (!(_onLoad isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					if (['RscUnitInfoAirRTDFullDigital',(_x # 1),FALSE] call _fn_inString) then {
 						_QS_module_opsec_detected = 1;
@@ -1188,7 +1221,7 @@ if (_QS_module_opsec) then {
 					_detected = format ['Modified IGUI Method OL: %1 (Memory Hack)',(_x # 1)];
 				};
 				_onUnload = toArray (getText (configFile >> 'RscInGameUI' >> (_x # 1) >> 'onUnload'));
-				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo ''))) then {
+				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo '')) && (!(_onUnload isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					if (['RscUnitInfoAirRTDFullDigital',(_x # 1),FALSE] call _fn_inString) then {
 						_QS_module_opsec_detected = 1;
@@ -1203,12 +1236,12 @@ if (_QS_module_opsec) then {
 		if (_type isEqualTo 'MissionDisplay') then {
 			{
 				_onLoad = toArray (getText (missionConfigFile >> (_x # 1) >> 'onLoad'));
-				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo ''))) then {
+				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo '')) && (!(_onLoad isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified MissionDisplay Method OL: %1 (Memory Hack)',(_x # 1)];
 				};
 				_onUnload = toArray (getText (missionConfigFile >> (_x # 1) >> 'onUnload'));
-				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo ''))) then {
+				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo '')) && (!(_onUnload isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified MissionDisplay Method OUL: %1 (Memory Hack)',(_x # 1)];
 				};
@@ -1220,12 +1253,12 @@ if (_QS_module_opsec) then {
 		if (_type isEqualTo 'RscTitles') then {
 			{
 				_onLoad = toArray (getText (configFile >> 'RscTitles' >> (_x # 1) >> 'onLoad'));
-				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo ''))) then {
+				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo '')) && (!(_onLoad isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified RscTitles Method OL: %1 (Memory Hack)',(_x # 1)];
 				};
 				_onUnload = toArray (getText (configFile >> 'RscTitles' >> (_x # 1) >> 'onUnload'));
-				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo ''))) then {
+				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo '')) && (!(_onUnload isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified RscTitles Method OUL: %1 (Memory Hack)',(_x # 1)];
 				};
@@ -1237,12 +1270,12 @@ if (_QS_module_opsec) then {
 		if (_type isEqualTo 'MissionTitles') then {
 			{
 				_onLoad = toArray (getText (missionConfigFile >> 'RscTitles' >> (_x # 1) >> 'onLoad'));
-				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo ''))) then {
+				if ((!(_onLoad isEqualTo (_x # 2))) && (!(_onLoad isEqualTo '')) && (!(_onLoad isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified RscTitles Method OL: %1 (Memory Hack)',(_x # 1)];
 				};
 				_onUnload = toArray (getText (missionConfigFile >> 'RscTitles' >> (_x # 1) >> 'onUnload'));
-				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo ''))) then {
+				if ((!(_onUnload isEqualTo (_x # 3))) && (!(_onUnload isEqualTo '')) && (!(_onUnload isEqualTo []))) then {
 					_QS_module_opsec_detected = 2;
 					_detected = format ['Modified RscTitles Method OUL: %1 (Memory Hack)',(_x # 1)];
 				};
@@ -1549,6 +1582,9 @@ if ((missionNamespace getVariable ['QS_missionConfig_baseLayout',0]) isEqualTo 0
 		_position = AGLToASL _position;
 		player setDir (_position getDir (([8133.47,10123,-0.147434] nearestObject 'Land_MilOffices_V1_F') buildingExit 0));
 	};
+	if (_QS_worldName isEqualTo 'Enoch') then {
+		_position = [((_position # 0) + 6 - (random 12)),((_position # 1) + 6 - (random 12)),(_position # 2)];
+	};
 };
 if (!(simulationEnabled player)) then {
 	player enableSimulation TRUE;
@@ -1711,10 +1747,10 @@ for 'x' from 0 to 1 step 0 do {
 					_QS_fpsLastPull = round diag_fps;
 					_QS_fpsCheckDelay = _timeNow + _QS_fpsDelay;
 				};
-				((findDisplay _mainMenuIDD) displayCtrl 1001) ctrlSetToolTip 'FPS, Time to server restart (estimated)';
+				((findDisplay _mainMenuIDD) displayCtrl 1001) ctrlSetToolTip 'FPS, Час для перезапуску сервера (приблизно)';
 				((findDisplay _mainMenuIDD) displayCtrl 1001) ctrlSetText format ['FPS: %1 | Restart: %2h',_QS_fpsLastPull,([(0 max (estimatedEndServerTime - _serverTime) min 36000),'HH:MM'] call _fn_secondsToString)];
-				((findDisplay _mainMenuIDD) displayCtrl 1002) ctrlSetToolTip 'Score, Rating, Health, Equipment';
-				((findDisplay _mainMenuIDD) displayCtrl 1002) ctrlSetText format ['Score: %1 | Rating: %2 | Hp: %3 | Load: %4/100',(score _QS_player),(rating _QS_player),_QS_clientHp,_QS_clientMass];
+				((findDisplay _mainMenuIDD) displayCtrl 1002) ctrlSetToolTip 'Рахунок, Рейтинг, Здоров’я, Екіпіровка';
+				((findDisplay _mainMenuIDD) displayCtrl 1002) ctrlSetText format ['Рахунок: %1 | Рейтинг: %2 | Hp: %3 | Вага: %4/100',(score _QS_player),(rating _QS_player),_QS_clientHp,_QS_clientMass];
 				((findDisplay _mainMenuIDD) displayCtrl 1001) ctrlCommit 0;
 				((findDisplay _mainMenuIDD) displayCtrl 1002) ctrlCommit 0;
 			};
@@ -1728,7 +1764,7 @@ for 'x' from 0 to 1 step 0 do {
 			if (isNull (findDisplay _viewMenuIDD)) then {
 				_viewMenuOpen = _false;
 			} else {
-				((findDisplay _viewMenuIDD) displayCtrl 1001) ctrlSetToolTip 'FPS, Time to server restart (estimated)';
+				((findDisplay _viewMenuIDD) displayCtrl 1001) ctrlSetToolTip 'FPS, Час для перезапуску сервера (приблизно)';
 				((findDisplay _viewMenuIDD) displayCtrl 1001) ctrlSetText format ['FPS: %1 | Restart: %2h',_QS_fpsLastPull,([(0 max (estimatedEndServerTime - _serverTime) min 36000),'HH:MM'] call _fn_secondsToString)];
 			};
 		};
@@ -2709,6 +2745,7 @@ for 'x' from 0 to 1 step 0 do {
 			if (
 				(_noObjectParent) &&
 				{(!isNull _cursorObject)} &&
+				{(_cursorObjectDistance < 3)} &&
 				{(_cursorObject in ([(missionNamespace getVariable ['QS_module_fob_dataTerminal',_objNull]),(missionNamespace getVariable ['QS_module_fob_baseDataTerminal',_objNull])] select {(!isNull _x)}))}
 			) then {
 				if (!(_QS_interaction_fob_status)) then {
@@ -3077,7 +3114,7 @@ for 'x' from 0 to 1 step 0 do {
 				) then {
 					if (!(_QS_interaction_sensorTarget)) then {
 						_QS_interaction_sensorTarget = _true;
-						_QS_action_sensorTarget_array set [0,(['Report target','Confirm target'] select (_QS_player getUnitTrait 'QS_trait_JTAC'))];
+						_QS_action_sensorTarget_array set [0,(['Повідомити про ціль','Підтвердити ціль'] select (_QS_player getUnitTrait 'QS_trait_JTAC'))];
 						_QS_action_sensorTarget = player addAction _QS_action_sensorTarget_array;
 						player setUserActionText [_QS_action_sensorTarget,((player actionParams _QS_action_sensorTarget) # 0),(format ["<t size='3'>%1</t>",((player actionParams _QS_action_sensorTarget) # 0)])];
 					};
@@ -3101,12 +3138,12 @@ for 'x' from 0 to 1 step 0 do {
 			) then {
 				if (!(_QS_interaction_attachExp)) then {
 					_QS_interaction_attachExp = _true;
-					_QS_userActionText = format ['%1 (%2 left)',_QS_action_attachExp_text,({(_x isEqualTo 'DemoCharge_Remote_Mag')} count (magazines _QS_player))];
+					_QS_userActionText = format ['%1 (%2 залишилось)',_QS_action_attachExp_text,({(_x isEqualTo 'DemoCharge_Remote_Mag')} count (magazines _QS_player))];
 					_QS_action_attachExp_array set [0,_QS_userActionText];
 					_QS_action_attachExp = player addAction _QS_action_attachExp_array;
 					player setUserActionText [_QS_action_attachExp,_QS_userActionText,(format ["<t size='3'>%1</t>",_QS_userActionText])];
 				} else {
-					_QS_userActionText = format ['%1 (%2 left)',_QS_action_attachExp_text,({(_x isEqualTo 'DemoCharge_Remote_Mag')} count (magazines _QS_player))];
+					_QS_userActionText = format ['%1 (%2 залишилось)',_QS_action_attachExp_text,({(_x isEqualTo 'DemoCharge_Remote_Mag')} count (magazines _QS_player))];
 					player setUserActionText [_QS_action_attachExp,_QS_userActionText,(format ["<t size='3'>%1</t>",_QS_userActionText])];
 				};
 			} else {
@@ -3319,15 +3356,15 @@ for 'x' from 0 to 1 step 0 do {
 										if (!(_QS_interaction_carrierLaunch)) then {
 											_QS_interaction_carrierLaunch = _true;
 											_QS_action_carrierLaunch = _QS_carrier_cameraOn addAction _QS_action_carrierLaunch_array;
-											_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Initiate Launch Sequence','<t size="3">Initiate Launch Sequence</t>'];
+											_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Розпочати процедуру запуску','<t size="3">Initiate Launch Sequence</t>'];
 										};
 										if (_QS_carrier_cameraOn getVariable ['QS_carrier_launch',_false]) then {
-											if (((_QS_carrier_cameraOn actionParams _QS_action_carrierLaunch) # 0) isEqualTo 'Initiate Launch Sequence') then {
-												_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Launch','<t size="3">Launch</t>'];
+											if (((_QS_carrier_cameraOn actionParams _QS_action_carrierLaunch) # 0) isEqualTo 'Розпочати процедуру запуску') then {
+												_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Запуск','<t size="3">Запуск</t>'];
 											};
 										} else {
-											if (((_QS_carrier_cameraOn actionParams _QS_action_carrierLaunch) # 0) isEqualTo 'Launch') then {
-												_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Initiate Launch Sequence','<t size="3">Initiate Launch Sequence</t>'];
+											if (((_QS_carrier_cameraOn actionParams _QS_action_carrierLaunch) # 0) isEqualTo 'Запуск') then {
+												_QS_carrier_cameraOn setUserActionText [_QS_action_carrierLaunch,'Розпочати процедуру запуску','<t size="3">Розпочати процедуру запуску</t>'];
 											};
 										};
 									} else {
@@ -3957,7 +3994,7 @@ for 'x' from 0 to 1 step 0 do {
 						if (local _QS_v2) then {
 							if (isTouchingGround _QS_v2) then {
 								[17,_QS_v2] remoteExec ['QS_fnc_remoteExec',2,_false];
-								50 cutText ['Vehicles in the spawn area are prohibited.','PLAIN',1];
+								50 cutText ['Транспорт в зонi вiдродження заборонений.','PLAIN',1];
 							};
 						};
 					};
@@ -4215,12 +4252,12 @@ for 'x' from 0 to 1 step 0 do {
 			if (_QS_v2 isKindOf 'Air') then {
 				if (!(_QS_v2Type in ['B_Heli_Light_01_F','Steerable_Parachute_F'])) then {
 					if (_QS_player in [(driver _QS_v2)]) then {
-						if (!(_QS_player getUnitTrait 'QS_trait_pilot')) then {
+						if ((!(_QS_player getUnitTrait 'QS_trait_pilot')) && {(!(_QS_player getUnitTrait 'QS_trait_fighterPilot'))}) then {
 							if (((getPosATL _QS_v2) # 2) < 5) then {
 								moveOut _QS_player;
 								0 spawn {
 									uiSleep 1;
-									systemChat 'You are not in a pilot role';
+									systemChat 'Ви не в ролі пiлота.';
 								};
 							};
 						};
@@ -4228,12 +4265,12 @@ for 'x' from 0 to 1 step 0 do {
 				} else {
 					if (!(_QS_v2Type in ['Steerable_Parachute_F'])) then {
 						if (_QS_player in [(driver _QS_v2)]) then {
-							if (!(_QS_player getUnitTrait 'QS_trait_pilot')) then {
+							if ((!(_QS_player getUnitTrait 'QS_trait_pilot')) && {(!(_QS_player getUnitTrait 'QS_trait_fighterPilot'))}) then {
 								if (((getPosATL _QS_v2) # 2) < 5) then {
 									moveOut _QS_player;
 									0 spawn {
 										uiSleep 1;
-										systemChat 'You are not in a pilot role';
+										systemChat 'Ви не в ролi пiлота.';
 									};
 								};
 							};
@@ -4244,7 +4281,7 @@ for 'x' from 0 to 1 step 0 do {
 			/*/===== Pilot babysitter/*/
 			
 			if (_QS_pilotBabysitter) then {
-				if ((count _allPlayers) >= 30) then {
+				if ((count _allPlayers) >= 20) then {
 					if (_QS_player getUnitTrait 'QS_trait_pilot') then {
 						if (time > _QS_secondsCounter) then {
 							_QS_secondsCounter = time + 1;
@@ -4255,7 +4292,7 @@ for 'x' from 0 to 1 step 0 do {
 										forceRespawn _QS_player;
 									} else {
 										if (_QS_currentTimeOnGround > _QS_warningTimeOnGround) then {
-											(missionNamespace getVariable 'QS_managed_hints') pushBack [5,_false,10,-1,'You are a pilot. Please play your role or re-assign. There are over 30 players on the server, please respawn if timely evac is not available.',[],(serverTime + 20),_true,'Role Restriction',_false];
+											(missionNamespace getVariable 'QS_managed_hints') pushBack [5,_false,10,-1,'Ви пілот. Будь ласка, грайте свою роль або оберть іншу. На сервері більше 30 гравців, будь ласка, відродіться, якщо евакуація тимчасово не можливо.',[],(serverTime + 20),_true,'Role Restriction',_false];
 										};
 									};
 								} else {
@@ -4277,7 +4314,7 @@ for 'x' from 0 to 1 step 0 do {
 								with uiNamespace do {
 									0 spawn {
 										[
-											'Auto-kicked for AFK timeout.',
+											'Авто-кiк за таймаутом AFK.',
 											'Robocop',
 											TRUE, 
 											FALSE, 
@@ -4632,7 +4669,7 @@ for 'x' from 0 to 1 step 0 do {
 		if (currentChannel isEqualTo 6) then {
 			if (!isNull (findDisplay 55)) then {
 				if (!(_puid in (['ALL'] call _fn_uidStaff))) then {
-					50 cutText ['Use General channel for general voice communications. Press [Home] >> [Comm-Link] >> [Radio Management] to subscribe.','PLAIN DOWN'];
+					50 cutText ['Використовуйте загальний канал для загального голосового звязку.  Нажмiть [Home] >> [Комунiкацiя] >> [Налаштування радiо] щоб пiдписатися.','PLAIN DOWN'];
 					setCurrentChannel 5;
 				};
 			};
@@ -4651,7 +4688,7 @@ for 'x' from 0 to 1 step 0 do {
 		if (!(currentChannel isEqualTo 5)) then {
 			if (!isNull (findDisplay 55)) then {
 				if (!('ItemRadio' in (assignedItems _QS_player))) then {
-					50 cutText ['You need a Radio to transmit over radio channels!','PLAIN DOWN'];
+					50 cutText ['Вам потрiбна рацiя щоб говорити в радiоканали!','PLAIN DOWN'];
 					setCurrentChannel 5;
 				};
 			};
@@ -4904,7 +4941,7 @@ for 'x' from 0 to 1 step 0 do {
 							_QS_inGeorgetown = _true;
 							_QS_georgetown_priorVD = viewDistance;
 							_QS_georgetown_priorOVD = getObjectViewDistance # 0;
-							50 cutText [(format ['Lowering view distance (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
+							50 cutText [(format ['Зменьшення дистанцiї огляду (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
 							[_QS_georgetown_priorVD,_QS_georgetown_priorOVD,_QS_georgetown_VD,_QS_georgetown_OVD] spawn {
 								params ['_QS_georgetown_priorVD','_QS_georgetown_priorOVD','_QS_georgetown_VD','_QS_georgetown_OVD'];
 								if (_QS_georgetown_priorVD > _QS_georgetown_VD) then {
@@ -4946,7 +4983,7 @@ for 'x' from 0 to 1 step 0 do {
 					};
 					if ((!(_QS_posWorldPlayer inPolygon _QS_georgetown_polygon)) || {(!isNull _objectParent)} || {((_posATLPlayer # 2) >= 50)}) then {
 						_QS_inGeorgetown = FALSE;
-						50 cutText [(format ['Restoring view distance (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
+						50 cutText [(format ['Вiдновлення дистанцiї огляду (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
 						[_QS_georgetown_priorVD,_QS_georgetown_priorOVD] spawn {
 							params ['_QS_georgetown_priorVD','_QS_georgetown_priorOVD'];
 							if (viewDistance < _QS_georgetown_priorVD) then {
@@ -4977,7 +5014,7 @@ for 'x' from 0 to 1 step 0 do {
 			} else {
 				if (_QS_inGeorgetown) then {
 					_QS_inGeorgetown = _false;
-					50 cutText [(format ['Restoring view distance (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
+					50 cutText [(format ['Вiдновлення дистанцiї огляду (%1) ...',(['Kavala','Georgetown'] select (_QS_worldName isEqualTo 'Tanoa'))]),'PLAIN DOWN',0.25];
 					[_QS_georgetown_priorVD,_QS_georgetown_priorOVD] spawn {
 						params ['_QS_georgetown_priorVD','_QS_georgetown_priorOVD'];
 						if (viewDistance < _QS_georgetown_priorVD) then {
@@ -5049,7 +5086,7 @@ for 'x' from 0 to 1 step 0 do {
 	/*/========== Operational Security Module/*/
 	
 	if (_QS_module_opsec) then {
-		if (_QS_uiTime > _QS_module_opsec_checkDelay) then {
+		if ((_QS_uiTime > _QS_module_opsec_checkDelay) || {isGamePaused} || {!isGameFocused})  then {
 			_QS_module_opsec_detected = 0;
 			if (_QS_module_opsec_detected < 2) then {
 				if (_QS_module_opsec_recoilSway) then {
@@ -5328,7 +5365,7 @@ for 'x' from 0 to 1 step 0 do {
 														_profileNameSteam,
 														_puid,
 														2,
-														(format ['Anti-Hack * Non-whitelisted scroll action text: "%1" %2',_opsec_actionTitle,_opsec_actionCode]),
+														(format ['Anti-Hack * Не дозволена дія в скролл-меню: "%1" %2',_opsec_actionTitle,_opsec_actionCode]),
 														player,
 														_QS_productVersion
 													]
@@ -5336,7 +5373,7 @@ for 'x' from 0 to 1 step 0 do {
 												_co = player;
 												removeAllActions _co;
 											} else {
-												//comment 'Robocop is in action text, now what?';
+												
 											};
 										};
 									};
@@ -5385,6 +5422,55 @@ for 'x' from 0 to 1 step 0 do {
 				};
 			};
 		};
+		if (_QS_module_opsec_checkActions) then {
+			if (isActionMenuVisible) then {
+				_opsec_actionIDs = actionIDs player;
+				_opsec_actionParams = [];
+				if (!(_opsec_actionIDs isEqualTo [])) then {
+					{
+						_opsec_actionParams = player actionParams _forEachIndex;
+						_opsec_actionParams = [];
+						if (!(isNil '_opsec_actionParams')) then {
+							if (!(_opsec_actionParams isEqualTo [])) then {
+								_opsec_actionParams params [
+									'_opsec_actionTitle',
+									'_opsec_actionCode'
+								];
+								if (!(_opsec_actionTitle in _opsec_actionWhitelist)) then {
+									if (!(_puid in (['DEVELOPER'] call _fn_uidStaff))) then {
+										if ((!(['ROBOCOP',_opsec_actionTitle,_false] call _fn_inString)) && (!(['Put Explosive Charge',_opsec_actionTitle,_false] call _fn_inString))) then {
+											_QS_module_opsec_return = [_QS_module_opsec_memArray,_namePlayer,_profileName,_profileNameSteam,_puid] call _QS_module_opsec_memCheck_script;
+											if (!((_QS_module_opsec_return # 0) isEqualTo 0)) then {
+												_detected = format ['%1 + %2',_detected,(_QS_module_opsec_return # 1)];
+											};
+											[
+												40,
+												[
+													time,
+													serverTime,
+													_namePlayer,
+													_profileName,
+													_profileNameSteam,
+													_puid,
+													2,
+													(format ['Anti-Hack * Non-whitelisted scroll action text: "%1" %2',_opsec_actionTitle,_opsec_actionCode]),
+													player,
+													_QS_productVersion
+												]
+											] remoteExec ['QS_fnc_remoteExec',2,_false];
+											_co = player;
+											removeAllActions _co;
+										} else {
+											
+										};
+									};
+								};
+							};
+						};
+					} forEach _opsec_actionIDs;
+				};
+			};
+		};
 	};
 	if (!(_lifeState isEqualTo 'INCAPACITATED')) then {
 		if (!(_QS_module_49Opened)) then {
@@ -5399,9 +5485,9 @@ for 'x' from 0 to 1 step 0 do {
 				{
 					_QS_buttonCtrl = _d49 displayCtrl _x;
 					if (!isNull _QS_buttonCtrl) then {
-						_QS_buttonCtrl ctrlSetText 'Player Menu';
+						_QS_buttonCtrl ctrlSetText 'Меню гравця';
 						_QS_buttonCtrl buttonSetAction _QS_buttonAction;
-						_QS_buttonCtrl ctrlSetTooltip 'Invade & Annex player menu';
+						_QS_buttonCtrl ctrlSetTooltip 'Меню гравця Invade & Annex';
 						_QS_buttonCtrl ctrlSetBackgroundColor [1,0.5,0.5,1];
 						_QS_buttonCtrl ctrlCommit 0;
 					};
@@ -5412,15 +5498,15 @@ for 'x' from 0 to 1 step 0 do {
 				_QS_buttonCtrl ctrlSetText (['','Role Selection'] select _roleSelectionSystem);
 				if (_roleSelectionSystem) then {
 					_QS_buttonCtrl buttonSetAction _QS_buttonAction2;
-					_QS_buttonCtrl ctrlSetTooltip 'Change player role';
+					_QS_buttonCtrl ctrlSetTooltip 'Змiнити роль гравця';
 					_QS_buttonCtrl ctrlSetBackgroundColor [1,0.5,0.5,1];
 					_QS_buttonCtrl ctrlCommit 0;
 				};
 				(_d49 displayCtrl 523) ctrlSetText (format ['%1',_profileName]);
 				(_d49 displayCtrl 109) ctrlSetText (format ['%1',_roleDisplayName]);
 				(_d49 displayCtrl 104) ctrlEnable _true;
-				(_d49 displayCtrl 104) ctrlSetText (['Abort','Exit'] select _roleSelectionSystem);
-				(_d49 displayCtrl 104) ctrlSetTooltip (['Abort to role assignment (lobby).','Leave server.'] select _roleSelectionSystem);
+				(_d49 displayCtrl 104) ctrlSetText (['Вiдмiнити','Вийти'] select _roleSelectionSystem);
+				(_d49 displayCtrl 104) ctrlSetTooltip (['Вiдмiнити та змiнити роль (lobby).','Залишити сервер.'] select _roleSelectionSystem);
 				(_d49 displayCtrl 1005) ctrlSetText (format ['%1 - A3 %2',_QS_missionVersion,(format ['%1.%2',(_QS_productVersion # 2),(_QS_productVersion # 3)])]);
 			};
 		} else {
@@ -5596,8 +5682,6 @@ for 'x' from 0 to 1 step 0 do {
 					['_advTitle','',['',_parsedText]],
 					['_advRecall',_false,[_false]]
 				];	
-				//_hintsQueue set [0,_false];
-				//_hintsQueue deleteAt 0;
 				if ((!((toLower (str _hintText)) isEqualTo (toLower (str _hintTextPrevious)))) || {(_QS_uiTime > (_hintPriorClosedAt + 15))} || {(_hintsQueue isEqualTo [])}) then {
 					if ((_hintIrrelevantWhen isEqualTo -1) || {(_serverTime < _hintIrrelevantWhen)}) then {
 						if (!(_hintPreset isEqualTo -1)) then {
@@ -5694,7 +5778,7 @@ for 'x' from 0 to 1 step 0 do {
 				if ((_QS_player distance2D (markerPos 'QS_marker_aoCircle')) > (((markerSize 'QS_marker_aoCircle') # 0) * 1.1)) then {
 					if (((markerAlpha 'QS_marker_aoCircle') > 0) || {((missionNamespace getVariable ['QS_missionConfig_aoType','CLASSIC']) isEqualTo 'GRID')}) then {
 						if (_QS_uiTime > (uiNamespace getVariable ['QS_client_respawnCooldown',-1])) then {
-							(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,20,-1,'OPFOR players cannot leave the Area of Operations.',[],-1,TRUE,'Mission Control',FALSE];		
+							(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,20,-1,'Гравцi OPFOR не можуть залишати Зону Операцiй.',[],-1,TRUE,'Контроль Мiсiї',FALSE];
 							_QS_player setDamage [1,_true];
 						};
 					};
@@ -5709,4 +5793,4 @@ for 'x' from 0 to 1 step 0 do {
 	};
 	uiSleep 0.1;
 };
-['Uho! It appears something has gone wrong. Please report this error code to staff:<br/><br/>456<br/><br/>Thank you for your assistance.',TRUE] call _fn_hint;
+['Ого! Здається щось пiшло не так. Будь ласка, повiдомте код цiєї помилки персоналу:<br/><br/>456<br/><br/>Дякуємо за допомогу.',TRUE] call _fn_hint;

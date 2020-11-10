@@ -16,16 +16,16 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={6949.1475,7.2411137,7356.4736};
-		dir[]={0.70273983,-0.26716551,0.6594305};
-		up[]={0.19483496,0.96364683,0.18282697};
-		aside[]={0.68430495,7.2534021e-007,-0.72924691};
+		pos[]={6958.2002,27.152945,7325.2056};
+		dir[]={0.19425736,-0.37591282,0.90615702};
+		up[]={0.078805171,0.92663413,0.36759973};
+		aside[]={0.97786164,1.1501834e-007,-0.20963243};
 	};
 };
 binarizationWanted=0;
 addons[]=
 {
-	"A3_Structures_F_Items_Electronics",
+	"A3_Props_F_Enoch_Military_Equipment",
 	"A3_Weapons_F_Ammoboxes",
 	"A3_Soft_F_Exp_MRAP_01",
 	"A3_Ui_F",
@@ -41,8 +41,8 @@ class AddonsMetaData
 		items=8;
 		class Item0
 		{
-			className="A3_Structures_F";
-			name="Arma 3 - Buildings and Structures";
+			className="A3_Props_F_Enoch";
+			name="Arma 3 Contact Platform - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -141,8 +141,8 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
-		briefingName="Invade & Annex: Apex Edition";
-		overviewText="Relaxed, combined-arms coop with infantry focus";
+		briefingName="Invade & Annex: Apex Edition [UA]";
+		overviewText="Розслабляючий CooP з комбінованим озрбоєнням та фокусом на піхотні дії";
 		startWeather=0.29999998;
 		startWind=0.099999994;
 		startWaves=0.099999994;
@@ -180,7 +180,8 @@ class Mission
 				disableSimulation=1;
 			};
 			id=98;
-			type="Land_Laptop_unfolded_F";
+			type="Land_Laptop_03_black_F";
+			atlOffset=-0.011340857;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -344,7 +345,8 @@ class Mission
 				disableSimulation=1;
 			};
 			id=106;
-			type="Land_Laptop_unfolded_F";
+			type="Land_Laptop_03_black_F";
+			atlOffset=-0.011340857;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -392,7 +394,7 @@ class Mission
 			dataType="Marker";
 			position[]={6957.8013,2.6600001,7384.5435};
 			name="QS_marker_base_marker";
-			text="Base";
+			text="База";
 			type="respawn_unknown";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -405,7 +407,7 @@ class Mission
 			dataType="Marker";
 			position[]={7063.979,2.6600001,7475.333};
 			name="QS_marker_airbaseDefense";
-			text="   AA";
+			text="   ППО";
 			type="b_antiair";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -418,7 +420,7 @@ class Mission
 			dataType="Marker";
 			position[]={7064.7632,2.6600001,7467.8931};
 			name="QS_marker_airbaseArtillery";
-			text="   Arty";
+			text="   Артилерія";
 			type="b_art";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -431,7 +433,7 @@ class Mission
 			dataType="Marker";
 			position[]={7064.8032,2.6600001,7460.5562};
 			name="QS_marker_casJet_spawn";
-			text="   CAS";
+			text="   Літаки";
 			type="respawn_plane";
 			colorName="ColorWEST";
 			alpha=0.5042358;
@@ -444,7 +446,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.9341,2.6600001,7384.7803};
 			name="QS_marker_crate_area";
-			text="   Crate Area";
+			text="   Вантажна зона";
 			type="b_support";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -457,7 +459,7 @@ class Mission
 			dataType="Marker";
 			position[]={7064.8979,2.6600001,7452.7432};
 			name="QS_marker_heli_spawn";
-			text="   Heli";
+			text="   Гелікоптери";
 			type="respawn_air";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -470,7 +472,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.3481,2.6600001,7446.3262};
 			name="QS_marker_veh_spawn";
-			text="   Vehicle";
+			text="   Транспорт";
 			type="respawn_armor";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -483,7 +485,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.2271,2.6600001,7440.4722};
 			name="QS_marker_boats_1";
-			text="   Boat";
+			text="   Човни";
 			type="respawn_naval";
 			colorName="ColorWEST";
 			alpha=0.49576423;
@@ -496,7 +498,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.8691,2.6600001,7433.1099};
 			name="QS_marker_side_rewards";
-			text="   Rewards";
+			text="   Винагороди";
 			type="b_unknown";
 			colorName="ColorWEST";
 			alpha=0.5042358;
@@ -509,7 +511,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.7808,2.6600001,7426.397};
 			name="QS_marker_gitmo";
-			text="   Gitmo";
+			text="   В’язниця";
 			type="b_unknown";
 			colorName="ColorWEST";
 			alpha=0.5042358;
@@ -522,7 +524,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.7632,2.6600001,7420.2388};
 			name="QS_marker_medevac_hq";
-			text="   Medevac HQ";
+			text="   Шпиталь";
 			type="b_med";
 			colorName="ColorWEST";
 			alpha=0.49576423;
@@ -535,7 +537,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.646,2.6600001,7412.5879};
 			name="QS_marker_veh_baseservice_01";
-			text="   Vehicle Service";
+			text="   Транспортний сервіс";
 			type="b_maint";
 			colorName="ColorWEST";
 			alpha=0.49576423;
@@ -548,7 +550,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.8208,2.6600001,7406.019};
 			name="QS_marker_veh_baseservice_02";
-			text="   Heli Service";
+			text="   Сервіс гелікоптерів";
 			type="b_maint";
 			colorName="ColorWEST";
 			alpha=0.49576423;
@@ -561,7 +563,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.7539,2.6600001,7397.9141};
 			name="QS_marker_veh_baseservice_03";
-			text="   Plane Service";
+			text="   Сервіс літаків";
 			type="b_maint";
 			colorName="ColorWEST";
 			alpha=0.49576423;
@@ -574,7 +576,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.9556,2.6600001,7391.0962};
 			name="QS_marker_veh_inventoryService_01";
-			text="   Inventory";
+			text="   Спорядження";
 			type="b_support";
 			colorName="ColorWEST";
 			alpha=0.5;
@@ -806,7 +808,7 @@ class Mission
 			dataType="Marker";
 			position[]={7513.8599,0,6066.645};
 			name="QS_marker_subPosition";
-			text="   Submarine position";
+			text="   Позиція підводного човна";
 			type="Empty";
 			alpha=0.5;
 			angle=91.614227;
@@ -818,7 +820,7 @@ class Mission
 			dataType="Marker";
 			position[]={7066.3911,2.6600001,7336.4712};
 			name="QS_marker_respawn_helipilot";
-			text="   Heli Pilot Respawn";
+			text="   Відродження Пілотів гелікоптерів";
 			type="Empty";
 			alpha=0.49576423;
 			id=133;
@@ -828,7 +830,7 @@ class Mission
 			dataType="Marker";
 			position[]={7065.1011,2.6600001,7317.2959};
 			name="QS_marker_respawn_jetpilot";
-			text="   Jet Pilot Respawn";
+			text="   Відродження Пілотів літаків";
 			type="Empty";
 			alpha=0.5042358;
 			id=134;
@@ -838,7 +840,7 @@ class Mission
 			dataType="Marker";
 			position[]={7064.103,2.6600001,7299.3198};
 			name="QS_marker_respawn_uavoperator";
-			text="   UAV Operator Respawn";
+			text="   Відродження Операторів БПЛА";
 			type="Empty";
 			alpha=0.49576423;
 			id=135;
@@ -915,7 +917,7 @@ class Mission
 			dataType="Marker";
 			position[]={7831.0405,2.019434,5639.1704};
 			name="QS_marker_destroyer_1";
-			text="Destroyer ship position";
+			text="Позиція Есмінця";
 			type="Empty";
 			alpha=0.5;
 			angle=88.549187;
@@ -927,7 +929,7 @@ class Mission
 			dataType="Marker";
 			position[]={7133.2847,6.8069134,5293.5757};
 			name="QS_marker_carrier_1";
-			text="Carrier ship position";
+			text="Позиція Авіаносця";
 			type="Empty";
 			alpha=0.5;
 			angle=102.89074;
@@ -953,7 +955,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=151;
@@ -1028,7 +1030,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=153;
@@ -1103,7 +1105,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=155;
@@ -1178,7 +1180,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=157;
@@ -1253,7 +1255,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=159;
@@ -1328,7 +1330,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayer=1;
 						isPlayable=1;
 					};
@@ -1404,7 +1406,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=163;
@@ -1479,7 +1481,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=165;
@@ -1554,7 +1556,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=167;
@@ -1629,7 +1631,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=169;
@@ -1704,7 +1706,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=171;
@@ -1779,7 +1781,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=173;
@@ -1854,7 +1856,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=175;
@@ -1929,7 +1931,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=177;
@@ -2004,7 +2006,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=179;
@@ -2079,7 +2081,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=181;
@@ -2154,7 +2156,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=183;
@@ -2229,7 +2231,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=185;
@@ -2304,7 +2306,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=187;
@@ -2379,7 +2381,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=189;
@@ -2454,7 +2456,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=211;
@@ -2529,7 +2531,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=213;
@@ -2604,7 +2606,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=215;
@@ -2679,7 +2681,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=217;
@@ -2754,7 +2756,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=219;
@@ -2829,7 +2831,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=221;
@@ -2904,7 +2906,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=223;
@@ -2979,7 +2981,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=225;
@@ -3054,7 +3056,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=227;
@@ -3129,7 +3131,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=229;
@@ -3204,7 +3206,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=231;
@@ -3279,7 +3281,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=233;
@@ -3354,7 +3356,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=235;
@@ -3429,7 +3431,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=237;
@@ -3504,7 +3506,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=239;
@@ -3579,7 +3581,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=241;
@@ -3654,7 +3656,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=243;
@@ -3729,7 +3731,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=245;
@@ -3804,7 +3806,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=247;
@@ -3879,7 +3881,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=249;
@@ -3954,7 +3956,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=251;
@@ -4029,7 +4031,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=253;
@@ -4104,7 +4106,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=255;
@@ -4179,7 +4181,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=257;
@@ -4254,7 +4256,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=259;
@@ -4329,7 +4331,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=261;
@@ -4404,7 +4406,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=263;
@@ -4479,7 +4481,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=265;
@@ -4554,7 +4556,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=267;
@@ -4629,7 +4631,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=269;
@@ -4704,7 +4706,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=271;
@@ -4779,7 +4781,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=273;
@@ -4854,7 +4856,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=275;
@@ -4929,7 +4931,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=277;
@@ -5004,7 +5006,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=279;
@@ -5079,7 +5081,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=281;
@@ -5152,7 +5154,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=283;
@@ -5225,7 +5227,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=285;
@@ -5298,7 +5300,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=287;
@@ -5373,7 +5375,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=289;
@@ -5446,7 +5448,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=291;
@@ -5521,7 +5523,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=293;
@@ -5596,7 +5598,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=295;
@@ -5671,7 +5673,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=297;
@@ -5746,7 +5748,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=299;
@@ -5821,7 +5823,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=301;
@@ -5896,7 +5898,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=303;
@@ -5971,7 +5973,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=305;
@@ -6046,7 +6048,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=307;
@@ -6121,7 +6123,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=309;
@@ -6196,7 +6198,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=311;
@@ -6271,7 +6273,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=313;
@@ -6346,7 +6348,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=315;
@@ -6421,7 +6423,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=317;
@@ -6496,7 +6498,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=319;
@@ -6571,7 +6573,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=321;
@@ -6646,7 +6648,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=323;
@@ -6719,7 +6721,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=325;
@@ -6792,7 +6794,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=327;
@@ -6867,7 +6869,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=329;

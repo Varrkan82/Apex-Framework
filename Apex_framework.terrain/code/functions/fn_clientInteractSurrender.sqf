@@ -63,7 +63,7 @@ _onCompleted = {
 		[58,[profileName]] remoteExec ['QS_fnc_remoteExec',2,FALSE];
 	};
 	if (_entity isEqualTo (missionNamespace getVariable 'QS_arrest_target')) then {
-		['sideChat',[WEST,'HQ'],(format ['%1 arrested the HVT!',profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+		['sideChat',[WEST,'HQ'],(format ['%1 заарештував HVT!',profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 		for '_x' from 0 to 1 step 1 do {
 			missionNamespace setVariable ['QS_aoSmallTask_Arrested',TRUE,TRUE];
 		};
@@ -82,9 +82,9 @@ _onCompleted = {
 		['QS_RD_loadable',TRUE,TRUE],
 		['QS_surrender_captor',[profileName,(getPlayerUID player)],TRUE]
 	];
-	_text = format ['%1 has captured a unit at grid %2',profileName,(mapGridPosition player)];
+	_text = format ['%1 захопив об’єкт в квадратi %2',profileName,(mapGridPosition player)];
 	['systemChat',_text] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-	50 cutText ['Captured!','PLAIN DOWN',0.75];
+	50 cutText ['Захоплено!','PLAIN DOWN',0.75];
 };
 /*/ 
 How hard should it be to capture the unit?
@@ -94,7 +94,7 @@ private _timerRange = [1.5,2.1,2.35];
 private _timerMin = 0.5;
 private _duration = ((random _timerRange) + (morale _t) - (damage _t) - (needReload _t)) max _timerMin;
 [
-	'Capturing unit',
+	'Захоплення в полон',
 	_duration,
 	0,
 	[[_t],{FALSE}],

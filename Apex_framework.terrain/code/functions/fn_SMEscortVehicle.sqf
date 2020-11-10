@@ -6,7 +6,7 @@ Author:
 	
 Last Modified:
 
-	30/09/2018 A3 1.84 by Quiksilver
+	27/07/2019 A3 1.94 by Quiksilver
 	
 Description:
 
@@ -46,7 +46,7 @@ _functionAttack = 'QS_fnc_taskAttack';
 _base = markerPos 'QS_marker_base_marker';
 _baseBufferDist = 1000;
 _worldName = worldName;
-if (!(_worldName in ['Altis','Malden','Tanoa'])) exitWith {
+if (!(_worldName in ['Altis','Malden','Tanoa','Enoch'])) exitWith {
 	diag_log '***** ERROR * Truck side mission * terrain not supported (needs config) *****';
 };
 if (_worldName isEqualTo 'Tanoa') then {
@@ -104,13 +104,28 @@ if (_worldName isEqualTo 'Malden') then {
 		[7689.35,3309.53,0]
 	] call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
 };
+if (_worldName isEqualTo 'Enoch') then {
+	_startPosition = [4268.87,10463.4,0];
+	_startDir = 134;
+	_vehicleTypes = ['B_T_Truck_01_fuel_F','B_T_Truck_01_box_F'];
+	_destinations = [
+		[11151.5,11434.7,0.00144577],
+		[11436.9,9484.55,0.0016613],
+		[11226.9,4360.06,0.00143433],
+		[5946.78,4097.98,0.00137329],
+		[4949.62,2143.18,0.00149536],
+		[1664.64,3653.66,0.00143433],
+		[11429.7,503.399,0.0014534],
+		[7363.54,2856.99,0.00144196],
+		[4906.16,5423.01,0.00140381],
+		[9065.14,6668.31,0.00143433],
+		[565.645,947.551,0.00146484],
+		[565.645,947.551,0.00146484]
+	] call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
+};
 _vehicleType = selectRandom _vehicleTypes;
 _vehicle = createVehicle [_vehicleType,_startPosition,[],0,'NONE'];
-missionNamespace setVariable [
-	'QS_analytics_entities_created',
-	((missionNamespace getVariable 'QS_analytics_entities_created') + 1),
-	FALSE
-];
+missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + 1),FALSE];
 _enabled_IED = FALSE;
 _enabled_mech = FALSE;
 _enabled_RPG = FALSE;
@@ -182,7 +197,7 @@ _vehicle addEventHandler [
 		params ['_vehicle','_position','_unit','_turret'];
 		if (_position == 'driver') then {
 			if (isPlayer _unit) then {
-				['vehicleChat',_vehicle,'Get this vehicle to its destination, soldier!'] remoteExec ['QS_fnc_remoteExecCmd',_unit,FALSE];
+				['vehicleChat',_vehicle,'Доставте транспорт до мiсця призначення!'] remoteExec ['QS_fnc_remoteExecCmd',_unit,FALSE];
 			};
 		};
 	}
@@ -199,12 +214,12 @@ _vehicle addEventHandler [
 		params ['_vehicle','_unit1','_unit2'];
 		if ('Driver' in (assignedVehicleRole _unit1)) then {
 			if (isPlayer _unit1) then {
-				['vehicleChat',_vehicle,'Mission: Get this vehicle to its destination, soldier!'] remoteExec ['QS_fnc_remoteExecCmd',_unit1,FALSE];
+				['vehicleChat',_vehicle,'Мiсiя: Доставте транспорт до мiсця призначення!'] remoteExec ['QS_fnc_remoteExecCmd',_unit1,FALSE];
 			};
 		};
 		if ('Driver' in (assignedVehicleRole _unit2)) then {
 			if (isPlayer _unit2) then {
-				['vehicleChat',_vehicle,'Mission: Get this vehicle to its destination, soldier!'] remoteExec ['QS_fnc_remoteExecCmd',_unit2,FALSE];
+				['vehicleChat',_vehicle,'Мiсiя: Доставте транспорт до мiсця призначення!'] remoteExec ['QS_fnc_remoteExecCmd',_unit2,FALSE];
 			};
 		};
 	}
@@ -248,8 +263,8 @@ _enemyFiredEvent = {
 	_unit = _this select 0;
 	_unit removeEventHandler ['Fired',_thisEventHandler];
 	_unit suppressFor 5;
-	if (!isNull (assignedTarget _unit)) then {
-		_unit doSuppressiveFire (aimPos (assignedTarget _unit));
+	if (alive (getAttackTarget _unit)) then {
+		_unit doSuppressiveFire (aimPos (getAttackTarget _unit));
 	};
 };
 _veh = objNull;
@@ -303,7 +318,7 @@ _marker0 setMarkerShape 'Icon';
 _marker0 setMarkerType 'mil_dot';
 _marker0 setMarkerColor 'ColorGreen';
 _marker0 setMarkerAlpha 1;
-_marker0 setMarkerText (format ['%1Side mission: Truck Destination',(toString [32,32,32])]);
+_marker0 setMarkerText (format ['%1Додаткова мiсiя: Мiсце доставки вантажiвки',(toString [32,32,32])]);
 _marker0 setMarkerPos _destination;
 _distanceInFront_fixed = 250;
 _distanceInFront_random = 500;
@@ -331,9 +346,9 @@ _suppressTargets pushBack _suppressTarget;
 	'QS_IA_TASK_SM_ESCORT',
 	TRUE,
 	[
-		(format ['Get the vehicle to its destination near %1 (marked on map). It is strongly advised to stay on roads, and not to bring tanks or APCs, as this can disturb buried IEDs. It is suggested to keep moving even during contact, to prevent getting flanked and attacked by more heavily armed insurgents. Good luck, soldier!',_nearestVillage]),
-		'Side Mission: Escort truck',
-		'Side Mission: Escort truck'
+		(format ['Отримайте транспортний засiб %1 (транспорт позначений на мапi).',_nearestVillage]),
+		'Додаткова мiсiя: Супровiд вантажiвки',
+		'Додаткова мiсiя: Супровiд вантажiвки'
 	],
 	[_vehicle,TRUE],
 	'CREATED',
@@ -343,8 +358,8 @@ _suppressTargets pushBack _suppressTarget;
 	'Truck',
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
-['NewSideMission',['Escort truck']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
-'QS_marker_sideMarker' setMarkerText (format ['%1Escort truck',(toString [32,32,32])]);
+['NewSideMission',['Супроводити вантажiвку']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+'QS_marker_sideMarker' setMarkerText (format ['%1Супровiд вантажiвки',(toString [32,32,32])]);
 waitUntil {
 	sleep 3;
 	(!alive _vehicle) ||
@@ -354,7 +369,7 @@ if (!alive _vehicle) exitWith {
 	//comment 'Mission fail';
 	deleteMarker _marker0;
 	['QS_IA_TASK_SM_ESCORT'] call (missionNamespace getVariable 'BIS_fnc_deleteTask');
-	['TaskFailed',['','Truck destroyed!']] remoteExec [_fuctionNotification,-2,FALSE];
+	['TaskFailed',['','Вантажвку знищено!']] remoteExec [_fuctionNotification,-2,FALSE];
 	sleep 5;
 	[0,_destination] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 };
@@ -374,7 +389,7 @@ for '_x' from 0 to 1 step 0 do {
 							if ((_vehiclePos distance2D _startPosition) > _safezone_radius) then {
 								_timeOffRoad = _timeOffRoad + 1;
 								if (_timeOffRoad > 7) then {
-									['sideChat',[WEST,'BLU'],'Side mission - The vehicle has struck a buried landmine!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+									['sideChat',[WEST,'BLU'],'Додаткова мiсiя - Транспорт вражено мiною!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 									_hasHitLandmine = TRUE;
 								};
 							};
@@ -628,13 +643,12 @@ for '_x' from 0 to 1 step 0 do {
 				_veh enableVehicleCargo FALSE;
 				_veh setConvoySeparation 50;
 				_veh addEventHandler ['Killed',(missionNamespace getVariable 'QS_fnc_vKilled2')];
-				createVehicleCrew _veh;
+				_grp = createVehicleCrew _veh;
 				missionNamespace setVariable [
 					'QS_analytics_entities_created',
 					((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _veh))),
 					FALSE
 				];
-				_grp = group ((crew _veh) select 0);
 				[(units _grp),(selectRandom [1,2])] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
 				_enemyGroupArray pushBack _grp;
 				_enemyArray pushBack _veh;
@@ -909,13 +923,13 @@ for '_x' from 0 to 1 step 0 do {
 	};
 	if (!alive _vehicle) exitWith {
 		//comment 'Mission fail';
-		['SM_TRUCK',['Side mission','Truck mission failed!<br/>Truck destroyed']] remoteExec [_fuctionNotification,-2,FALSE];
+		['SM_TRUCK',['Другорядна мiсiя','Мiсiю з вантажiвкою провалено!<br/>Вантажiвку знищено']] remoteExec [_fuctionNotification,-2,FALSE];
 		sleep 5;
 		[0,_destination] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 	};
 	if ((_vehicle distance2D _destination) < 50) exitWith {
 		//comment 'Mission success';
-		['SM_TRUCK',['Side mission','Truck mission complete!<br/>Truck at destination']] remoteExec [_fuctionNotification,-2,FALSE];
+		['SM_TRUCK',['Другорядна мiсiя','Мiсiю з вантажiвкою завершено!<br/>Вантажiвка в точцi призначення']] remoteExec [_fuctionNotification,-2,FALSE];
 		sleep 5;
 		[1,_destination] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 	};

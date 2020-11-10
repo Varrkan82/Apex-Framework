@@ -6,11 +6,11 @@ Author:
 	
 Last Modified:
 
-	6/05/2019 A3 1.92 by Quiksilver
+	19/10/2020 A3 2.00 by Quiksilver
 
 Description:
 
-	Get anticheat compatibility
+	
 __________________________________________________________*/
 
-192;
+200;

@@ -45,6 +45,7 @@ if (_type isEqualTo 1) exitWith {
 		clearMagazineCargoGlobal _jammer;
 		clearItemCargoGlobal _jammer;
 		clearBackpackCargoGlobal _jammer;
+		_jammer lockInventory TRUE;
 		_jammer enableVehicleCargo FALSE;
 		_jammer enableRopeAttach FALSE;
 		_jammer setRepairCargo 0;
@@ -91,13 +92,13 @@ if (_type isEqualTo 1) exitWith {
 					};
 					if (!isNull _instigator) then {
 						if (isPlayer _instigator) then {
-							_text = format ['%1 ( %2 ) destroyed a GPS jammer!',(name _instigator),(groupID (group _instigator))];
+							_text = format ['%1 ( %2 ) знищив пригнiчувач GPS!',(name _instigator),(groupID (group _instigator))];
 							[[WEST,'BLU'],_text] remoteExec ['sideChat',-2,FALSE];
 						} else {
-							[[WEST,'BLU'],'GPS jammer destroyed!'] remoteExec ['sideChat',-2,FALSE];
+							[[WEST,'BLU'],'Пригнiчувач GPS знищено!'] remoteExec ['sideChat',-2,FALSE];
 						};
 					} else {
-						[[WEST,'BLU'],'GPS jammer destroyed!'] remoteExec ['sideChat',-2,FALSE];
+						[[WEST,'BLU'],'Пригнiчувач GPS знищено!'] remoteExec ['sideChat',-2,FALSE];
 					};
 					_gpsJammers = missionNamespace getVariable ['QS_mission_gpsJammers',[]];
 					if (!(_gpsJammers isEqualTo [])) then {
@@ -147,9 +148,9 @@ if (_type isEqualTo 1) exitWith {
 				_id,
 				TRUE,
 				[
-					'The enemy has deployed a GPS jammer. Locate and destroy it!',
-					'GPS Jammer',
-					'GPS Jammer'
+					'Ворог розгорнув пригнiчувач GPS. Знайдiть та знищiть його!',
+					'Пригнiчувач GPS',
+					'Пригнiчувач GPS'
 				],
 				_effectPosition,
 				'CREATED',

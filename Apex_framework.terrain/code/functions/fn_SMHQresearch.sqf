@@ -26,9 +26,9 @@ private [
 ];
 
 _c4Messages = [
-	"Hard drive secured. The charge has been set! 15 seconds until detonation.",
-	"Research secured. The explosives have been set! 15 seconds until detonation.",
-	"Research intel secured. The charge is planted! 15 seconds until detonation."
+	"Жорсткий диск захищений. Вибухiвку встановлено! 15 секунд до детонацiї.",
+	"Дослiдження отримано. Вибухiвку встановлено! 15 секунд до детонацiї.",
+	"Дослiдження документiв виконано. Вибухiвку встановлено! 15 секунд до детонацiї."
 ];
 _c4Message = selectRandom _c4Messages;
 if (worldName isEqualTo 'Tanoa') then {
@@ -88,7 +88,7 @@ missionNamespace setVariable [
 _researchTable setPosWorld [((getPosWorld QS_sideObj) select 0), ((getPosWorld QS_sideObj) select 1), ((getPosWorld QS_sideObj) select 2)];
 _dummyTypes = ['Box_East_AmmoOrd_F','Box_IND_AmmoOrd_F'];
 _dummyType = selectRandom _dummyTypes;
-_objectTypes = ['Land_Laptop_unfolded_F','Land_Laptop_device_F'];
+_objectTypes = ['Land_Laptop_03_black_F','Land_Laptop_device_F'];
 _objectType = selectRandom _objectTypes;
 _object = createVehicle [_objectType,[0,0,0],[],0,'NONE'];
 missionNamespace setVariable [
@@ -115,15 +115,15 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	_x setMarkerPos _fuzzyPos;
 	_x setMarkerAlpha 1;
 } count ['QS_marker_sideMarker','QS_marker_sideCircle'];
-'QS_marker_sideMarker' setMarkerText (format ['%1Seize Research Data',(toString [32,32,32])]);
+'QS_marker_sideMarker' setMarkerText (format ['%1Захопити дослiдницькi даннi',(toString [32,32,32])]);
 
 [
 	'QS_IA_TASK_SM_0',
 	TRUE,
 	[
-		'Seize the research data! The enemy is conducting weapons testing research, and has left one of their research stations under-protected. Get over there and download the intel! This objective is not accurately marked.',
-		'Seize Research Data',
-		'Seize Research Data'
+		'Захопити дослiдницькi данi! Ворог проводить дослiдження з тестування секретної зброї i залишив одну з своїх дослiдницьких станцiй недостатньо захищеною. Вирушайте туди i захопiть данi!',
+		'Захопити дослiдницькi данi',
+		'Захопити дослiдницькi данi'
 	],
 	(markerPos 'QS_marker_sideMarker'),
 	'CREATED',
@@ -134,9 +134,9 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
 
-_briefing = parseText "<t align='center'><t size='2.2'>New Side Mission</t><br/><t size='1.5' color='#00B2EE'>Seize Research Data</t><br/>____________________<br/>OPFOR are conducting advanced military research.<br/><br/>Find the data and then torch the place!</t>";
+_briefing = parseText "<t align='center'><t size='2.2'>Нове додаткове завдання</t><br/><t size='1.5' color='#00B2EE'>Захопити дослiдницькi данi</t><br/>____________________<br/>OPFOR проводять передовi вiйськовi дослiдження.<br/><br/>Захопiть центр дослiджнеь.</t>";
 //['hint',_briefing] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-['NewSideMission',['Seize Research Data']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['NewSideMission',['Захопити дослiдницькi данi']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 missionNamespace setVariable ['QS_sideMissionUp',TRUE,TRUE];
 missionNamespace setVariable ['QS_smSuccess',FALSE,TRUE];
 	
@@ -148,7 +148,7 @@ for '_x' from 0 to 1 step 0 do {
 		
 		/*/-------------------- DE-BRIEFING/*/
 
-		['sideChat',[WEST,'HQ'],'Objective destroyed, mission FAILED!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+		['sideChat',[WEST,'HQ'],'Цiль знищено, мiсiю ПРОВАЛЕНО!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 		[0,_flatPos] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 		{
 			_x setMarkerPos [-5000,-5000,0];

@@ -59,14 +59,14 @@ _vehicle setVehicleReportRemoteTargets TRUE;
 						_killerDisplayName = getText (configFile >> 'CfgVehicles' >> _killerType >> 'displayName');
 						_objDisplayName = getText (configFile >> 'CfgVehicles' >> _objType >> 'displayName');
 						_name = name _instigator;
-						['sideChat',[WEST,'BLU'],(format ['%1 has destroyed a(n) %2 with a(n) %3!',_name,_objDisplayName,_killerDisplayName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+						['sideChat',[WEST,'BLU'],(format ['%1 знищив %2 з %3!',_name,_objDisplayName,_killerDisplayName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 					};
 				};
 			};
 			if ((missionNamespace getVariable 'QS_mission_aoType') isEqualTo 'SC') then {
-				['SC_SUB_COMPLETED',['','AA Site destroyed']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+				['SC_SUB_COMPLETED',['','Розрахунок ППО знищено']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 			} else {
-				['CompletedSub',['AA Site Destroyed']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+				['CompletedSub',['Розрахунок ППО знищено']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 			};
 		}
 	],

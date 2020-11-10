@@ -23,7 +23,7 @@ params [
 ];
 private _entities = [];
 if (_type isEqualTo 'FOOT') then {
-	comment 'Get area building positions';
+	//comment 'Get area building positions';
 	private _buildings = nearestObjects [_centerPos,['House','Building'],_centerRad,TRUE];
 	_buildings = _buildings + ((allSimpleObjects []) select {((_x distance2D _centerPos) <= _centerRad)});
 	_buildings = _buildings call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
@@ -49,10 +49,10 @@ if (_type isEqualTo 'FOOT') then {
 	if (!(_arrayBuildingPositions isEqualTo [])) then {
 		if (((count _arrayBuildingPositions) > 20) || (_forced)) then {
 			_arrayBuildingPositions = _arrayBuildingPositions call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
-			comment 'Spawn agents';
+			//comment 'Spawn agents';
 			private _agent = objNull;
 			private _agentType = '';
-			_agentTypes = [
+			private _agentTypes = [
 				[
 					'C_man_p_beggar_F_afro',
 					'C_Man_casual_1_F_afro',
@@ -118,6 +118,29 @@ if (_type isEqualTo 'FOOT') then {
 					'C_IDAP_Man_AidWorker_07_F'
 				]
 			] select (worldName isEqualTo 'Tanoa');
+			if (worldName in ['Enoch']) then {
+				_agentTypes = [
+					'c_man_1_enoch_f',
+					'c_man_2_enoch_f',
+					'c_man_3_enoch_f',
+					'c_man_4_enoch_f',
+					'c_farmer_01_enoch_f',
+					'c_man_casual_1_f_euro',
+					'c_man_casual_2_f_euro',
+					'c_man_casual_3_f_euro',
+					'c_scientist_01_formal_f',
+					'c_scientist_01_informal_f',
+					'c_scientist_02_informal_f',
+					'c_scientist_02_formal_f',
+					'c_man_casual_1_f_afro',
+					'c_man_casual_2_f_afro',
+					'c_man_casual_3_f_afro',
+					'c_idap_man_aidworker_01_f',
+					'c_idap_man_aidworker_02_f',
+					'c_idap_man_aidworker_09_f',
+					'c_idap_man_aidworker_07_f'
+				];
+			};
 			_arrayBuildingPositionsProxy = _arrayBuildingPositions call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
 			reverse _arrayBuildingPositionsProxy;
 			_arrayBuildingPositionsProxy = _arrayBuildingPositionsProxy call (missionNamespace getVariable 'QS_fnc_arrayShuffle');
@@ -147,8 +170,8 @@ if (_type isEqualTo 'FOOT') then {
 									if (!(missionNamespace getVariable ['QS_grid_civCasualties',FALSE])) then {
 										missionNamespace setVariable ['QS_grid_civCasualties',TRUE,TRUE];
 										if (isDedicated) then {
-											['GRID_IDAP_UPDATE',['Area Of Operations','Objective failed<br/>No civilian casualties']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
-											'QS_marker_grid_civState' setMarkerText (format ['%1No civilian casualties (failed)',(toString [32,32,32])]);
+											['GRID_IDAP_UPDATE',['Зона Операцiй','Завдання провалено<br/>Без жертв серед цивiльних']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+											'QS_marker_grid_civState' setMarkerText (format ['%1Без жертв серед цивiльних (провалено)',(toString [32,32,32])]);
 											'QS_marker_grid_civState' setMarkerColor 'ColorRED';
 										} else {
 											[85] remoteExec ['QS_fnc_remoteExec',2,FALSE];
@@ -178,7 +201,7 @@ if (_type isEqualTo 'FOOT') then {
 						if (!isNull _instigator) then {
 							if (isPlayer _instigator) then {
 								_name = name _instigator;
-								_text = format ['%1 %2 a civilian!',_name,(selectRandom ['killed','murdered','butchered','slaughtered'])];
+								_text = format ['%1 %2 цивiльного!',_name,(selectRandom ['вбив','знищив','нейтралiзував','лiквiдував'])];
 								['systemChat',_text] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 							};
 						};
@@ -190,6 +213,6 @@ if (_type isEqualTo 'FOOT') then {
 	};
 };
 if (_type isEqualTo 'VEHICLE') then {
-	/*/ugh AI driving can fuck right off (1.78 A3 23/11/2017) /*/
+	/*/ AI driving can fuck right off (1.78 A3 23/11/2017) /*/
 };
 _entities;

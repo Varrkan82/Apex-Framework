@@ -64,7 +64,7 @@ for '_x' from 0 to (round (1 + (random 2))) step 1 do {
 
 for '_x' from 0 to 1 step 1 do {
 	_randomPos = [_pos,500,100,10] call (missionNamespace getVariable 'QS_fnc_findOverwatchPos');
-	_smSniperTeam = [_randomPos,(random 360),EAST,'OI_SniperTeam',FALSE] call (missionNamespace getVariable 'QS_fnc_spawnGroup');
+	_smSniperTeam = [_randomPos,(random 360),EAST,'OI_SniperTeam_2',FALSE] call (missionNamespace getVariable 'QS_fnc_spawnGroup');
 	[(units _smSniperTeam),4] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
 	{
 		_x setBehaviour 'COMBAT';
@@ -82,24 +82,21 @@ for '_x' from 0 to 1 step 1 do {
 _randomPos = ['RADIUS',_pos,300,'LAND',[],FALSE,[],[],TRUE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
 _vehType = selectRandomWeighted ([2] call (missionNamespace getVariable 'QS_fnc_getAIMotorPool'));
 _SMveh1 = createVehicle [_vehType,_randomPos,[],0,'NONE'];
-missionNamespace setVariable [
-	'QS_analytics_entities_created',
-	((missionNamespace getVariable 'QS_analytics_entities_created') + 1),
-	FALSE
-];
+missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + 1),FALSE];
 _SMveh1 allowCrewInImmobile TRUE;
 [0,_SMveh1,EAST,1] call (missionNamespace getVariable 'QS_fnc_vSetup2');
 _SMveh1 lock 3;
 (missionNamespace getVariable 'QS_AI_vehicles') pushBack _SMveh1;
 _SMveh1 addEventHandler ['GetOut',(missionNamespace getVariable 'QS_fnc_AIXDismountDisabled')];
 _SMveh1 addEventHandler ['Killed',(missionNamespace getVariable 'QS_fnc_vKilled2')];
-createVehicleCrew _SMveh1;
-missionNamespace setVariable [
-	'QS_analytics_entities_created',
-	((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _SMveh1))),
-	FALSE
-];
-_grp = group ((crew _SMveh1) select 0);
+private _grp = createVehicleCrew _SMveh1;
+if (!((side _grp) in [EAST,RESISTANCE])) then {
+	_grp = createGroup [EAST,TRUE];
+	{
+		[_x] joinSilent _grp;
+	} forEach (crew _SMveh1);
+};
+missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _SMveh1))),FALSE];
 {
 	_x call (missionNamespace getVariable 'QS_fnc_unitSetup');
 } forEach (units _grp);
@@ -133,13 +130,12 @@ if ((count allPlayers) > 25) then {
 	_SMaa lock 3;
 	_SMaa addEventHandler ['GetOut',(missionNamespace getVariable 'QS_fnc_AIXDismountDisabled')];
 	_SMaa addEventHandler ['Killed',(missionNamespace getVariable 'QS_fnc_vKilled2')];
-	createVehicleCrew _SMaa;
+	_grp = createVehicleCrew _SMaa;
 	missionNamespace setVariable [
 		'QS_analytics_entities_created',
 		((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _SMaa))),
 		FALSE
 	];
-	_grp = group ((crew _SMaa) select 0);
 	{
 		_x call (missionNamespace getVariable 'QS_fnc_unitSetup');
 	} forEach (units _grp);

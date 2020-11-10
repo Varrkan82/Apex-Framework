@@ -6,7 +6,7 @@ Author:
 	
 Last modified:
 
-	21/07/2018 A3 1.84 by Quiksilver
+	2/06/2019 A3 1.94 by Quiksilver
 	
 Description:
 
@@ -39,8 +39,8 @@ private _entitiesParams = [['Air'],['UAV_01_base_F','UAV_06_base_F','ParachuteBa
 private _rearmInterval = _time + (240 + (random 80));
 private _rearming = FALSE;
 private _rearmDelay = [15,20,30];
-_rearmingText = 'The CSAT AA Battery is rearming!';
-_finishedRearmText = 'The CSAT AA Battery has finished rearming!';
+_rearmingText = 'ПП батарея CSAT перезаряджається!';
+_finishedRearmText = 'ПП батарея CSAT закiнчила перезарядку!';
 private _turretParams = [];
 private _targetListEnemy = [];
 private _targetType = '';
@@ -66,6 +66,7 @@ for '_x' from 0 to 1 step 0 do {
 	};
 	if (_accepted) exitWith {};
 };
+private _watchPosition = _spawnPosition vectorAdd [0,0,1000];
 //comment 'Generate composition and assets';
 private _compositionData = [
 	[
@@ -209,13 +210,13 @@ _compositionData = nil;
 				};
 				if (!isNull _instigator) then {
 					if (isPlayer _instigator) then {
-						_text = format ['%1 ( %2 ) destroyed an AA tank!',(name _instigator),(groupID (group _instigator))];
+						_text = format ['%1 ( %2 ) знищив ПП транспорт ворога!',(name _instigator),(groupID (group _instigator))];
 						[[WEST,'BLU'],_text] remoteExec ['sideChat',-2,FALSE];
 					} else {
-						[[WEST,'BLU'],'AA tank destroyed!'] remoteExec ['sideChat',-2,FALSE];
+						[[WEST,'BLU'],'ПП транспорт знищено!'] remoteExec ['sideChat',-2,FALSE];
 					};
 				} else {
-					[[WEST,'BLU'],'AA tank destroyed!'] remoteExec ['sideChat',-2,FALSE];
+					[[WEST,'BLU'],'ПП транспорт знищено!'] remoteExec ['sideChat',-2,FALSE];
 				};
 			}
 		];
@@ -223,7 +224,8 @@ _compositionData = nil;
 		(crew _aaHull) joinSilent (createGroup [EAST,TRUE]);
 		{
 			_x setVariable ['QS_hidden',TRUE,TRUE];
-		} forEach (crew _aaHull);		
+		} forEach (crew _aaHull);
+		//_aaHull doWatch _watchPosition;
 		_aaTurrets pushBack [_aaHull,(gunner _aaHull),(group (gunner _aaHull)),(typeOf _aaHull),((weapons _aaHull) select ([0,1] select (_aaHull isKindOf 'Tank'))),0,0,0];
 	};
 } forEach _aaHulls;
@@ -240,14 +242,14 @@ _fuzzyPos = [((_spawnPosition select 0) - 300) + (random 600),((_spawnPosition s
 	_x setMarkerPos _fuzzyPos;
 	_x setMarkerAlpha 1;
 } count ['QS_marker_sideMarker','QS_marker_sideCircle'];
-'QS_marker_sideMarker' setMarkerText (format ['%1Priority Target: Anti-Air Battery',(toString [32,32,32])]);
+'QS_marker_sideMarker' setMarkerText (format ['%1Прiоритетне завдання: Протиповiтряна батарея',(toString [32,32,32])]);
 [
 	'QS_IA_TASK_SM_0',
 	TRUE,
 	[
-		'The enemy has set up an Anti-Air Battery near our base. This is a priority target, soldiers! It has extremely long range! Get over there and take it out at all cost. While it is active, it is not advised to use air transport. This objective is not accurately marked. While it is re-arming (30 seconds), it will not be able to lock on at long range. Bringing heavy explosives is advised.',
-		'Anti-Air Battery',
-		'Anti-Air Battery'
+		'Противник встановив протиповiтряну батарею бiля нашої бази. Це прiоритетна мета, солдати! Батарея має надзвичайно великий радiус дiї! Рухайтесь туди i лiквiдiйте цiль за будь-яку цiну. Поки цiль активна, не рекомендується використовувати повiтряний транспорт.',
+		'Противоповiтряна Батарея',
+		'Противоповiтряна Батарея'
 	],
 	(markerPos 'QS_marker_sideMarker'),
 	'CREATED',
@@ -257,14 +259,14 @@ _fuzzyPos = [((_spawnPosition select 0) - 300) + (random 600),((_spawnPosition s
 	'destroy',
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
-_briefing = parseText "<t align='center' size='2.2'>Priority Target</t><br/><t size='1.5' color='#b60000'>Anti-Air Battery</t><br/>____________________<br/>OPFOR forces are setting up an anti-air battery to hit you guys damned hard! We've picked up their positions with thermal imaging scans and have marked it on your map.<br/><br/>This is a priority target, boys!";
+_briefing = parseText "<t align='center' size='2.2'>Прiоритетна цiль</t><br/><t size='1.5' color='#b60000'>Противоповiтряна Батарея</t><br/>____________________<br/>Сили OPFOR створюють протиповiтряну батарею, щоб заблокувати наш повiтряний транспорт! Ми визначили їхнє розташування за допомогою зображень з безпiлотника i позначили цiль на картi.<br/><br/>Прiоритетна цiль";
 //['hint',_briefing] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-['NewPriorityTarget',['Anti-Air Battery']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['NewPriorityTarget',['Противоповiтряна Батарея']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 //comment 'Loop';
 missionNamespace setVariable ['QS_smSuccess',FALSE,TRUE];
 for '_x' from 0 to 1 step 0 do {
 	if (((_aaHulls findIf {(alive _x)}) isEqualTo -1) || {(missionNamespace getVariable ['QS_smSuccess',FALSE])}) exitWith {
-		['CompletedPriorityTarget',['Anti-Air Battery Neutralized']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+		['CompletedPriorityTarget',['Протиповiтряну батарею нейтралiзовано']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 		[1,_spawnPosition] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 		{
 			_x setMarkerAlpha 0;
@@ -273,6 +275,11 @@ for '_x' from 0 to 1 step 0 do {
 	uiSleep 1;
 	_time = diag_tickTime;
 	if (_time > _checkDelay) then {
+		{
+			if (alive _x) then {
+				//_x doWatch _watchPosition;
+			};
+		} forEach _aaHulls;
 		_allAircraft = (entities _entitiesParams) select {
 			_aircraftPosition = getPosATL _x;
 			if (surfaceIsWater _aircraftPosition) then {
@@ -335,8 +342,8 @@ for '_x' from 0 to 1 step 0 do {
 					if (!(_targetListEnemy isEqualTo [])) then {
 						_targetCandidate = selectRandom _targetListEnemy;
 						_aaGunner reveal [_targetCandidate,4];
-						_aaGunner doTarget _targetCandidate;
-						_aaGunner doWatch (_aaTurret getVariable 'QS_v_targetPosition');
+						_aaTurret doTarget _targetCandidate;
+						_aaTurret doWatch _targetCandidate;
 						uiSleep 2;
 						_aaTurret fireAtTarget [_targetCandidate,_aaTurretWeapon];
 					};

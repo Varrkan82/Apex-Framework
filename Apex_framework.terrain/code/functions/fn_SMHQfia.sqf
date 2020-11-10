@@ -25,9 +25,9 @@ private [
 ];
 
 _c4Messages = [
-	"Supply crate secured. The charge has been set! 15 seconds until detonation.",
-	"Weapons secured. The explosives have been set! 15 seconds until detonation.",
-	"Insurgents supply secured. The charge is planted! 15 seconds until detonation."
+	"Ящики зi спорядженням виявлено. Можна встановлювати заряд! 15 секунд до детонацiї.",
+	"Зброю знайдено. Треба встановити вибухiвку! 15 секунд до детонацiї.",
+	"Спорядження повстанцiв захоплене. Заряд встановлено! 15 секунд до детонацiї."
 ];
 _c4Message = selectRandom _c4Messages;
 
@@ -114,15 +114,15 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	_x setMarkerPos _fuzzyPos;
 	_x setMarkerAlpha 1;
 } count ['QS_marker_sideMarker','QS_marker_sideCircle'];
-'QS_marker_sideMarker' setMarkerText (format ['%1Secure Insurgency Supply',(toString [32,32,32])]);
+'QS_marker_sideMarker' setMarkerText (format ['%1Захопити постачання повстанцiв',(toString [32,32,32])]);
 
 [
 	'QS_IA_TASK_SM_0',
 	TRUE,
 	[
-		(format ['The enemy has been supplying an insurgency on %1, get over there and secure their weapons cache. This objective is not accurately marked.',worldName]),
-		'Secure Insurgents Cache',
-		'Secure Insurgents Cache'
+		(format ['Ворог постачає припаси повстанцям %1, висувайтесь туди та захопiть їхнiй склад зброї. Це завдання позначено не точно.',worldName]),
+		'Знищити склад повстанцiв',
+		'Знищити склад повстанцiв'
 	],
 	(markerPos 'QS_marker_sideMarker'),
 	'CREATED',
@@ -133,9 +133,9 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
 
-_briefing = parseText format ["<t align='center'><t size='2.2'>New Side Mission</t><br/><t size='1.5' color='#00B2EE'>Secure Insurgency Supply</t><br/>____________________<br/>OPFOR are training an insurgency on %1.<br/><br/>We've marked the position on your map; head over there, sanitize the area and secure their supply.</t>",worldName];
+_briefing = parseText format ["<t align='center'><t size='2.2'>Нова Другорядна Мiсiя</t><br/><t size='1.5' color='#00B2EE'>Знищити спорядження повстанцiв</t><br/>____________________<br/>OPFOR тренує повстанцiв в %1.<br/><br/>Ми позначили позицiю на мапi; рушайте туди, зачистiть зону та знищiть спорядження.</t>",worldName];
 //['hint',_briefing] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-['NewSideMission',['Secure Insurgency Supply']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['NewSideMission',['Знищити спорядження повстанцiв']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 
 /*/-------------------- [ CORE LOOPS ] ------------------------ [ CORE LOOPS ]/*/
 
@@ -156,7 +156,7 @@ for '_x' from 0 to 1 step 0 do {
 		/*/-------------------- DE-BRIEFING/*/
 
 		missionNamespace setVariable ['QS_sideMissionUp',FALSE,TRUE];
-		['sideChat',[WEST,'HQ'],'Objective destroyed, mission FAILED!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+		['sideChat',[WEST,'HQ'],'Об’єкт знищено, мiсiю ПРОВАЛЕНО!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 		[0,_flatPos] spawn (missionNamespace getVariable 'QS_fnc_smDebrief');
 
 		/*/-------------------- DELETE/*/

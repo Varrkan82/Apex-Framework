@@ -193,114 +193,243 @@ if (worldName isEqualTo 'Malden') then {
 		[[8208.08,3157.17,0.00145531],""]
 	];
 };
+if (worldName isEqualTo 'Enoch') then {
+	_QS_locationsUrban = [
+		[[3682.06,11815.2,0.00144958],""],
+		[[1392.82,9691.77,0.00149536],""],
+		[[4998.03,9953.58,0.00149155],""],
+		[[6481.91,11269.7,0.00144482],""],
+		[[1866.89,7364.82,0.00138092],""],
+		[[3125.47,6820.26,0.0014534],""],
+		[[4036.04,7943.7,0.00145721],""],
+		[[865.074,5509.75,0.00141907],""],
+		[[4558.2,6423.24,0.00141907],""],
+		[[4799.16,7569.35,0.00126648],""],
+		[[6051.08,8179.25,0.00148773],""],
+		[[6305.7,10183.8,0.00143814],""],
+		[[8120,8730.02,0.00144196],""],
+		[[9274.04,10886.9,0.00143814],""],
+		[[8420.9,12020.3,0.00139666],""],
+		[[10681.8,10985.2,0.00155544],""],
+		[[11419.1,9613.33,0.00145626],""],
+		[[9828.27,8501.86,0.00118637],""],
+		[[5942.96,6817.91,0.00165558],""],
+		[[5231.64,5581.69,0.00143433],""],
+		[[7314.85,6351.98,0.00144958],""],
+		[[8513.57,6806.43,0.00139618],""],
+		[[10298.4,6802.31,0.00151062],""],
+		[[1159.42,7254.45,0.00143814],""],
+		[[7379.64,2628.73,0.00144196],""],
+		[[11361.8,627.466,0.00143051],""],
+		[[11086.2,4278.94,0.00143433],""],
+		[[11560.2,4668.16,0.00143433],""],
+		[[7692.92,5283.55,0.00143433],""],
+		[[6097.49,4136.39,0.00151062],""],
+		[[3281,2061.02,0.00146484],""]
+	];
+};
 
 if (_QS_locationsUrban isEqualTo []) exitWith {diag_log '***** fn_secureUrban ***** No valid locations *****';};
-	_QS_approvedBuildingTypes = [
-		'Land_i_House_Small_03_V1_F',
-		'Land_u_House_Big_02_V1_F',
-		'Land_i_House_Big_02_V3_F',
-		'Land_i_House_Big_02_V1_F',
-		'Land_i_House_Big_02_V2_F',
-		'Land_u_House_Big_01_V1_F',
-		'Land_i_House_Big_01_V3_F',
-		'Land_i_House_Big_01_V1_F',
-		'Land_i_House_Big_01_V2_F',
-		'Land_u_Shop_02_V1_F',
-		'Land_i_Shop_02_V3_F',
-		'Land_i_Shop_02_V1_F',
-		'Land_i_Shop_02_V2_F',
-		'Land_u_Shop_01_V1_F',
-		'Land_i_Shop_01_V3_F',
-		'Land_i_Shop_01_V1_F',
-		'Land_i_Shop_01_V2_F',
-		'Land_u_House_Small_01_V1_F',
-		'Land_u_House_Small_02_V1_F',
-		'Land_i_House_Small_02_V3_F',
-		'Land_i_House_Small_02_V1_F',
-		'Land_i_House_Small_02_V2_F',
-		'Land_i_House_Small_01_V3_F',
-		'Land_i_House_Small_01_V1_F',
-		'Land_i_House_Small_01_V2_F',
-		'Land_i_Stone_HouseBig_V3_F',
-		'Land_i_Stone_HouseBig_V1_F',
-		'Land_i_Stone_HouseBig_V2_F',
-		'Land_i_Stone_HouseSmall_V3_F',
-		'Land_i_Stone_HouseSmall_V1_F',
-		'Land_i_Stone_Shed_V2_F',
-		'Land_i_Stone_Shed_V1_F',
-		'Land_i_Stone_Shed_V3_F',
-		'Land_i_Stone_HouseSmall_V2_F',
-		'Land_i_House_Big_02_b_blue_F',
-		'Land_i_House_Big_02_b_pink_F',
-		'Land_i_House_Big_02_b_whiteblue_F',
-		'Land_i_House_Big_02_b_white_F',
-		'Land_i_House_Big_02_b_brown_F',
-		'Land_i_House_Big_02_b_yellow_F',
-		'Land_i_House_Big_01_b_blue_F',
-		'Land_i_House_Big_01_b_pink_F',
-		'Land_i_House_Big_01_b_whiteblue_F',
-		'Land_i_House_Big_01_b_white_F',
-		'Land_i_House_Big_01_b_brown_F',
-		'Land_i_House_Big_01_b_yellow_F',
-		'Land_i_Shop_02_b_blue_F',
-		'Land_i_Shop_02_b_pink_F',
-		'Land_i_Shop_02_b_whiteblue_F',
-		'Land_i_Shop_02_b_white_F',
-		'Land_i_Shop_02_b_brown_F',
-		'Land_i_Shop_02_b_yellow_F',
-		'Land_Barn_01_brown_F',
-		'Land_Barn_01_grey_F',
-		'Land_i_House_Small_01_b_blue_F',
-		'Land_i_House_Small_01_b_pink_F',
-		'Land_i_House_Small_02_b_blue_F',
-		'Land_i_House_Small_02_b_pink_F',
-		'Land_i_House_Small_02_b_whiteblue_F',
-		'Land_i_House_Small_02_b_white_F',
-		'Land_i_House_Small_02_b_brown_F',
-		'Land_i_House_Small_02_b_yellow_F',
-		'Land_i_House_Small_02_c_blue_F',
-		'Land_i_House_Small_02_c_pink_F',
-		'Land_i_House_Small_02_c_whiteblue_F',
-		'Land_i_House_Small_02_c_white_F',
-		'Land_i_House_Small_02_c_brown_F',
-		'Land_i_House_Small_02_c_yellow_F',
-		'Land_i_House_Small_01_b_whiteblue_F',
-		'Land_i_House_Small_01_b_white_F',
-		'Land_i_House_Small_01_b_brown_F',
-		'Land_i_House_Small_01_b_yellow_F',
-		'Land_i_Stone_House_Big_01_b_clay_F',
-		'Land_i_Stone_Shed_01_b_clay_F',
-		'Land_i_Stone_Shed_01_b_raw_F',
-		'Land_i_Stone_Shed_01_b_white_F',
-		'Land_i_Stone_Shed_01_c_clay_F',
-		'Land_i_Stone_Shed_01_c_raw_F',
-		'Land_i_Stone_Shed_01_c_white_F',
-		'Land_House_Big_04_F',
-		'Land_House_Small_04_F',
-		'Land_House_Small_05_F',
-		'Land_Addon_04_F',
-		'Land_House_Big_03_F',
-		'Land_House_Small_02_F',
-		'Land_House_Big_02_F',
-		'Land_House_Small_03_F',
-		'Land_House_Small_06_F',
-		'Land_House_Big_01_F',
-		'Land_Slum_02_F',
-		'Land_Slum_01_F',
-		'Land_GarageShelter_01_F',
-		'Land_House_Small_01_F',
-		'Land_Slum_03_F',
-		'Land_Temple_Native_01_F',
-		'Land_House_Native_02_F',
-		'Land_House_Native_01_F',
-		"Land_GH_House_1_F",
-		"Land_GH_House_2_F",
-		"Land_GH_MainBuilding_entry_F",
-		"Land_GH_MainBuilding_right_F",
-		"Land_GH_MainBuilding_left_F",
-		"Land_GH_Gazebo_F",
-		"Land_WIP_F"
-	];
+_QS_approvedBuildingTypes = [
+	'Land_i_House_Small_03_V1_F',
+	'Land_u_House_Big_02_V1_F',
+	'Land_i_House_Big_02_V3_F',
+	'Land_i_House_Big_02_V1_F',
+	'Land_i_House_Big_02_V2_F',
+	'Land_u_House_Big_01_V1_F',
+	'Land_i_House_Big_01_V3_F',
+	'Land_i_House_Big_01_V1_F',
+	'Land_i_House_Big_01_V2_F',
+	'Land_u_Shop_02_V1_F',
+	'Land_i_Shop_02_V3_F',
+	'Land_i_Shop_02_V1_F',
+	'Land_i_Shop_02_V2_F',
+	'Land_u_Shop_01_V1_F',
+	'Land_i_Shop_01_V3_F',
+	'Land_i_Shop_01_V1_F',
+	'Land_i_Shop_01_V2_F',
+	'Land_u_House_Small_01_V1_F',
+	'Land_u_House_Small_02_V1_F',
+	'Land_i_House_Small_02_V3_F',
+	'Land_i_House_Small_02_V1_F',
+	'Land_i_House_Small_02_V2_F',
+	'Land_i_House_Small_01_V3_F',
+	'Land_i_House_Small_01_V1_F',
+	'Land_i_House_Small_01_V2_F',
+	'Land_i_Stone_HouseBig_V3_F',
+	'Land_i_Stone_HouseBig_V1_F',
+	'Land_i_Stone_HouseBig_V2_F',
+	'Land_i_Stone_HouseSmall_V3_F',
+	'Land_i_Stone_HouseSmall_V1_F',
+	'Land_i_Stone_Shed_V2_F',
+	'Land_i_Stone_Shed_V1_F',
+	'Land_i_Stone_Shed_V3_F',
+	'Land_i_Stone_HouseSmall_V2_F',
+	'Land_i_House_Big_02_b_blue_F',
+	'Land_i_House_Big_02_b_pink_F',
+	'Land_i_House_Big_02_b_whiteblue_F',
+	'Land_i_House_Big_02_b_white_F',
+	'Land_i_House_Big_02_b_brown_F',
+	'Land_i_House_Big_02_b_yellow_F',
+	'Land_i_House_Big_01_b_blue_F',
+	'Land_i_House_Big_01_b_pink_F',
+	'Land_i_House_Big_01_b_whiteblue_F',
+	'Land_i_House_Big_01_b_white_F',
+	'Land_i_House_Big_01_b_brown_F',
+	'Land_i_House_Big_01_b_yellow_F',
+	'Land_i_Shop_02_b_blue_F',
+	'Land_i_Shop_02_b_pink_F',
+	'Land_i_Shop_02_b_whiteblue_F',
+	'Land_i_Shop_02_b_white_F',
+	'Land_i_Shop_02_b_brown_F',
+	'Land_i_Shop_02_b_yellow_F',
+	'Land_Barn_01_brown_F',
+	'Land_Barn_01_grey_F',
+	'Land_i_House_Small_01_b_blue_F',
+	'Land_i_House_Small_01_b_pink_F',
+	'Land_i_House_Small_02_b_blue_F',
+	'Land_i_House_Small_02_b_pink_F',
+	'Land_i_House_Small_02_b_whiteblue_F',
+	'Land_i_House_Small_02_b_white_F',
+	'Land_i_House_Small_02_b_brown_F',
+	'Land_i_House_Small_02_b_yellow_F',
+	'Land_i_House_Small_02_c_blue_F',
+	'Land_i_House_Small_02_c_pink_F',
+	'Land_i_House_Small_02_c_whiteblue_F',
+	'Land_i_House_Small_02_c_white_F',
+	'Land_i_House_Small_02_c_brown_F',
+	'Land_i_House_Small_02_c_yellow_F',
+	'Land_i_House_Small_01_b_whiteblue_F',
+	'Land_i_House_Small_01_b_white_F',
+	'Land_i_House_Small_01_b_brown_F',
+	'Land_i_House_Small_01_b_yellow_F',
+	'Land_i_Stone_House_Big_01_b_clay_F',
+	'Land_i_Stone_Shed_01_b_clay_F',
+	'Land_i_Stone_Shed_01_b_raw_F',
+	'Land_i_Stone_Shed_01_b_white_F',
+	'Land_i_Stone_Shed_01_c_clay_F',
+	'Land_i_Stone_Shed_01_c_raw_F',
+	'Land_i_Stone_Shed_01_c_white_F',
+	'Land_House_Big_04_F',
+	'Land_House_Small_04_F',
+	'Land_House_Small_05_F',
+	'Land_Addon_04_F',
+	'Land_House_Big_03_F',
+	'Land_House_Small_02_F',
+	'Land_House_Big_02_F',
+	'Land_House_Small_03_F',
+	'Land_House_Small_06_F',
+	'Land_House_Big_01_F',
+	'Land_Slum_02_F',
+	'Land_Slum_01_F',
+	'Land_GarageShelter_01_F',
+	'Land_House_Small_01_F',
+	'Land_Slum_03_F',
+	'Land_Temple_Native_01_F',
+	'Land_House_Native_02_F',
+	'Land_House_Native_01_F',
+	'Land_GH_House_1_F',
+	'Land_GH_House_2_F',
+	'Land_GH_MainBuilding_entry_F',
+	'Land_GH_MainBuilding_right_F',
+	'Land_GH_MainBuilding_left_F',
+	'Land_GH_Gazebo_F',
+	'Land_Barn_02_F',
+	'Land_Barn_04_F',
+	'Land_Barn_03_large_F',
+	'Land_Barn_03_small_F',
+	'Land_Cowshed_01_A_F',
+	'Land_Cowshed_01_B_F',
+	'Land_Cowshed_01_C_F',
+	'Land_CementWorks_01_brick_F',
+	'Land_CementWorks_01_grey_F',
+	'Land_CoalPlant_01_MainBuilding_F',
+	'Land_Factory_02_F',
+	'Land_GarageRow_01_large_F',
+	'Land_GarageRow_01_small_F',
+	'Land_GarageOffice_01_F',
+	'Land_IndustrialShed_01_F',
+	'Land_i_Shed_Ind_old_F',
+	'Land_Workshop_05_F',
+	'Land_Workshop_05_grey_F',
+	'Land_Workshop_03_grey_F',
+	'Land_Workshop_04_grey_F',
+	'Land_Workshop_01_grey_F',
+	'Land_Workshop_02_grey_F',
+	'Land_Workshop_01_F',
+	'Land_Workshop_02_F',
+	'Land_Barracks_06_F',
+	'Land_Barracks_02_F',
+	'Land_Barracks_03_F',
+	'Land_Barracks_04_F',
+	'Land_Barracks_05_F',
+	'Land_GuardHouse_02_F',
+	'Land_GuardHouse_03_F',
+	'Land_GuardHouse_02_grey_F',
+	'Land_Radar_01_HQ_F',
+	'Land_Radar_01_kitchen_F',
+	'Land_Rail_Station_Big_F',
+	'Land_Rail_Warehouse_Small_F',
+	'Land_Church_04_lightblue_F',
+	'Land_Church_04_lightblue_damaged_F',
+	'Land_Church_04_small_lightblue_F',
+	'Land_Church_04_small_lightblue_damaged_F',
+	'Land_Church_04_lightyellow_F',
+	'Land_Church_04_lightyellow_damaged_F',
+	'Land_Church_04_small_lightyellow_F',
+	'Land_Church_04_small_lightyellow_damaged_F',
+	'Land_Church_04_red_F',
+	'Land_Church_04_red_damaged_F',
+	'Land_Church_04_small_red_F',
+	'Land_Church_04_small_red_damaged_F',
+	'Land_Church_04_white_red_F',
+	'Land_Church_04_white_red_damaged_F',
+	'Land_Church_04_small_white_red_F',
+	'Land_Church_04_small_white_red_damaged_F',
+	'Land_Church_04_white_F',
+	'Land_Church_04_white_damaged_F',
+	'Land_Church_04_small_white_F',
+	'Land_Church_04_small_white_damaged_F',
+	'Land_Church_04_yellow_F',
+	'Land_Church_04_yellow_damaged_F',
+	'Land_Church_04_small_yellow_F',
+	'Land_Church_04_small_yellow_damaged_F',
+	'Land_OrthodoxChurch_02_F',
+	'Land_OrthodoxChurch_03_F',
+	'Land_Church_05_F',
+	'Land_FuelStation_03_shop_F',
+	'Land_PowerStation_01_F',
+	'Land_House_1B01_F',
+	'Land_House_2B01_F',
+	'Land_House_2B02_F',
+	'Land_House_2B03_F',
+	'Land_House_2B04_F',
+	'Land_Camp_House_01_brown_F',
+	'Land_VillageStore_01_F',
+	'Land_HealthCenter_01_F',
+	'Land_Shed_13_F',
+	'Land_PoliceStation_01_F',
+	'Land_House_1W01_F',
+	'Land_House_1W10_F',
+	'Land_House_1W11_F',
+	'Land_House_1W12_F',
+	'Land_House_1W13_F',
+	'Land_House_1W02_F',
+	'Land_House_1W03_F',
+	'Land_House_1W04_F',
+	'Land_House_1W05_F',
+	'Land_House_1W06_F',
+	'Land_House_1W07_F',
+	'Land_House_1W08_F',
+	'Land_House_1W09_F',
+	'Land_House_2W01_F',
+	'Land_House_2W02_F',
+	'Land_House_2W03_F',
+	'Land_House_2W04_F',
+	'Land_House_2W05_F',
+	'Land_Shed_14_F',
+	'Land_Shed_10_F'
+];
 if (worldName isEqualTo 'Tanoa') then {
 	_QS_urbanEnemyUnits = [
 		"I_C_Soldier_Bandit_7_F","I_C_Soldier_Bandit_3_F","I_C_Soldier_Bandit_2_F","I_C_Soldier_Bandit_5_F","I_C_Soldier_Bandit_6_F",
@@ -676,15 +805,15 @@ missionNamespace setVariable ['QS_mission_urban_objectsSecured',0,FALSE];
 	_x setMarkerAlpha 1;
 } count ['QS_marker_sideMarker','QS_marker_sideCircle'];
 _QS_firstDetected = FALSE;
-'QS_marker_sideMarker' setMarkerText (format ['%1Secure Caches',(toString [32,32,32])]);
+'QS_marker_sideMarker' setMarkerText (format ['%1Захопити схрони',(toString [32,32,32])]);
 
 [
 	'QS_IA_TASK_SM_0',
 	TRUE,
 	[
-		'The enemy is supplying an insurgency with advanced guidance systems for their anti-air launchers. Get over there and secure the crates! They look like small plastic boxes. There will be 3 crates located in the marked areas, search the nearby buildings to locate.',
-		'Secure Caches',
-		'Secure Caches'
+		'Ворог постачає повстанцям передовi системи наведення для протиповiтряних пускових установок. Прямуйте туди i захопiть ящики. У вiдмiчених областях буде розташовано 3 ящики. Обшукуйте будiвлi поблизу.',
+		'Захопити ворожi схрони',
+		'Захопити ворожi схрони'
 	],
 	(markerPos 'QS_marker_sideMarker'),
 	'CREATED',
@@ -696,7 +825,7 @@ _QS_firstDetected = FALSE;
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
 
 missionNamespace setVariable ['QS_mission_urban_active',TRUE,TRUE];
-['NewSideMission',['Secure Weapons Caches']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['NewSideMission',['Захопити ворожi схрони']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 _box1_secured = FALSE;
 _box2_secured = FALSE;
 _box3_secured = FALSE;
@@ -785,7 +914,7 @@ for '_x' from 0 to 1 step 0 do {
 			if (_QS_enemyDetected) exitWith {};
 		} count _QS_enemyArray;
 		if (_QS_enemyDetected) then {
-			['ST_URBAN',['Side Mission Update','The enemy has detected our approach']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+			['ST_URBAN',['Додаткова мiсiя оновлена','Ворог виявив наш пiдхiд']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 			{
 				if (alive _x) then {
 					if ((random 1) > 0.75) then {
@@ -797,7 +926,7 @@ for '_x' from 0 to 1 step 0 do {
 			['QS_IA_TASK_SM_0',TRUE,_QS_enemyDetected_endTime] call (missionNamespace getVariable 'QS_fnc_taskSetTimer');
 			_QS_bombTimer_started = TRUE;
 			_QS_urbanTimerBroadcast_delay = time + 25;
-			_QS_text = format ['CSAT will destroy the intel in %1',[((round(_QS_enemyDetected_endTime - serverTime))/60)+0.01,'HH:MM'] call (missionNamespace getVariable 'BIS_fnc_timeToString')];
+			_QS_text = format ['CSAT збирається знищити об’экт о %1',[((round(_QS_enemyDetected_endTime - serverTime))/60)+0.01,'HH:MM'] call (missionNamespace getVariable 'BIS_fnc_timeToString')];
 			['systemChat',_QS_text] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 		};
 	};
@@ -811,7 +940,7 @@ for '_x' from 0 to 1 step 0 do {
 					_QS_object1 setPos [-5000,-5000,0];
 					(_markers select 0) setMarkerAlpha 0;
 					missionNamespace setVariable ['QS_mission_urban_objectsSecured',((missionNamespace getVariable 'QS_mission_urban_objectsSecured') + 1),FALSE];
-					['ST_URBAN',['Side Mission Update',(format ['%1 / 3 intel secured',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+					['ST_URBAN',['Додаткову мiсiю оновлено',(format ['%1 / 3 об’єкти захоплено',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 				};
 			};
 		};
@@ -825,7 +954,7 @@ for '_x' from 0 to 1 step 0 do {
 					_QS_object2 setPos [-5000,-5000,0];
 					(_markers select 1) setMarkerAlpha 0;
 					missionNamespace setVariable ['QS_mission_urban_objectsSecured',((missionNamespace getVariable 'QS_mission_urban_objectsSecured') + 1),FALSE];
-					['ST_URBAN',['Side Mission Update',(format ['%1 / 3 intel secured',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+					['ST_URBAN',['Додаткову мiсiю оновлено',(format ['%1 / 3 об’єкт захоплено',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 				};
 			};
 		};
@@ -839,7 +968,7 @@ for '_x' from 0 to 1 step 0 do {
 					_QS_object3 setPos [-5000,-5000,0];
 					(_markers select 2) setMarkerAlpha 0;
 					missionNamespace setVariable ['QS_mission_urban_objectsSecured',((missionNamespace getVariable 'QS_mission_urban_objectsSecured') + 1),FALSE];
-					['ST_URBAN',['Side Mission Update',(format ['%1 / 3 intel secured',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+					['ST_URBAN',['Додаткову мiсiю оновлено',(format ['%1 / 3 об’єкт захоплено',(missionNamespace getVariable 'QS_mission_urban_objectsSecured')])]] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 				};
 			};
 		};
@@ -880,7 +1009,7 @@ for '_x' from 0 to 1 step 0 do {
 			
 			if (serverTime > _QS_enemyDetected_endTime) then {
 				if (!(_allSecured)) then {
-					['systemChat','CSAT has destroyed the crates!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+					['systemChat','CSAT знищили ящики!'] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 				};
 			};
 		};

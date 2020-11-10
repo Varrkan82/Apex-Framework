@@ -1,5 +1,73 @@
 Official Change Log
 
+1.1.9 (20/10/2020 A3 2.00)
+
+- [ADDED] New script commands (systemTime, getAttackTarget, etc).
+- [TWEAKED] Vehicle Active Protection System to improve player-vehicle protection from enemy AI-fired projectiles. 
+- [TWEAKED] AI awareness of hostile (player occupied) buildings.
+- [TWEAKED] Added civilian Tractor to easter eggs
+- [TWEAKED] Enemy MG towers no longer spawn on roads, probably.
+- [TWEAKED] Server security to A3 2.00 compatibility.
+- [FIXED] Friendly AI vehicles could spawn at some enemy objectives.
+- [FIXED] Custom terrain structures will no longer delete at the start of Defend missions/end of AO when players are nearby.
+- [REMOVED] real_date.dll extension dependency
+
+1.1.8 (19/08/2019 A3 1.94)
+
+- [ADDED] Sector Control mission type to Livonia.
+- [TWEAKED] Added new Mora variant (Livonia) to enemy vehicle config files.
+- [TWEAKED] (Livonia) Classic mission type: removed Gliniska AO (too close to base).
+- [FIXED] Game-breaking bug with vehicle respawn system.
+- [FIXED] Potentially game-breaking bug which causes AI to sometimes stop spawning.
+- [FIXED] (Again) Side mission rewards were not spawning in some cases.
+
+1.1.7 Hotfix 2 (15/08/2019 A3 1.94)
+
+- [ADDED] AI re-arming.
+- [TWEAKED] T140 Angara improved APS, but extended minimum effective range.
+- [TWEAKED] Commander no longer required for Active Protection System to work.
+- [TWEAKED] @Apex servermod, added override for BIS_fnc_setCustomSoundController running on server.
+- [TWEAKED] Removed enemy UGV from defend missions due to potential server crash.
+- [FIXED] "Edit Inventory" menu was broken by the arma update. (Thanks Fitz)
+- [FIXED] Robocop kick+ban features were broken by the arma update. (Thanks Fitz)
+- [FIXED] "Escort Vehicle" side mission was not available on Livonia.
+- [FIXED] Script error in AI suppressive fire system
+- [FIXED] Script error in AI countermeasure system
+- [FIXED] Shotgun magazines added to Arsenal whitelist. (Thanks Fitz)
+- [FIXED] Side mission rewards were not spawning on Livonia. (Thanks Mynar)
+- [FIXED] APS UI color was switching to red and not switching back to white.
+- [FIXED] APS UI visible only when in correct vehicle role.
+- [FIXED] Cancel action remained after reviving/healing.
+- [FIXED] "Edit Inventory" user action was broken by a recent arma update.
+- [FIXED] Auto-cancel of Treat action not working when heal target moved out of range.
+- [FIXED] AI units have ammo for incorrect gun (leaving limited space for ammo for correct gun).
+- [FIXED] Missions spawning outside map area (Livonia)
+- [FIXED] Script error in Sector Control mode, causing some AI to become invincible.
+
+
+1.1.7 "Contact" (23/07/2019 A3 1.94)
+
+- [ADDED] Contact DLC Integration.
+- [ADDED] QS Active Protection System, for armored vehicles. Based on Israeli "Trophy" and Russian "Afghanit" systems.
+- [ADDED] FOBs to Malden.
+- [ADDED] Medical cabinets to FOBs (all terrains).
+- [ADDED] DLC gear to scripted Arsenal.
+- [ADDED] New enemy static weapon emplacement in AOs.
+- [TWEAKED] Improved enemy loadout randomization.
+- [TWEAKED] Overhaul of enemy AI gear randomization system.
+- [TWEAKED] FOB'ified the main mission types for Malden.
+- [TWEAKED] Added ability to disregard "is respawn position clear" parameter for Vehicle Respawn (set near entities check radius to -1).
+- [TWEAKED] Prisoners converted from object type 'agent' (more resources) to 'vehicle' (less resources) when placed into Prison.
+- [TWEAKED] Contact DLC objects can be dragged/carried when appropriate.
+- [TWEAKED] Integrated new & improved A3 1.94 script commands.
+- [FIXED] Player vehicle event handlers were not unloading properly on player death.
+- [FIXED] "FOB Status" user action had no maximum radius.
+- [FIXED] Fighter pilot was unable to properly use Aircraft radio channel.
+- [FIXED] Engineer was unable to disarm landmines.
+- [FIXED] Enemy forces were unaware of where their own minefields were.
+- [FIXED] Script error in Towing Release script.
+- [FIXED] Fixed potential script error in AO Defend mission.
+
 1.1.6 Hotfix 1 (12/05/2019 A3 1.92)
 
 - [FIXED] HVT could not be captured.

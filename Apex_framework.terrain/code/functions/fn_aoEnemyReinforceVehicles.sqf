@@ -105,14 +105,19 @@ clearWeaponCargoGlobal _v;
 clearItemCargoGlobal _v;
 clearBackpackCargoGlobal _v;
 _v lock 3;
-createVehicleCrew _v;
+private _vCrewGroup = createVehicleCrew _v;
+if (!((side _vCrewGroup) in [EAST,RESISTANCE])) then {
+	_vCrewGroup = createGroup [EAST,TRUE];
+	{
+		[_x] joinSilent _vCrewGroup;
+	} forEach (crew _v);
+};
 (missionNamespace getVariable 'QS_AI_vehicles') pushBack _v;
 missionNamespace setVariable [
 	'QS_analytics_entities_created',
 	((missionNamespace getVariable 'QS_analytics_entities_created') + (count (crew _v))),
 	FALSE
 ];
-_vCrewGroup = group (driver _v);
 _vCrewGroup setVariable ['QS_dynSim_ignore',TRUE,TRUE];
 _vCrewGroup addVehicle _v;
 _v addEventHandler ['Killed',(missionNamespace getVariable 'QS_fnc_vKilled2')];

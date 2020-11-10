@@ -116,7 +116,7 @@ if (_type isEqualTo 'GET_ROLE_COUNT') exitWith {
 		_role_capacity = _min max (_min + (floor (_playerCount / _coef))) min _max;
 	};
 	if (_returnText) then {
-		if (!( [_role_count,_role_capacity] isEqualTo [0,0] )) then {
+		if (!([_role_count,_role_capacity] isEqualTo [0,0])) then {
 			_return = format ['( %1 / %2 )',_role_count,_role_capacity];
 		};
 	} else {
@@ -186,7 +186,7 @@ if (_type isEqualTo 'GET_ROLE_ICON') exitWith {
 		['_role',''],
 		['_unit',objNull]
 	];
-	private _return = 'a3\Ui_f\data\GUI\Cfg\RespawnRoles\assault_ca.paa';
+	private _return = 'a3\ui_f\data\gui\cfg\respawnroles\assault_ca.paa';
 	if (_role isEqualTo '') then {
 		if (!isNull _unit) then {
 			_role = _unit getVariable ['QS_unit_role','rifleman'];
@@ -313,36 +313,36 @@ if (_type isEqualTo 'REQUEST_ROLE') exitWith {
 					
 				} else {
 					_allowRequest = FALSE;
-					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Already in selected role',[],-1,TRUE,'Role Selection',FALSE];
+					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Вже у обранiй ролi',[],-1,TRUE,'Role Selection',FALSE];
 				};
 			} else {
 				_allowRequest = FALSE;
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Maximum number of players in selected role',[],-1,TRUE,'Role Selection',FALSE];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Максимальна кiлькiсть гравцiв у обранiй ролi',[],-1,TRUE,'Role Selection',FALSE];
 			};
 		} else {
 			if ((!(_side isEqualTo (player getVariable ['QS_unit_side',WEST]))) && (!(missionNamespace getVariable ['QS_RSS_client_canSideSwitch',FALSE]))) then {
 				_allowRequest = FALSE;
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Cannot switch faction',[],-1,TRUE,'Role Selection',FALSE];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Неможливо змiнити фракцiю',[],-1,TRUE,'Role Selection',FALSE];
 			} else {
 				_allowRequest = FALSE;
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Cannot select role',[],-1,TRUE,'Role Selection',FALSE];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Неможливо обрати роль',[],-1,TRUE,'Role Selection',FALSE];
 			};
 		};
 		if (_role in ['pilot_plane','pilot_cas']) then {
 			_isCAS = TRUE;
 			if ((missionNamespace getVariable ['QS_missionConfig_CAS',2]) isEqualTo 0) then {
 				_allowRequest = FALSE;
-				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Close Air Support roles disabled in mission parameters.',[],-1,TRUE,'Role Selection',FALSE];
+				(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Роль пiлота повiтряної пiдтримки вимкнено в налаштуваннях мiсiї.',[],-1,TRUE,'Role Selection',FALSE];
 			};
 			if ((missionNamespace getVariable ['QS_missionConfig_CAS',2]) in [1,3]) then {
 				if (!(_uid in (['CAS'] call (missionNamespace getVariable 'QS_fnc_whitelist')))) then {
-					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Not in CAS role whitelist (talk to admins to get whitelisted!)',[],-1,TRUE,'Role Selection',FALSE];
+					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Не в бiлому списку для ролi Пiлота Повiтрянної Пядтримки (звернiться до адмiнiв щоб потрапити до бiлого списку!)',[],-1,TRUE,'Role Selection',FALSE];
 					_allowRequest = FALSE;
 				};
 			};
 			if ((missionNamespace getVariable ['QS_missionConfig_CAS',2]) isEqualTo 3) then {
 				if ((player getVariable ['QS_client_casAllowance',0]) >= (missionNamespace getVariable ['QS_CAS_jetAllowance_value',3])) then {
-					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,(format ['CAS jet limit exceeded ( %1 )',(missionNamespace getVariable ['QS_CAS_jetAllowance_value',3])]),[],-1,TRUE,'Role Selection',FALSE];
+					(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,(format ['Досягнуто лiмiту на кiлькiсть Лiтаків ( %1 )',(missionNamespace getVariable ['QS_CAS_jetAllowance_value',3])]),[],-1,TRUE,'Role Selection',FALSE];
 					_allowRequest = FALSE;
 				};
 			};
@@ -370,9 +370,7 @@ if (_type isEqualTo 'HANDLE_REQUEST_ROLE') exitWith {
 		['_role','rifleman'],
 		['_unit',objNull]
 	];
-	
-	diag_log (format ['Role requested: %1',_this]);
-	
+	//diag_log (format ['Role requested: %1',_this]);
 	if (_uid isEqualTo '') then {
 		_uid = getPlayerUID _unit;
 	};
@@ -424,13 +422,13 @@ if (_type isEqualTo 'HANDLE_REQUEST_ROLE') exitWith {
 	if (_available_role_index isEqualTo -1) exitWith {};
 	_available_role = _role_units # _available_role_index;
 	_role_data params [
-		'_role_data_role',
+		'',	//'_role_data_role',
 		'_role_data_side',
-		'_role_data_min',
-		'_role_data_max',
-		'_role_data_availabilityCoef',
-		'_whitelist_value',
-		'_queue_capacity'
+		'',	//'_role_data_min',
+		'',	//'_role_data_max',
+		'',	//'_role_data_availabilityCoef',
+		'',	//'_whitelist_value',
+		''	//'_queue_capacity'
 	];
 	if (!(_role_data_side isEqualTo _side)) exitWith {};
 	_available_role set [0,_uid];
@@ -453,7 +451,7 @@ if (_type isEqualTo 'HANDLE_REQUEST_ROLE') exitWith {
 		};
 		[_unit] joinSilent (createGroup [_side,TRUE]);
 		if (!(_side isEqualTo (_unit getVariable ['QS_unit_side',WEST]))) then {
-			_txt = format ['%1 switched from %2 to %3',(name _unit),(_unit getVariable ['QS_unit_side',WEST]),_side];
+			_txt = format ['%1 перемкнуто з %2 до %3',(name _unit),(_unit getVariable ['QS_unit_side',WEST]),_side];
 			_txt remoteExec ['systemChat',-2,FALSE];
 			remoteExec ['QS_fnc_clientEventRespawn',_unit,FALSE];
 		};
@@ -584,7 +582,7 @@ if (_type isEqualTo 'INIT_ROLE') exitWith {
 			[['medic',FALSE,FALSE]],
 			[['uavhacker',FALSE,FALSE]],
 			[['engineer',TRUE,FALSE]],
-			[['explosiveSpecialist',FALSE,FALSE]],
+			[['explosiveSpecialist',TRUE,FALSE]],
 			[['audibleCoef',1,FALSE]],
 			[['camouflageCoef',1,FALSE]],
 			[['loadCoef',1,FALSE]],
@@ -794,7 +792,7 @@ if (_type isEqualTo 'INIT_ROLE') exitWith {
 	['SET_SAVED_LOADOUT',_role] call (missionNamespace getVariable 'QS_fnc_roles');
 	call (missionNamespace getVariable 'QS_fnc_respawnPilot');
 	uiNamespace setVariable ['QS_client_respawnCooldown',diag_tickTime + 30];
-	(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,(format ['Role changed to %1',(['GET_ROLE_DISPLAYNAME',_role] call (missionNamespace getVariable 'QS_fnc_roles'))]),[],-1,TRUE,'Role Selection',FALSE];
+	(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,(format ['Роль змінено на %1',(['GET_ROLE_DISPLAYNAME',_role] call (missionNamespace getVariable 'QS_fnc_roles'))]),[],-1,TRUE,'Role Selection',FALSE];
 };
 if (_type isEqualTo 'SET_DEFAULT_LOADOUT') exitWith {
 	params ['','_role',['_save',FALSE]];
@@ -804,19 +802,19 @@ if (_type isEqualTo 'SET_DEFAULT_LOADOUT') exitWith {
 		if (!((getUnitLoadout player) isEqualTo (((missionNamespace getVariable 'QS_roles_defaultLoadouts') # 0) # 1))) then {
 			player setUnitLoadout [(((missionNamespace getVariable 'QS_roles_defaultLoadouts') # 0) # 1),TRUE];
 		} else {
-			(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Loadout already applied',[],-1,TRUE,'Role Selection',FALSE];
+			(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Спорадження вже застосовано',[],-1,TRUE,'Role Selection',FALSE];
 		};
 	} else {
 		if (!((getUnitLoadout player) isEqualTo (((missionNamespace getVariable 'QS_roles_defaultLoadouts') # _loadout_index) # 1))) then {
 			player setUnitLoadout [(((missionNamespace getVariable 'QS_roles_defaultLoadouts') # _loadout_index) # 1),TRUE];
 		} else {
-			(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Loadout already applied',[],-1,TRUE,'Role Selection',FALSE];
+			(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,5,-1,'Спорядження вже застосовано',[],-1,TRUE,'Role Selection',FALSE];
 		};
 	};
 	if (_save) then {
 		_QS_playerRole = player getVariable ['QS_unit_role','rifleman'];
 		missionNamespace setVariable ['QS_revive_arsenalInventory',(getUnitLoadout player),FALSE];
-		private _QS_savedLoadouts = profileNamespace getVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))]),[]];
+		private _QS_savedLoadouts = profileNamespace getVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))]),[]];
 		_QS_loadoutIndex = (_QS_savedLoadouts findIf {((_x # 0) isEqualTo _QS_playerRole)});
 		_a = [_QS_playerRole,(getUnitLoadout player)];
 		if (_QS_loadoutIndex isEqualTo -1) then {
@@ -824,7 +822,7 @@ if (_type isEqualTo 'SET_DEFAULT_LOADOUT') exitWith {
 		} else {
 			_QS_savedLoadouts set [_QS_loadoutIndex,_a];
 		};
-		profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))]),_QS_savedLoadouts];
+		profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))]),_QS_savedLoadouts];
 		saveProfileNamespace;
 	};
 };
@@ -832,21 +830,21 @@ if (_type isEqualTo 'SET_SAVED_LOADOUT') exitWith {
 	params ['',['_role','rifleman']];
 	private _customLoadout = FALSE;
 	if ((((missionNamespace getVariable ['QS_missionConfig_aoType','CLASSIC']) in ['CLASSIC','SC','GRID']) && ((player getVariable ['QS_unit_side',WEST]) isEqualTo WEST)) || {(!((missionNamespace getVariable ['QS_missionConfig_aoType','CLASSIC']) in ['CLASSIC','SC','GRID']))}) then {
-		if (!isNil {profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))])}) then {
-			if ((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))])) isEqualType []) then {
-				if (!((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))])) isEqualTo [])) then {
-					_QS_loadoutIndex = (profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))])) findIf {((_x # 0) isEqualTo _role)};
+		if (!isNil {profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))])}) then {
+			if ((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))])) isEqualType []) then {
+				if (!((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))])) isEqualTo [])) then {
+					_QS_loadoutIndex = (profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))])) findIf {((_x # 0) isEqualTo _role)};
 					if (!(_QS_loadoutIndex isEqualTo -1)) then {
-						player setUnitLoadout [(((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))])) # _QS_loadoutIndex) # 1),TRUE];
+						player setUnitLoadout [(((profileNamespace getVariable (format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))])) # _QS_loadoutIndex) # 1),TRUE];
 						_customLoadout = TRUE;
 					};
 				};
 			} else {
-				profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))]),[]];
+				profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))]),[]];
 				saveProfileNamespace;
 			};
 		} else {
-			profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa']))]),[]];
+			profileNamespace setVariable [(format ['QS_RSS_loadouts_%1',(['arid','tropic'] select (worldName in ['Tanoa','Enoch']))]),[]];
 			saveProfileNamespace;
 		};
 	};

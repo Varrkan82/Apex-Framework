@@ -13,7 +13,7 @@ Description:
 	-
 ____________________________________________________________________________/*/
 
-['GRID_IG_UPDATE',['Defend','Defend HQ']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['GRID_IG_UPDATE',['Захистити','Захистити Штаб']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 missionNamespace setVariable ['QS_grid_defend_active',TRUE,TRUE];
 missionNamespace setVariable ['QS_grid_defend_AIinit',TRUE,TRUE];
 _playersCount = count allPlayers;
@@ -26,7 +26,7 @@ _centerRadius = 20;
 private _serverTime = serverTime;
 _duration = 900 + (random 360);
 _endTime = _serverTime + _duration;
-private _enemyInRadiusThreshold = 4;
+private _enemyInRadiusThreshold = 2;
 private _enemyCoefLow = 0.025;
 private _enemyCoefHigh = 0.05;
 private _sectorControl = 1;
@@ -45,8 +45,8 @@ _taskType = 'defend';
 	_taskID,
 	TRUE,
 	[
-		'The guerilla forces are mounting a counterattack to retake their HQ. Hold them back at all cost, boys!',
-		'Defend HQ',
+		'Партизани збираються вiдбити свiй Штаб. Стримайте їх за будь-яку цiну!',
+		'Захистити Штаб',
 		''
 	],
 	[(_centerPos select 0),(_centerPos select 1),10],
@@ -58,7 +58,7 @@ _taskType = 'defend';
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
 [_taskID,TRUE,_endTime] call (missionNamespace getVariable 'QS_fnc_taskSetTimer');
-[_taskID,[_taskType,'Defend 1','Defend 2']] call (missionNamespace getVariable 'QS_fnc_taskSetCustomData');
+[_taskID,[_taskType,'Захистити 1','Захистити 2']] call (missionNamespace getVariable 'QS_fnc_taskSetCustomData');
 [_taskID,TRUE,_sectorControl] call (missionNamespace getVariable 'QS_fnc_taskSetProgress');
 _fn_detector = missionNamespace getVariable 'QS_fnc_serverDetector';
 _fn_taskSetProgress = missionNamespace getVariable 'QS_fnc_taskSetProgress';
@@ -69,8 +69,8 @@ for '_x' from 0 to 1 step 0 do {
 		_allUnits = allUnits;
 		_nearUnits = (_centerPos nearEntities ['CAManBase',_nearUnitsRadius]) select {((lifeState _x) in ['HEALTHY','INJURED'])};
 		if (!(_nearUnits isEqualTo [])) then {
-			_enemiesInRadius = _nearUnits select {((side _x) in _enemySides)};
-			_friendsInRadius = _nearUnits select {((side _x) in _friendSides)};
+			_enemiesInRadius = _nearUnits select {((side (group _x)) in _enemySides)};
+			_friendsInRadius = _nearUnits select {((side (group _x)) in _friendSides)};
 			if ((count _enemiesInRadius) > _enemyInRadiusThreshold) then {
 				if (_sectorControl > 0) then {
 					_sectorControl = (_sectorControl - ([_enemyCoefLow,_enemyCoefHigh] select ((count _friendsInRadius) > 0))) max 0;
@@ -86,11 +86,11 @@ for '_x' from 0 to 1 step 0 do {
 	};
 	if (_sectorControl <= 0) exitWith {
 		//comment 'enemy wins';
-		['GRID_IG_UPDATE',['Defend','Defense failed!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+		['GRID_IG_UPDATE',['Захистити','Захист провалено!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 	};
 	if (_serverTime > _endTime) exitWith {
 		//comment 'friends win';
-		['GRID_IG_UPDATE',['Defend','Defense successful!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+		['GRID_IG_UPDATE',['Захистити','Захист вдалий!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 	};
 	uiSleep 2;
 };

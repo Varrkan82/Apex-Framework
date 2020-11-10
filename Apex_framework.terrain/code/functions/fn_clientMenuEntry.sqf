@@ -25,7 +25,7 @@ if (_type isEqualTo 'onLoad') then {
 	_ctrlSText1 = _display displayCtrl 1806;
 	private _text = '';
 	_text = parseText format [
-		'<t underline="true">Briefing</t><br/><t size="1">Seize %1 from opposing forces.</t><br/><br/><t underline="true">Rules</t><t size="1"><br/>%3</t><br/><br/><t underline="true">Staff</t><br/><t size="1">%4</t><br/><br/><t underline="true">Teamspeak</t><br/><t size="1">%2</t><br/><br/><t underline="true">Hotkeys</t><br/><t size="1">[Home] - Player Menu<br/>[End] - Earplugs<br/>[4] - Weapon Holster<br/>[L.Ctrl]+[Reload] - Magazine Repack<br/>[V] - Jump (while running)<br/>[U] - Group Management<br/>[Space] - Open and Close doors<br/>[J]x2 - Tasks</t>',
+		'<t underline="true">Брiфинг</t><br/><t size="1">Захистiть %1 вiд протилежної сторони.</t><br/><br/><t underline="true">Правила</t><t size="1"><br/>%3</t><br/><br/><t underline="true">Персонал</t><br/><t size="1">%4</t><br/><br/><t underline="true">Teamspeak</t><br/><t size="1">%2</t><br/><br/><t underline="true">Гарячi клавiшi</t><br/><t size="1">[Home] - Меню гравця<br/>[End] - Берушi<br/>[4] - Поставити зброю на запобiжник<br/>[L.Ctrl]+[Reload] - Перепакувати магазини<br/>[V] - Стрибнути (пiд час бiгу)<br/>[U] - Керування групами<br/>[Space] - Вiдркити/Закрити дверi<br/>[J]x2 - Завдання</t>',
 		worldName,
 		(missionNamespace getVariable ['QS_missionConfig_commTS','']),
 		(missionNamespace getVariable ['QS_missionConfig_splash_serverRules','']),

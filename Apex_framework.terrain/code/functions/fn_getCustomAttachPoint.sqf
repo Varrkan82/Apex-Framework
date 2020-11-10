@@ -67,14 +67,14 @@ if (_parent in ['b_truck_01_mover_f','b_t_truck_01_mover_f']) then {
 			_attachPoint = [0.179199,-8.35583,-1.80251];
 		};
 	};
-	if (_child in ['box_nato_ammoveh_f','box_ind_ammoveh_f','box_east_ammoveh_f']) then {
+	if (_child in ['box_nato_ammoveh_f','box_ind_ammoveh_f','box_east_ammoveh_f','box_eaf_ammoveh_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0,-3,0.4],0];
 		} else {
 			_attachPoint = [0.0349121,-6.88416,-1.67472];
 		};
 	};
-	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f']) then {
+	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f','i_e_cargonet_01_ammo_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0,-3,0.4],0];
 		} else {
@@ -251,7 +251,7 @@ if (_parent in [
 			_attachPoint = [-0.0697021,-5.31775,-1.54134];
 		};
 	};
-	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f']) then {
+	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f','i_e_cargonet_01_ammo_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[-0.03,-2.1,0.15],0];
 		} else {
@@ -308,7 +308,9 @@ if (_parent in [
 	'o_ugv_01_f',
 	'o_t_ugv_01_ghex_f',
 	'i_ugv_01_f',
-	'c_idap_ugv_01_f'
+	'c_idap_ugv_01_f',
+	'i_e_ugv_01_f',
+	'i_e_ugv_01_rcws_f'
 ]) then {
 	if (_child in ['b_supplycrate_f','o_supplycrate_f','i_supplycrate_f','c_t_supplycrate_f','c_supplycrate_f','ig_supplycrate_f','c_idap_supplycrate_f']) then {
 		if (_detachAttach) then {
@@ -317,7 +319,7 @@ if (_parent in [
 			_attachPoint = [0.43,-3.73389,-1.92198];
 		};
 	};
-	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f']) then {
+	if (_child in ['b_cargonet_01_ammo_f','o_cargonet_01_ammo_f','i_cargonet_01_ammo_f','c_idap_cargonet_01_supplies_f','i_e_cargonet_01_ammo_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0.43,-0.45,0.10],0];
 		} else {
@@ -345,7 +347,7 @@ if (_parent in [
 			_attachPoint = [0.43,-4.13208,-1.92251];
 		};	
 	};
-	if (_child in ['box_nato_ammoveh_f','box_ind_ammoveh_f','box_east_ammoveh_f']) then {
+	if (_child in ['box_nato_ammoveh_f','box_ind_ammoveh_f','box_east_ammoveh_f','box_eaf_ammoveh_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0.43,-0.4,0.12],0];
 		} else {
@@ -388,21 +390,24 @@ if (_parent in [
 	'b_g_van_01_transport_f','o_g_van_01_transport_f','i_g_van_01_transport_f','i_c_van_01_transport_f','i_c_van_01_transport_brown_f',
 	'i_c_van_01_transport_olive_f','c_van_01_transport_f','c_van_01_transport_red_f','c_van_01_transport_white_f'
 ]) then {
-	if (_child in ['b_hmg_01_high_f','b_gmg_01_high_f','o_hmg_01_high_f','o_gmg_01_high_f','i_hmg_01_high_f','i_gmg_01_high_f']) then {
+	if (_child in [
+		'b_hmg_01_high_f','b_gmg_01_high_f','o_hmg_01_high_f','o_gmg_01_high_f','i_hmg_01_high_f','i_gmg_01_high_f','i_e_gmg_01_high_f',
+		'b_g_hmg_02_high_f','o_g_hmg_02_high_f','i_hmg_02_high_f','i_g_hmg_02_high_f','i_e_hmg_02_high_f','i_c_hmg_02_high_f'
+	]) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0,-2.5,1],0];
 		} else {
 			_attachPoint = [-0.0332031,-6.5061,-1.97767];
 		};
 	};
-	if (_child in ['b_static_aa_f','b_static_at_f','o_static_aa_f','o_static_at_f','i_static_aa_f','i_static_at_f','b_t_static_aa_f','b_t_static_at_f']) then {
+	if (_child in ['b_static_aa_f','b_static_at_f','o_static_aa_f','o_static_at_f','i_static_aa_f','i_static_at_f','b_t_static_aa_f','b_t_static_at_f','i_e_static_aa_f','i_e_static_at_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0,-2.5,0.375],180];
 		} else {
 			_attachPoint = [-0.0205078,-5.62256,-1.94009];
 		};
 	};
-	if (_child in ['b_g_mortar_01_f','b_mortar_01_f','b_t_mortar_01_f','o_mortar_01_f','o_g_mortar_01_f','i_mortar_01_f','i_g_mortar_01_f']) then {
+	if (_child in ['b_g_mortar_01_f','b_mortar_01_f','b_t_mortar_01_f','o_mortar_01_f','o_g_mortar_01_f','i_mortar_01_f','i_g_mortar_01_f','i_e_mortar_01_f']) then {
 		if (_detachAttach) then {
 			_attachPoint = [[0,-2.25,0.1],0];
 		} else {

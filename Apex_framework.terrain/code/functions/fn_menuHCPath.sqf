@@ -134,12 +134,12 @@ if (_this isEqualType '') then {
 							if (local this) then {
 								_leader = leader (group this);
 								if (player isEqualTo _leader) then {
-									50 cutText ["[Commander] Waypoint complete","PLAIN DOWN",0.5,TRUE,FALSE];
+									50 cutText ["[Командир] Точку пройдено","PLAIN DOWN",0.5,TRUE,FALSE];
 								};
 								deleteWaypoint [group this,currentWaypoint (group this)];
 							} else {
 								if (player isEqualTo (missionNamespace getVariable "QS_hc_Commander")) then {
-									_text = format ["%1 ( %2 ) completed its task at grid %3",(groupID (group this)),profileName,(mapGridPosition this)];
+									_text = format ["%1 ( %2 ) завершили свою мiсiю в квадратi %3",(groupID (group this)),profileName,(mapGridPosition this)];
 									systemChat _text;
 								};
 							};
@@ -148,19 +148,19 @@ if (_this isEqualType '') then {
 					_leader = leader _grp;
 					if (!(_add)) then {
 						if (diag_tickTime > (_leader getVariable ['QS_HComm_ordersNotifInterval',-1])) then {
-							[34,['hcTaskCreated',['','New orders']]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
+							[34,['hcTaskCreated',['','Новi накази']]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
 						};
 						_leader setVariable ['QS_HComm_ordersNotifInterval',(diag_tickTime + 15),FALSE];
-						[63,[5,[(format['Orders assigned by [Commander] %1',profileName]),'PLAIN DOWN',0.75]]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
+						[63,[5,[(format['Порядок визначено [Командир] %1',profileName]),'PLAIN DOWN',0.75]]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
 					} else {
-						[63,[5,[(format['Orders updated by [Commander] %1',profileName]),'PLAIN DOWN',0.75]]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
+						[63,[5,[(format['Порядок оновлено [Командир] %1',profileName]),'PLAIN DOWN',0.75]]] remoteExec ['QS_fnc_remoteExec',_leader,FALSE];
 					};
 				};
 			} else {
-				50 cutText ['Too close (30m)','PLAIN DOWN',0.25,TRUE,FALSE];
+				50 cutText ['Занадто близько (30м)','PLAIN DOWN',0.25,TRUE,FALSE];
 			};
 		} else {
-			50 cutText ['Too many waypoints (max 3)','PLAIN DOWN',0.25,TRUE,FALSE];
+			50 cutText ['Занадто багато маршрутних точок (max 3)','PLAIN DOWN',0.25,TRUE,FALSE];
 		};
 	} forEach _arraySelected;
 };

@@ -691,7 +691,7 @@ if (_case < 40) exitWith {
 		if (isDedicated) then {
 			if (_rxID isEqualTo _cid) then {
 				diag_log format ['***** ADMIN ***** %1 ***** %2 kicked for AFK timeout *****',time,_profileName];
-				['systemChat',(format ['Robocop kicked %1 for AFK timeout.',_profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+				['systemChat',(format ['Robocop вигнав %1 за таймаут AFK.',_profileName])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 				([] call (uiNamespace getVariable 'QS_fnc_serverCommandPassword')) serverCommand (format ['#exec kick %1',_cid]);
 			};
 		};
@@ -884,7 +884,7 @@ if (_case < 60) exitWith {
 			if (!isNil {missionNamespace getVariable 'QS_staff_requestBaseCleanup_time'}) then {
 				if (time > (missionNamespace getVariable 'QS_staff_requestBaseCleanup_time')) then {
 					missionNamespace setVariable ['QS_staff_requestBaseCleanup_time',(time + 300),FALSE];
-					diag_log format ['%1 (%2) (staff) has initiated base cleanup',((_this # 1) # 0),((_this # 1) # 1)];
+					diag_log format ['%1 (%2) (персонал) запустив очищення бази',((_this # 1) # 0),((_this # 1) # 1)];
 					0 = 0 spawn {
 						_baseMarker = markerPos 'QS_marker_base_marker';
 						{
@@ -1035,7 +1035,7 @@ if (_case < 60) exitWith {
 			];
 			[(missionNamespace getVariable 'QS_AO_HQ_flag'),WEST,'',FALSE,objNull,1] call (missionNamespace getVariable 'QS_fnc_setFlag');
 			['QS_IA_TASK_AO_2'] call (missionNamespace getVariable 'BIS_fnc_deleteTask');
-			['sideChat',[WEST,'HQ'],(format ['Enemy commander captured by %1!',_name])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+			['sideChat',[WEST,'HQ'],(format ['%1 захопив ворожого командира!',_name])] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 		};
 	};
 	/*/===== Remote Add To Remains Collector/*/
@@ -1246,7 +1246,7 @@ if (_case < 80) exitWith {
 			};
 			comment 'Communicate here';
 			['QS_virtualSectors_sub_1_task'] call (missionNamespace getVariable 'BIS_fnc_deleteTask');
-			['SC_SUB_COMPLETED',['','Datalink secured']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+			['SC_SUB_COMPLETED',['','Канал данних убезпечено']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 			if (missionNamespace getVariable ['QS_virtualSectors_active',FALSE]) then {
 				private ['_QS_virtualSectors_scoreSides','_scoreEast','_scoreToRemove'];
 				_QS_virtualSectors_scoreSides = missionNamespace getVariable ['QS_virtualSectors_scoreSides',[0,0,0,0,0]];
@@ -1320,7 +1320,7 @@ if (_case < 80) exitWith {
 				_marker1 setMarkerShape 'ICON';
 				_marker1 setMarkerType 'mil_dot';
 				_marker1 setMarkerColor 'ColorWEST';
-				_marker1 setMarkerText (format ['%1Supply Depot',(toString [32,32,32])]);
+				_marker1 setMarkerText (format ['%1Ворожi припаси',(toString [32,32,32])]);
 				_marker1 setMarkerSize [0.5,0.5];
 				_marker1 setMarkerPos (missionNamespace getVariable ['QS_virtualSectors_sd_position',[-1000,-1000,0]]);
 				_marker1 setMarkerAlpha 1;
@@ -1333,7 +1333,7 @@ if (_case < 80) exitWith {
 			};		
 			comment 'Communicate here';
 			['QS_virtualSectors_sub_3_task'] call (missionNamespace getVariable 'BIS_fnc_deleteTask');
-			['SC_SUB_COMPLETED',['','Supply Depot secured']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+			['SC_SUB_COMPLETED',['','Ворожi припаси убезпечено']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 		};
 	};
 	/*/===== CAS spawner/*/
@@ -1488,7 +1488,7 @@ if (_case < 90) exitWith {
 			if (!(isObjectHidden _entity)) then {
 				_entity hideObjectGlobal TRUE;
 			};
-			_text = format ['%1 (%2) located intel',_profileName,_groupID];
+			_text = format ['%1 (%2) знайшов документи',_profileName,_groupID];
 			_text remoteExec ['systemChat',-2];
 			if (!((_entity getVariable ['QS_intel_marker',-1]) isEqualTo -1)) then {
 				for '_x' from 0 to 1 step 1 do {
@@ -1502,7 +1502,7 @@ if (_case < 90) exitWith {
 		if (!(isObjectHidden _entity)) then {
 			_entity hideObjectGlobal TRUE;
 			_entity enableSimulationGlobal FALSE;
-			_text = format ['%1 (%2) located intel',_profileName,_groupID];
+			_text = format ['%1 (%2) знайшов документи',_profileName,_groupID];
 			_text remoteExec ['systemChat',-2];
 			[(_entity getVariable ['QS_entity_assocPos',(position _entity)]),_clientOwner] spawn (missionNamespace getVariable 'QS_fnc_aoTaskIDAP');
 		};
@@ -1512,7 +1512,7 @@ if (_case < 90) exitWith {
 		if (!(isObjectHidden _entity)) then {
 			_entity hideObjectGlobal TRUE;
 			_entity enableSimulationGlobal FALSE;
-			_text = format ['%1 (%2) located intel',_profileName,_groupID];
+			_text = format ['%1 (%2) знайшов документи',_profileName,_groupID];
 			_text remoteExec ['systemChat',-2];
 			[(_entity getVariable ['QS_entity_assocPos',(getPosATL _entity)]),_clientOwner] spawn (missionNamespace getVariable 'QS_fnc_aoTaskIG');
 		};
@@ -1609,14 +1609,14 @@ if (_case < 90) exitWith {
 		if (!(isObjectHidden _entity)) then {
 			_entity hideObjectGlobal TRUE;
 			_entity enableSimulationGlobal FALSE;
-			_text = format ['%1 (%2) located intel',_profileName,_groupID];
+			_text = format ['%1 (%2) знайшов документи',_profileName,_groupID];
 			_text remoteExec ['systemChat',-2];
 			[(getPosATL _entity)] spawn (missionNamespace getVariable 'QS_fnc_aoTaskKill');
 		};
 	};
 	if (_case isEqualTo 85) then {
-		['GRID_IDAP_UPDATE',['Area Of Operations','Objective failed<br/>No civilian casualties']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
-		'QS_marker_grid_civState' setMarkerText (format ['%1No civilian casualties (failed)',(toString [32,32,32])]);
+		['GRID_IDAP_UPDATE',['Area Of Operations','Завдання провалено<br/>Без жертв серед цивiльних']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+		'QS_marker_grid_civState' setMarkerText (format ['%1Жодних жертв серед цивiльного населення (Провалено)',(toString [32,32,32])]);
 		'QS_marker_grid_civState' setMarkerColor 'ColorRED';
 	};
 	if (_case isEqualTo 86) then {
@@ -1711,7 +1711,74 @@ if (_case < 100) exitWith {
 			} forEach (allMissionObjects 'EmptyDetector');
 		};
 	};
+	// Replace agent with vehicle
 	if (_case isEqualTo 92) then {
-	
+		params ['','_unit','_side','_isPrisoner'];
+		_unitDir = getDir _unit;
+		_unitPos = getPosWorld _unit;
+		_unitType = typeOf _unit;
+		_unitDamage = damage _unit;
+		_unitUniform = uniform _unit;
+		_unitVest = vest _unit;
+		_unitHeadgear = headgear _unit;
+		_unitFace = face _unit;
+		_agent = createVehicle [_unitType,[0,0,0],[],0,'NONE'];
+		_agent disableAI 'ALL';
+		deleteVehicle _unit;
+		_agent setPosWorld _unitPos;
+		removeAllWeapons _agent;
+		removeGoggles _agent;
+		removeHeadgear _agent;
+		removeBackpack _agent;
+		removeVest _agent;
+		_agent setCaptive TRUE;
+		{
+			_agent unlinkItem _x;
+		} count (assignedItems _agent);
+		{
+			_agent removeItem _x;
+		} forEach (items _agent);
+		_agent switchMove 'amovpercmstpsnonwnondnon';
+		[_agent,'amovpercmstpsnonwnondnon'] remoteExec ['switchMove',0,FALSE];
+		_agent setUnitPos 'UP';
+		_agent setDir _unitDir;
+		_agent setFace _unitFace;
+		_agent forceAddUniform _unitUniform;
+		_agent addHeadgear _unitHeadgear;
+		if (_unitDamage < 0.89) then {
+			_agent setDamage [_unitDamage,FALSE];
+		};
+		if (_isPrisoner) then {
+			0 = [_agent] spawn {
+				uiSleep 1; 
+				(_this # 0) setObjectTextureGlobal [0,'#(rgb,8,8,3)color(1,0.1,0,1)'];
+				(_this # 0) enableSimulationGlobal FALSE;
+				(_this # 0) enableDynamicSimulation FALSE;
+			};
+		};
+	};
+	if (_case isEqualTo 93) then {
+		params ['','_type','_vehicle','_unit','_firedPosition'];
+		if (!((behaviour (effectiveCommander _vehicle)) isEqualTo 'COMBAT')) then {
+			(group (effectiveCommander _vehicle)) setBehaviour 'COMBAT';
+			(crew _vehicle) doWatch _firedPosition;
+		};
+		if (_type isEqualTo 1) then {
+			_grp = group (effectiveCommander _vehicle);
+			if (!isNull _grp) then {
+				{
+					_grp reveal _x;
+				} forEach [
+					[_unit,4],
+					[vehicle _unit,4]
+				];
+			};
+		};
+	};
+	if (_case isEqualTo 94) then {
+		params ['','_rxAPSParams'];
+		if (isDedicated) then {
+			_rxAPSParams call (missionNamespace getVariable 'QS_fnc_clientProjectileManager');
+		};
 	};
 };

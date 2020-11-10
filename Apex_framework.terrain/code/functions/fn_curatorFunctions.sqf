@@ -186,34 +186,18 @@ if (_key isEqualTo 77) exitWith {
 		if (!((vehicle _unit) isKindOf 'Man')) then {
 			(vehicle _unit) sendSimpleCommand 'FIRE';
 		};
-		if (!isNull (assignedTarget _unit)) then {
-			if (([objNull,'VIEW'] checkVisibility [(eyePos _unit),(getPosASL (assignedTarget _unit))]) > 0) then {
+		if (alive (getAttackTarget _unit)) then {
+			if (([objNull,'VIEW'] checkVisibility [(eyePos _unit),(aimPos (getAttackTarget _unit))]) > 0) then {
 				if (local _unit) then {
-					_unit doSuppressiveFire (aimPos (assignedTarget _unit));
+					_unit doSuppressiveFire (aimPos (getAttackTarget _unit));
 				} else {
-					0 = [30,_unit,(assignedTarget _unit)] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
+					0 = [30,_unit,(getAttackTarget _unit)] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
 				};
 			} else {
 				if (local _unit) then {
-					_unit doSuppressiveFire (aimPos (assignedTarget _unit));
+					_unit doSuppressiveFire (aimPos (getAttackTarget _unit));
 				} else {
-					0 = [30,_unit,(getPosASL (assignedTarget _unit))] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
-				};
-			};
-		} else {
-			if (!isNull (_unit findNearestEnemy _unit)) then {
-				if (([objNull,'VIEW'] checkVisibility [(eyePos _unit),(getPosASL (assignedTarget _unit))]) > 0) then {
-					if (local _unit) then {
-						_unit doSuppressiveFire (aimPos (_unit findNearestEnemy _unit));
-					} else {
-						0 = [30,_unit,(_unit findNearestEnemy _unit)] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
-					};				
-				} else {
-					if (local _unit) then {
-						_unit doSuppressiveFire (aimPos (_unit findNearestEnemy _unit));
-					} else {
-						0 = [30,_unit,(getPosASL (_unit findNearestEnemy _unit))] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
-					};
+					0 = [30,_unit,(aimPos (getAttackTarget _unit))] remoteExec ['QS_fnc_remoteExec',_unit,FALSE];
 				};
 			};
 		};
@@ -399,9 +383,9 @@ if (_key isEqualTo 73) exitWith {
 			_unit setCaptive TRUE;
 			(missionNamespace getVariable 'QS_managed_hints') pushBack [5,TRUE,3,-1,'Unit set unconscious',[],-1,TRUE,'Curator',FALSE];
 		} else {
-			50 cutText ['Can only set unconscious units spawned by Zeus','PLAIN DOWN',0.333];
+			50 cutText ['Можна ставити лише одиницi без свiдомостi, створенi Зевсом','PLAIN DOWN',0.333];
 		};
 	} else {
-		50 cutText ['Cannot set this unit unconscious','PLAIN DOWN',0.333];
+		50 cutText ['Не можна встановити цю одиницю без свiдомостi','PLAIN DOWN',0.333];
 	};
 };

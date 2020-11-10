@@ -46,8 +46,8 @@ if (_type isEqualTo 1) then {
 			};
 		};
 	};
-	['sideChat',[WEST,'BLU'],format ['%1 is waiting for Medical Treatment.',profileName]] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-	50 cutText ['Respawn disabled for 60 seconds','PLAIN DOWN'];
+	['sideChat',[WEST,'BLU'],format ['%1 очiкує медичного втручання.',profileName]] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
+	50 cutText ['Респаун вимкнено на 60 секунд','PLAIN DOWN'];
 };
 if (_type isEqualTo 2) then {
 	[1] call (missionNamespace getVariable 'QS_fnc_clientMSpectate');

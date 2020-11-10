@@ -99,7 +99,7 @@ if (_missionConfig_CAS isEqualTo 3) then {
 	(missionNamespace getVariable 'QS_CAS_jetAllowance') set [_airIndex,[_uid,_aircraftPool]];
 	missionNamespace setVariable ['QS_CAS_jetAllowance_current',_aircraftPool,FALSE];
 	missionNamespace setVariable ['QS_casJet_destroyedAtBase',FALSE,FALSE];
-	['sideChat',[WEST,'AirBase'],(format ['Friendly CAS respawning ( %1 / %2 ) ...',_aircraftPool,(missionNamespace getVariable ['QS_CAS_jetAllowance_value',3])])] remoteExec ['QS_fnc_remoteExecCmd',_pilot,FALSE];
+	['sideChat',[WEST,'AirBase'],(format ['Спавниться літак ( %1 / %2 ) ...',_aircraftPool,(missionNamespace getVariable ['QS_CAS_jetAllowance_value',3])])] remoteExec ['QS_fnc_remoteExecCmd',_pilot,FALSE];
 	private ['_newCasType','_dir','_obstructions','_obstructionArray'];
 	//comment 'Now lets decide what will spawn';
 	private [
@@ -217,6 +217,10 @@ if ((missionNamespace getVariable ['QS_missionConfig_carrierEnabled',0]) isEqual
 			_pos = [8068.67,10002.2,0.395561];
 			_dir = 358.366;
 		};
+		if (worldName isEqualTo 'Enoch') then {
+			_pos = [4321.49,10505,0.3];
+			_dir = 314.899;		
+		};
 	} else {
 		_pos = markerPos 'QS_marker_casJet_spawn';
 		_dir = markerDir 'QS_marker_casJet_spawn';
@@ -261,9 +265,9 @@ if ((missionNamespace getVariable ['QS_missionConfig_carrierEnabled',0]) isEqual
 			params ['_jet','_killer','_instigator','_useEffects'];
 			private _text = '';
 			if (((getPosATL _jet) select 2) > 20) then {
-				_text = 'Our CAS has been shot down!';
+				_text = 'Нашу повiтряну пiдтримку пiдбили!';
 			} else {
-				_text = 'Our CAS has been destroyed!';
+				_text = 'Нашу повiтряну пiдтримку знищили!';
 			};
 			if (!isDedicated) then {
 				[WEST,'AirBase'] sideChat _text;

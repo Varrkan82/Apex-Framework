@@ -107,15 +107,19 @@ private _array = [];
 _heli = createVehicle [_heliType,_mapEdgePosition,[],500,'FLY'];
 _heli setVariable ['QS_dynSim_ignore',TRUE,TRUE];
 _heli enableDynamicSimulation FALSE;
-createVehicleCrew _heli;
+_heliGroup = createVehicleCrew _heli;
 _array pushBack _heli;
-_heliGroup = group (effectiveCommander _heli);
 {
 	_x setVariable ['QS_dynSim_ignore',TRUE,TRUE];
 	_x enableDynamicSimulation FALSE;
 } forEach (units _heliGroup);
 _heli setVariable ['QS_heli_spawnPosition',_mapEdgePosition,FALSE];
 _heli setVariable ['QS_heli_centerPosition',_position,FALSE];
+clearWeaponCargoGlobal _heli;
+clearMagazineCargoGlobal _heli;
+clearItemCargoGlobal _heli;
+clearBackpackCargoGlobal _heli;
+_heli lockInventory TRUE;
 [_heli,1,[]] call (missionNamespace getVariable 'QS_fnc_vehicleLoadouts');
 _heli engineOn TRUE;
 _heli addEventHandler [
@@ -172,19 +176,20 @@ _heli addEventHandler [
 _heli addEventHandler [
 	'IncomingMissile',
 	{
-		params ['_vehicle','_ammo','_firer','_instigator'];
-		if (!isNull (driver _vehicle)) then {
-			if (alive (driver _vehicle)) then {
-				(driver _vehicle) forceWeaponFire ['CMFlareLauncher','AIBurst'];
-				(driver _vehicle) spawn {
-					scriptName 'QS Incoming Missile Flares';
-					_this forceWeaponFire ['CMFlareLauncher','AIBurst'];
-					sleep 1;
-					_this forceWeaponFire ['CMFlareLauncher','AIBurst'];
-					sleep 1;
-					_this forceWeaponFire ['CMFlareLauncher','AIBurst'];
-					(vehicle _this) setVehicleAmmo 1;
-				};
+		params ['_vehicle','_ammo','_shooter','_instigator'];
+		private _projectile = nearestObject [_shooter,_ammo];
+		if (alive (driver _vehicle)) then {
+			(driver _vehicle) forceWeaponFire ['CMFlareLauncher','AIBurst'];
+			[driver _vehicle,_shooter,_projectile] spawn {
+				params ['_pilot','_shooter','_projectile'];
+				scriptName 'QS Incoming Missile Flares';
+				_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+				sleep 1;
+				_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+				sleep 1;
+				_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+				(vehicle _pilot) setVehicleAmmo 1;
+				[_projectile,objNull] remoteExec ['setMissileTarget',_shooter,FALSE];
 			};
 		};
 	}
@@ -318,9 +323,8 @@ if (_useSupport) then {
 		_supportHeli = createVehicle [_supportType,_supportSpawnPosition,[],0,'FLY'];
 		_supportHeli setVariable ['QS_dynSim_ignore',TRUE,TRUE];
 		_supportHeli enableDynamicSimulation FALSE;
-		createVehicleCrew _supportHeli;
+		_supportGroup = createVehicleCrew _supportHeli;
 		_array pushBack _supportHeli;
-		_supportGroup = group (effectiveCommander _supportHeli);
 		{
 			_x setSkill 1;
 			_x setVariable ['QS_dynSim_ignore',TRUE,TRUE];
@@ -338,8 +342,13 @@ if (_useSupport) then {
 		_supportHeli setUnloadInCombat [FALSE,FALSE];
 		_supportHeli allowCrewInImmobile TRUE;
 		_supportHeli lock 3;
+		clearWeaponCargoGlobal _supportHeli;
+		clearMagazineCargoGlobal _supportHeli;
+		clearItemCargoGlobal _supportHeli;
+		clearBackpackCargoGlobal _supportHeli;
+		_supportHeli lockInventory TRUE;
 		['setFeatureType',_supportHeli,2] remoteExec ['QS_fnc_remoteExecCmd',-2,_supportHeli];
-		[_supportHeli,1,[]] call (missionNamespace getVariable 'QS_fnc_vehicleLoadouts');
+		//[_supportHeli,1,[]] call (missionNamespace getVariable 'QS_fnc_vehicleLoadouts');
 		_wp = _supportGroup addWaypoint [_HLZ,0];
 		_wp setWaypointType 'LOITER';
 		_wp setWaypointLoiterType 'CIRCLE_L';
@@ -348,10 +357,10 @@ if (_useSupport) then {
 		_wp setWaypointBehaviour 'AWARE';
 		_wp setWaypointCombatMode 'RED';
 		_wp setWaypointForceBehaviour TRUE;
-		_supportGroup setBehaviourStrong 'AWARE';
+		_supportGroup setBehaviourStrong 'COMBAT';
 		_supportGroup lockWP TRUE;
 		_supportGroup enableAttack TRUE;
-		_supportGroup setBehaviour 'AWARE';
+		_supportGroup setBehaviour 'COMBAT';
 		_supportGroup setCombatMode 'RED';
 		_supportGroup setSpeedMode 'FULL';
 		_supportHeli addEventHandler [
@@ -385,13 +394,31 @@ if (_useSupport) then {
 				params ['_vehicle','_causedBy','_damage','_instigator'];
 				_supportGroup = _vehicle getVariable ['QS_heliInsert_supportGroup',grpNull];
 				if (!isNull _supportGroup) then {
-					if (!(((units _supportGroup) findIf {(alive _x)}) isEqualTo -1)) then {
-						if ((_supportGroup knowsAbout _instigator) isEqualTo 0) then {
-							_supportGroup reveal [_instigator,4];
+					_supportGroup reveal [_instigator,4];
+				};
+			}
+		];
+		_supportHeli addEventHandler [
+			'IncomingMissile',
+			{
+				params ['_vehicle','_ammo','_shooter','_instigator'];
+				private _projectile = nearestObject [_shooter,_ammo];
+				if (alive (driver _vehicle)) then {
+					(driver _vehicle) forceWeaponFire ['CMFlareLauncher','AIBurst'];
+					[driver _vehicle,_shooter,_projectile] spawn {
+						params ['_pilot','_shooter','_projectile'];
+						scriptName 'QS Incoming Missile Flares';
+						_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+						sleep 1;
+						_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+						sleep 1;
+						_pilot forceWeaponFire ['CMFlareLauncher','AIBurst'];
+						(vehicle _pilot) setVehicleAmmo 1;
+						if ((vehicle _shooter) isKindOf 'Air') then {
+							[_projectile,objNull] remoteExec ['setMissileTarget',_shooter,FALSE];
 						};
 					};
 				};
-				
 			}
 		];
 		_heli setVariable ['QS_heliInsert_supportHeli',_supportHeli,FALSE];

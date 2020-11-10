@@ -18,7 +18,7 @@ if (_type isEqualTo 'onLoad') exitWith {
 	disableSerialization;
 	params ['','_display'];
 	_title = _display displayCtrl 1802;
-	_title ctrlSetText 'Comm-Link';
+	_title ctrlSetText 'Комунiкацiя';
 	setMousePosition (uiNamespace getVariable ['QS_ui_mousePosition',getMousePosition]);
 	
 	/*/======================= EDIT BELOW =======================/*/ 
@@ -37,24 +37,24 @@ if (_type isEqualTo 'onLoad') exitWith {
 	_ctrlB4 = _display displayCtrl 1812;
 	_ctrlB4 ctrlSetStructuredText (parseText (format ["<a href=%1>%2</a>",((call (missionNamespace getVariable ['QS_missionConfig_monetizeURL',{}])) select 0),((call (missionNamespace getVariable ['QS_missionConfig_monetizeURL',{}])) select 1)]));
 	_ctrlB4 ctrlSetToolTip ((call (missionNamespace getVariable ['QS_missionConfig_monetizeURL',{}])) select 2);
-	_ctrlB4 ctrlEnable TRUE;	
-	/*/======================= EDIT ABOVE =======================/*/ 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	(_display displayCtrl 1806) ctrlSetText 'Radio Management';
+	_ctrlB4 ctrlEnable TRUE;
+	/*/======================= EDIT ABOVE =======================/*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+	(_display displayCtrl 1806) ctrlSetText 'Налаштування радiо';
 	(_display displayCtrl 1806) ctrlEnable TRUE;
-	(_display displayCtrl 1807) ctrlSetText 'Group Management';
+	(_display displayCtrl 1807) ctrlSetText 'Налаштування груп';
 	(_display displayCtrl 1807) ctrlEnable TRUE;
 	(_display displayCtrl 1808) ctrlEnable FALSE;
 	(_display displayCtrl 1810) ctrlEnable TRUE;
@@ -104,7 +104,7 @@ if (_type isEqualTo 'B4') exitWith {
 			(!dialog)
 		};
 		(findDisplay 46) createDisplay 'RscDisplayDynamicGroups';
-		50 cutText ['Use [Page Up] / [Page Down] to navigate the group list','PLAIN'];
+		50 cutText ['Використовуйте [Page Up] / [Page Down] для навiгацiї по перелiку груп','PLAIN'];
 	};
 };
 if (_type isEqualTo 'B5') exitWith {

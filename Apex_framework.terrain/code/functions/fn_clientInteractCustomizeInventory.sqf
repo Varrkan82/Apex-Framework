@@ -24,7 +24,7 @@ createDialog 'RscDisplayAttributesInventory';
 if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 [_cursorObject] spawn {
 	_entity = _this select 0;
-	50 cutText ['Please wait ...','PLAIN',1];
+	50 cutText ['Зачекайте будь ласка ...','PLAIN',1];
 	[5] spawn (missionNamespace getVariable 'QS_fnc_clientDisableUserInput');
 	waitUntil {
 		uiSleep 1;
@@ -87,23 +87,30 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 							_displayNameShort = tostring _displayNameShortArray + "...";
 						};
 						_type = if (getnumber (configfile >> "cfgweapons" >> _weapon >> "type") in [4096,131072]) then {1} else {0};
-						_addonListType pushback [_weapon,_displayName,_displayNameShort,_picture,_type,false];
+						_addonListType pushback [_displayName,_displayNameShort,_weapon,_picture,_type,false];
 					};
 					if (_weaponPublic || _weapon in ["throw","put"]) then {
 						{
 							_muzzle = if (_x == "this") then {_weaponCfg} else {_weaponCfg >> _x};
+							_magazinesList = getArray (_muzzle >> "magazines");
+							// Add magazines from magazine wells
+							{
+								{
+									_magazinesList append (getArray _x);
+								} foreach  configProperties [configFile >> "CfgMagazineWells" >> _x, "isArray _x"];
+							} foreach getArray (_muzzle >> "magazineWell");
 							{
 								_mag = tolower _x;
-								if ((_addonListType findIf {((_x select 0) == _mag)}) isEqualTo -1) then {
+								if ((_addonListType findIf {((_x select 2) == _mag)}) isEqualTo -1) then {
 									_magCfg = configfile >> "cfgmagazines" >> _mag;
 									if (getnumber (_magCfg >> "scope") isEqualTo 2) then {
 										_displayName = gettext (_magCfg >> "displayName");
 										_picture = gettext (_magCfg >> "picture");
-										_addonListType pushback [_mag,_displayName,_displayName,_picture,2,_mag in _magazines];
+										_addonListType pushback [_displayName,_displayName,_mag,_picture,2,_mag in _magazines];
 										_magazines pushback _mag;
 									};
 								};
-							} foreach getarray (_muzzle >> "magazines");
+							} foreach _magazinesList;
 						} foreach getarray (_weaponCfg >> "muzzles");
 					};
 				};
@@ -122,7 +129,7 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 						_displayName = gettext (_weaponCfg >> "displayName");
 						_picture = gettext (_weaponCfg >> "picture");
 						_addonListType = _addonList select _weaponTypeID;
-						_addonListType pushback [_weapon,_displayName,_displayName,_picture,3,false];
+						_addonListType pushback [_displayName,_displayName,_weapon,_picture,3,false];
 					};
 				};
 			} foreach getarray (configfile >> "cfgpatches" >> _x >> "units");
@@ -169,7 +176,7 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 	} foreach _cargo;
 	RscAttributeInventory_selected = 0;
 	playSound ['Click',FALSE];
-	50 cutText ['Initialization complete, select tab above','PLAIN',1];
+	50 cutText ['Інiцiалiзацiю завершено, оберiть вкладку зверху','PLAIN',1];
 	titleFadeOut 3;
 	if (userInputDisabled) then {
 		disableUserInput FALSE;
@@ -196,7 +203,7 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 			_backpackCargo = backpackCargo _entity;
 			if ((count _backpackCargo) > _cfgTransportMaxBackpacks) then {
 				clearBackpackCargoGlobal _entity;
-				50 cutText ['Crate overfilled, removing excess backpacks','PLAIN DOWN',0.25];
+				50 cutText ['Ящик перевантажено, вилучаємо зайвi рюкзаки','PLAIN DOWN',0.25];
 				_index = 0;
 				for '_x' from 0 to ((count _backpackCargo) - 1) step 1 do {
 					if (_index >= _cfgTransportMaxBackpacks) exitWith {};
@@ -207,7 +214,7 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 			_magazineCargo = magazineCargo _entity;
 			if ((count _magazineCargo) > _cfgTransportMaxMagazines) then {
 				clearMagazineCargoGlobal _entity;
-				50 cutText ['Crate overfilled, removing excess magazines','PLAIN DOWN',0.25];
+				50 cutText ['Ящик перевантажено, вилучаємо зайвi магазини','PLAIN DOWN',0.25];
 				_index = 0;
 				for '_x' from 0 to ((count _magazineCargo) - 1) step 1 do {
 					if (_index >= _cfgTransportMaxMagazines) exitWith {};
@@ -218,7 +225,7 @@ if (!isNull (getAssignedCuratorLogic player)) exitWith {};
 			_weaponCargo = weaponCargo _entity;
 			if ((count _weaponCargo) > _cfgTransportMaxWeapons) then {
 				clearWeaponCargoGlobal _entity;
-				50 cutText ['Crate overfilled, removing excess weapons','PLAIN DOWN',0.25];
+				50 cutText ['Ящик перевантажено, вилучаємо зайву зброю','PLAIN DOWN',0.25];
 				_index = 0;
 				for '_x' from 0 to ((count _weaponCargo) - 1) step 1 do {
 					if (_index >= _cfgTransportMaxWeapons) exitWith {};

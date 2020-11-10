@@ -31,7 +31,7 @@ if (_type isEqualTo 1) then {
 		if ((!isDedicated) && (hasInterface)) then {
 			if (player isEqualTo (leader _group)) then {
 				playSound 'TacticalPing4';
-				50 cutText [(format ['[Commander] %1 requested a SITREP for %2',_profileName,_groupID]),'PLAIN DOWN',0.5,TRUE,FALSE];
+				50 cutText [(format ['[КОМАНДИР] %1 запитує про СИТУАЦІЮ по %2',_profileName,_groupID]),'PLAIN DOWN',0.5,TRUE,FALSE];
 			};
 		};
 	};
@@ -118,11 +118,11 @@ if (_type isEqualTo 1) then {
 		_group setCombatMode 'RED';
 		{
 			if (!isPlayer _x) then {
-				if (alive (assignedTarget _x)) then {
+				if (alive (getAttackTarget _x)) then {
 					if (local _x) then {
-						_x doSuppressiveFire (aimPos (assignedTarget _x));
+						_x doSuppressiveFire (aimPos (getAttackTarget _x));
 					} else {
-						['doSuppressiveFire',_x,(aimPos (assignedTarget _x))] remoteExec ['QS_fnc_remoteExecCmd',_x,FALSE];
+						['doSuppressiveFire',_x,(aimPos (getAttackTarget _x))] remoteExec ['QS_fnc_remoteExecCmd',_x,FALSE];
 					};
 				};
 			};

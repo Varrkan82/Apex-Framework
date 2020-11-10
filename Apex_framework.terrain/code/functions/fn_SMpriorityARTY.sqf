@@ -43,9 +43,7 @@ _priorityTargets = [];
 		};
 	};
 } forEach _unitsArray;
-_enemiesArray = [_unitsArray select 0] call (missionNamespace getVariable 'QS_fnc_smEnemyEast');
-
-
+_enemiesArray = [_unitsArray # 0] call (missionNamespace getVariable 'QS_fnc_smEnemyEast');
 private _playerCount = count allPlayers;
 private _grp = grpNull;
 private _grpSpawnPos = [0,0,0];
@@ -80,8 +78,7 @@ for '_x' from 0 to (_tankCount - 1) step 1 do {
 		_tank addEventHandler ['GetOut',(missionNamespace getVariable 'QS_fnc_AIXDismountDisabled')];
 		[0,_tank,EAST] call (missionNamespace getVariable 'QS_fnc_vSetup2');
 		(missionNamespace getVariable 'QS_AI_vehicles') pushBack _tank;
-		createVehicleCrew _tank;
-		_grp = group (effectiveCommander _tank);
+		_grp = createVehicleCrew _tank;
 		[_grp,_flatPos,400,[],TRUE] call (missionNamespace getVariable 'QS_fnc_taskPatrolVehicle');
 		_grp setVariable ['QS_AI_GRP',TRUE,(call (missionNamespace getVariable 'QS_fnc_AIOwners'))];
 		_grp setVariable ['QS_AI_GRP_CONFIG',['GENERAL','VEHICLE',(count (units _grp)),_tank],(call (missionNamespace getVariable 'QS_fnc_AIOwners'))];
@@ -105,9 +102,9 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	'QS_IA_TASK_SM_0',
 	TRUE,
 	[
-		'The enemy has set up an Artillery Battery. Get over there and neutralize it before its too late! This objective is not accurately marked.',
-		'Artillery Battery',
-		'Artillery Battery'
+		'Ворог встановив артилерiйську батарею. Вирушайте туди та знищiть її доки не стало пiзно! Цю цiль позначено не точно.',
+		'Артилерiйська Батарея',
+		'Артилерiйська Батарея'
 	],
 	(markerPos 'QS_marker_sideMarker'),
 	'CREATED',
@@ -117,17 +114,17 @@ _fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 3
 	'destroy',
 	TRUE
 ] call (missionNamespace getVariable 'BIS_fnc_setTask');
-_briefing = parseText "<t align='center' size='2.2'>Priority Target</t><br/><t size='1.5' color='#b60000'>Artillery</t><br/>____________________<br/>OPFOR forces are setting up an artillery battery to hit you guys damned hard! We've picked up their positions with thermal imaging scans and have marked it on your map.<br/><br/>This is a priority target, boys! They're just setting up now; they'll be firing in about five minutes!";
+_briefing = parseText "<t align='center' size='2.2'>Прiоритетна цiль</t><br/><t size='1.5' color='#b60000'>Артилерiя</t><br/>____________________<br/>Сили OPFOR встановлюють артилерiйську батарею щоб надавата вам по срацi! Ми знайшли їхню позицiю за допомогою термальних знiмкiв та позначили її на вашiй мапi.<br/><br/>Це прiоритетна цiль, хлопцi! Вони ще розгортаються, але будуть готовi до вiдкриття вогню за 5 хвилин!";
 ['hint',_briefing] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-['NewPriorityTarget',['Artillery']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['NewPriorityTarget',['Артилерiя']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 missionNamespace setVariable ['QS_smSuccess',FALSE,TRUE];
 waitUntil {
 	sleep 5;
 	(((_priorityTargets findIf {((canMove _x) && (alive _x))}) isEqualTo -1) || {(missionNamespace getVariable 'QS_smSuccess')})
 };
-_completeText = parseText "<t align='center' size='2.2'>Priority Target</t><br/><t size='1.5' color='#08b000'>NEUTRALISED</t><br/>____________________<br/>Incredible job, boys! Make sure you jump on those priority targets quickly; they can really cause havoc if they're left to their own devices.<br/><br/>Keep on with the main objective; we'll tell you if anything comes up.";
+_completeText = parseText "<t align='center' size='2.2'>Прiоритетна цiль</t><br/><t size='1.5' color='#08b000'>НЕЙТРАЛІЗОВАНО</t><br/>____________________<br/>Неперевершена робота, козаки! Переконайтесь, що ви можете швидко перемiщуватись мiж цiлями, тому що якщо вони залишаться зi своїми iграшками - то можуть спричинити справжнiй хаос.<br/><br/>Продовжуйте основну операцiю. Ми сповiстимо вас, якщо щось змiниться.";
 ['hint',_completeText] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
-['CompletedPriorityTarget',['Artillery Neutralized']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+['CompletedPriorityTarget',['Артилерiю НЕЙТРАЛІЗОВАНО']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 {
 	_x setMarkerPos [-5000,-5000,0];
 	_x setMarkerAlpha 0;

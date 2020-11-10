@@ -54,7 +54,7 @@ _infUrbanTypes = [
 ];
 if (worldName in ['Tanoa','Lingor3']) then {
 	_staticTypes = ['O_HMG_01_high_F'];
-	_airTypes = ['i_heli_light_03_dynamicloadout_f','O_Heli_Light_02_dynamicLoadout_F'];
+	_airTypes = ['i_e_heli_light_03_dynamicloadout_f','O_Heli_Light_02_dynamicLoadout_F'];
 	_engineerType = 'O_T_Engineer_F';
 	_aaTypes = ['O_T_APC_Tracked_02_AA_ghex_F'];
 	_mrapTypes = ['O_T_MRAP_02_gmg_ghex_F','O_T_MRAP_02_hmg_ghex_F','O_T_LSV_02_armed_F'];
@@ -383,73 +383,120 @@ for '_x' from 0 to (_grpCount - 1) step 1 do {
 diag_log '****************************************************';
 diag_log '***** AO ENEMY ***** Spawning static weapons *****';
 diag_log '****************************************************';
-
-private _staticUnits = [];
-_staticGroup = createGroup [RESISTANCE,TRUE];
-for '_x' from 0 to 2 do {
-	private _watchPos = selectRandom [(AGLToASL _centerPos),(AGLToASL _QS_HQpos)];
-	_randomPos = [_watchPos,(_aoSize * 0.5),10,10,[[objNull,'VIEW'],(0.1 max (random 1))]] call (missionNamespace getVariable 'QS_fnc_findOverwatchPos');
-	_staticType = selectRandom _staticTypes;
-	_static = createVehicle [_staticType,_randomPos,[],0,'NONE'];
-	missionNamespace setVariable ['QS_analytics_entities_created',((missionNamespace getVariable 'QS_analytics_entities_created') + 1),FALSE];
-	_static setVectorUp (surfaceNormal _randomPos);
-	_static setVelocity [0,0,0];
-	if (_playerCount < 30) then {
-		[_static] call (missionNamespace getVariable 'QS_fnc_downgradeVehicleWeapons');
-	} else {
-		if ((random 1) > 0.666) then {
-			[_static] call (missionNamespace getVariable 'QS_fnc_downgradeVehicleWeapons');
-		};
-	};
-	_unit1 = _staticGroup createUnit [_mortGunnerType,_randomPos,[],0,'NONE'];
-	missionNamespace setVariable [
-		'QS_analytics_entities_created',
-		((missionNamespace getVariable 'QS_analytics_entities_created') + 1),
-		FALSE
-	];
-	_unit1 = _unit1 call (missionNamespace getVariable 'QS_fnc_unitSetup');
-	_unit1 assignAsGunner _static; 
-	_unit1 moveInGunner _static;
-	_staticUnits pushBack _unit1;
-	_unit1 setVariable ['QS_staticGunnerVehicle',_static,FALSE];
-	_unit1 addEventHandler [
-		'Killed',
-		{
-			_killed = _this select 0;
-			if (!isNull _killed) then {
-				if (!isNull (_killed getVariable 'QS_staticGunnerVehicle')) then {
-					(_killed getVariable 'QS_staticGunnerVehicle') setDamage 1;
-				};
-			};
-		}
-	];
-	_static addEventHandler [
-		'GetOut',
-		{
-			(_this select 2) setDamage 1;
-			(_this select 0) setDamage 1;
-		}
-	];
-	_staticGroup setBehaviour 'AWARE';
-	_staticGroup setCombatMode 'RED';
-	_dirToCenter = _randomPos getDir _watchPos;
-	_static setDir _dirToCenter;
-	_staticGroup setFormDir _dirToCenter;
-	_unit1 doWatch (ASLToAGL _watchPos);
-	_static lock 3;
-	for '_x' from 0 to 2 step 1 do {
-		_static setVectorUp [0,0,1];
-	};
-	[(units _staticGroup),2] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
-	{
-		0 = _enemiesArray pushBack _x;
-	} count (units _staticGroup);
-	0 = _enemiesArray pushBack _static;
+for '_x' from 0 to 49 step 1 do {
+	_randomPos = ['RADIUS',_centerPos,(_aoSize * 0.85),'LAND',[5,0,0.3,5,0,FALSE,objNull],FALSE,[],[],TRUE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
+	if (
+		(((missionNamespace getVariable 'QS_registeredPositions') findIf {((_randomPos distance2D _x) < 50)}) isEqualTo -1) && 
+		((((_randomPos select [0,2]) nearRoads 25) select {((_x isEqualType objNull) && (!((roadsConnectedTo _x) isEqualTo [])))}) isEqualTo [])
+	) exitWith {};
 };
-_staticGroup2 = createGroup [RESISTANCE,TRUE];
+_list = [
+	["Land_Mil_WallBig_4m_F",[-0.354004,-0.0078125,11.045],0,270.632],
+	["Land_Mil_WallBig_4m_F",[-0.0952148,0.0634766,11.082],0,0],
+	["I_E_HMG_02_high_F",[-2.18506,-2.04688,10.4124],0,234.27],
+	["I_E_HMG_02_high_F",[-1.84229,2.15332,10.4124],0,309.028],
+	["I_E_HMG_02_high_F",[2.16064,1.62402,10.4124],0,42.212],
+	["I_E_HMG_02_high_F",[1.96973,-2.24854,10.4124],0,139.225]
+];
+_tower = createVehicle ['CargoPlaftorm_01_green_F',[0,0,0]];
+_tower setPosASL _randomPos;
+_tower addEventHandler [
+	'Deleted',
+	{
+		params ['_tower'];
+		{
+			deleteVehicle _x;
+		} forEach (_tower getVariable ['QS_entity_assocEntities',[]]);
+	}
+];
+_tower addEventHandler [
+	'Killed',
+	{
+		params ['_tower'];
+		{
+			deleteVehicle _x;
+		} forEach (_tower getVariable ['QS_entity_assocEntities',[]]);
+	}
+];
+_tower setVectorUp [0,0,1];
+sleep 0.5;
+_enemiesArray pushBack _tower;
+private _object = objNull;
+private _offset = 5;
+private _attachPos = [0,0,0];
+_tower setVariable ['QS_entity_assocEntities',[],FALSE];
+_towerGrp = createGroup [EAST,TRUE];
 {
-	[_x] joinSilent _staticGroup2;
-} count _staticUnits;
+	_object = createVehicle [_x # 0,[0,0,0]];
+	_object allowDamage FALSE;
+	_attachPos = _x # 1;
+	_attachPos set [2,(_attachPos # 2) - _offset];
+	_object attachTo [_tower,_attachPos];
+	_object setDir ((getDir _tower) + (_x # 3));
+	_object spawn {sleep 1; detach _this;};
+	_tower setVariable ['QS_entity_assocEntities',((_tower getVariable ['QS_entity_assocEntities',[]]) + [_object]),FALSE];
+	_enemiesArray pushBack _object;
+	if (_object isKindOf 'StaticWeapon') then {
+		if (_playerCount < 30) then {
+			[_object] call (missionNamespace getVariable 'QS_fnc_downgradeVehicleWeapons');
+		} else {
+			if ((random 1) > 0.666) then {
+				[_object] call (missionNamespace getVariable 'QS_fnc_downgradeVehicleWeapons');
+			};
+		};
+		_grp = createVehicleCrew _object;
+		(units _grp) joinSilent _towerGrp;
+		(gunner _object) addEventHandler [
+			'Hit',
+			{
+				params ['_unit','_source','_damage','_instigator'];
+				if (!isNull _source) then {
+					_unit reveal [_source,4];
+					(group _unit) reveal [_source,4];
+				};
+				if (!isNull _instigator) then {
+					_unit reveal [_instigator,4];
+					(group _unit) reveal [_instigator,4];
+				};
+			}
+		];
+		(gunner _object) addEventHandler [
+			'Killed',
+			{
+				_killed = _this # 0;
+				if (!isNull _killed) then {
+					if (!isNull (_killed getVariable 'QS_staticGunnerVehicle')) then {
+						(_killed getVariable 'QS_staticGunnerVehicle') setDamage 1;
+					};
+				};
+			}
+		];
+		_object addEventHandler [
+			'GetOut',
+			{
+				(_this # 2) setDamage 1;
+				(_this # 0) setDamage 1;
+			}
+		];
+		_object addEventHandler [
+			'Deleted',
+			{
+				params ['_object'];
+			}
+		];
+		_object lock 3;
+		_enemiesArray pushBack (gunner _object);
+		(gunner _object) setVariable ['QS_staticGunnerVehicle',_object,FALSE];
+		_object enableDynamicSimulation TRUE;
+		(gunner _object) enableDynamicSimulation TRUE;
+	} else {
+		_object enableSimulationGlobal FALSE;
+	};
+} forEach _list;
+[(units _towerGrp),3] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
+_towerGrp setCombatMode 'RED';
+_towerGrp setBehaviourStrong 'COMBAT';
+_towerGrp enableAttack TRUE;
 
 /*/=============================================================== INFANTRY OVERWATCH/*/
 
@@ -578,7 +625,11 @@ for '_x' from 0 to (_vehCount - 1) step 1 do {
 	_AOvehGroup addVehicle _AOveh;
 	[_AOvehGroup,_randomPos,_aoSize,_roadPositionsValid,TRUE] call (missionNamespace getVariable 'QS_fnc_taskPatrolVehicle');
 	_AOveh lock 3;
-	[(units _AOvehGroup),1] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
+	if (_AOveh isKindOf 'mbt_04_base_f') then {
+		[(units _AOvehGroup),3] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
+	} else {
+		[(units _AOvehGroup),2] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
+	};
 	{
 		_x setVariable ['BIS_noCoreConversations',TRUE,FALSE];
 		0 = _enemiesArray pushBack _x;
@@ -691,6 +742,7 @@ if ((count (_terrainData select 4)) > 6) then {
 	};
 	[_toGarrison,2] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
 };
+_QS_HQpos set [2,0];
 _resistanceGrp = createGroup [RESISTANCE,TRUE];
 _unit = _resistanceGrp createUnit ['I_C_Soldier_Para_1_F',_QS_HQpos,[],0,'NONE'];
 missionNamespace setVariable [
@@ -723,7 +775,6 @@ if (worldName in ['Tanoa','Lingor3']) then {
 };
 _AOgarrisonGroup2 = createGroup [RESISTANCE,TRUE];
 _toGarrison = [];
-_QS_HQpos set [2,0];
 for '_x' from 0 to 8 step 1 do {
 	_randomUnit = selectRandom _indArray;
 	_unit = _AOgarrisonGroup2 createUnit [_randomUnit,_QS_HQpos,[],0,'NONE'];
@@ -764,7 +815,7 @@ diag_log '****************************************************';
 diag_log '***** AO ENEMY ***** Spawning HQ Guards *****';
 diag_log '****************************************************';
 
-_randomPos = ['RADIUS',_QS_HQpos,50,'LAND',[],FALSE,[],[0,40,'O_soldier_F'],TRUE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
+_randomPos = ['RADIUS',_QS_HQpos,50,'LAND',[],FALSE,[],[0,40,'O_soldier_F'],FALSE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
 _infUrbanType = selectRandomWeighted _infUrbanTypes;
 _hqGroup1 = [_randomPos,(random 360),EAST,_infUrbanType,FALSE] call (missionNamespace getVariable 'QS_fnc_spawnGroup');
 [_hqGroup1,_QS_HQpos,70,TRUE] call (missionNamespace getVariable 'QS_fnc_taskPatrol');
@@ -778,7 +829,7 @@ _hqGroup1 setVariable ['QS_AI_GRP_DATA',[TRUE,diag_tickTime],(call (missionNames
 	0 = _enemiesArray pushBack _x;
 } count (units _hqGroup1);
 _infUrbanType = selectRandomWeighted _infUrbanTypes;
-_randomPos = ['RADIUS',_QS_HQpos,50,'LAND',[],FALSE,[],[0,40,'O_soldier_F'],TRUE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
+_randomPos = ['RADIUS',_QS_HQpos,50,'LAND',[],FALSE,[],[0,40,'O_soldier_F'],FALSE] call (missionNamespace getVariable 'QS_fnc_findRandomPos');
 _hqGroup2 = [_randomPos,(random 360),EAST,_infUrbanType,FALSE] call (missionNamespace getVariable 'QS_fnc_spawnGroup');
 [_hqGroup2,_QS_HQpos,70,TRUE] call (missionNamespace getVariable 'QS_fnc_taskPatrol');
 [(units _hqGroup2),2] call (missionNamespace getVariable 'QS_fnc_serverSetAISkill');
@@ -833,11 +884,11 @@ _commander addEventHandler [
 			'QS_marker_hqMarker',
 			'QS_marker_hqCircle'
 		];
-		['CompletedSub',['CSAT Commander killed!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
+		['CompletedSub',['Командира CSAT вбито!']] remoteExec ['QS_fnc_showNotification',-2,FALSE];
 		if (!isNull _killer) then {
 			if (isPlayer _killer) then {
 				_name = name _killer;
-				_text = format ['%1 has killed the CSAT Commander',_name];
+				_text = format ['%1 вбив командира CSAT',_name];
 				['sideChat',[WEST,'HQ'],_text] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 			};
 		};

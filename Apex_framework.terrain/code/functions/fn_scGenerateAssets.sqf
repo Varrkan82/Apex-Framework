@@ -6,12 +6,12 @@ Author:
 
 Last Modified:
 
-	18/12/2017 A3 1.80 by Quiksilver
+	18/08/2019 A3 1.94 by Quiksilver
 
 Description:
 
 	Generate Sector Assets
-____________________________________________________________________________/*/
+_______________________________________/*/
 
 params ['_sectorPosition','_radius'];
 private _assets = [];
@@ -74,17 +74,22 @@ if ((([(_sectorPosition select 0),(_sectorPosition select 1)] nearObjects ['Hous
 	private _spawnPosition = [0,0,0];
 	private _buildingType = '';
 	private _building = objNull;
-	_buildingPool = [
-		[
-			"Land_i_Stone_HouseSmall_V2_F","Land_i_Stone_Shed_V1_F","Land_i_Stone_Shed_V2_F","Land_i_Stone_HouseSmall_V1_F",
-			"Land_d_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V2_F","Land_Slum_House02_F","Land_d_House_Small_01_V1_F","Land_u_House_Small_01_V1_F",
-			"land_shed_08_grey_f","land_bunker_01_hq_f","land_shed_08_grey_f","land_bunker_01_hq_f"
-		],
-		[
-			"land_shed_08_grey_f","land_bunker_01_hq_f","Land_Slum_03_F","Land_Slum_01_F","Land_Slum_02_F","Land_House_Small_03_F","Land_House_Native_01_F","Land_House_Native_02_F",
-			"land_bunker_01_hq_f"
-		]
-	] select (worldName isEqualTo 'Tanoa');
+	private _buildingPool = [
+		'land_i_stone_housesmall_v2_f','land_i_stone_shed_v1_f','land_i_stone_shed_v2_f','land_i_stone_housesmall_v1_f',
+		'land_d_stone_housebig_v1_f','land_i_stone_housebig_v1_f','land_i_stone_housebig_v2_f','land_slum_house02_f','land_d_house_small_01_v1_f','land_u_house_small_01_v1_f',
+		'land_shed_08_grey_f','land_bunker_01_hq_f','land_shed_08_grey_f','land_bunker_01_hq_f'
+	];
+	if (worldName in ['Tanoa']) then {
+		_buildingPool = [
+			'land_shed_08_grey_f','land_bunker_01_hq_f','Land_Slum_03_F','Land_Slum_01_F','Land_Slum_02_F','Land_House_Small_03_F','Land_House_Native_01_F','Land_House_Native_02_F',
+			'land_bunker_01_hq_f'
+		];	
+	};
+	if (worldName in ['Enoch']) then {
+		_buildingPool = [
+			'land_bunker_01_hq_f','land_shed_14_f','land_shed_13_f','land_camp_house_01_brown_f','land_houseruin_small_01_f','land_houseruin_small_04_f','land_barn_02_f'
+		];	
+	};
 	private _breakOut = FALSE;
 	for '_x' from 0 to 2 step 1 do {
 		_breakOut = FALSE;
@@ -147,7 +152,7 @@ if (_letter isEqualTo 'B') then {
 if (_letter isEqualTo 'C') then {
 	_title = 'Charlie';
 };
-_description = format ['Control %1 ( %2 ).<br/><br/>How to Capture:<br/><br/>Occupy the inner area to help capture and hold the zone.<br/><br/>Enemy within the outer area will slow down or even reverse your progress!<br/><br/>While it is necessary to hold the inner zone, it is also important to control and keep the enemy out of the larger zone.',_title,_letter];
+_description = format ['Контроль %1 ( %2 ).<br/><br/>Як захопити:<br/><br/>Займiть внутрiшню зону щоб допомогти в захопленнi та утриманнi.<br/><br/>Вороги у завнiшнiй зонi уповiльнять або навiть повернуть прогрес захоплення у зворотньому напрямку!<br/><br/>Доки потрiбно утримувати внутрiшню зону - також потрiбно контролювати та тримати ворога поза бiльшою зоною.',_title,_letter];
 _taskData pushBack ([
 	(format ['QS_virtualSectors_%1_task',(count (missionNamespace getVariable 'QS_virtualSectors_data'))]),
 	TRUE,

@@ -24,25 +24,25 @@ if ((isMultiplayer) && (!(local _t))) exitWith {};
 if (((vectorMagnitude (velocity _t)) * 3.6) > 1) exitWith {};
 if (diag_tickTime < (player getVariable ['QS_RD_canRespawnVehicle',-1])) exitWith {};
 if (!((getVehicleCargo _t) isEqualTo [])) exitWith {
-	50 cutText ['Vehicle has cargo inside.','PLAIN',0.3];
+	50 cutText ['Автомобiль має вантаж всерединi.','PLAIN',0.3];
 };
 if (!isNull (getSlingLoad _t)) exitWith {
-	50 cutText ['Vehicle has sling load.','PLAIN',0.3];
+	50 cutText ['Автомобiль має тент.','PLAIN',0.3];
 };
 if (!((ropes _t) isEqualTo [])) exitWith {
-	50 cutText ['Vehicle has ropes attached.','PLAIN',0.3];
+	50 cutText ['Автомобiль причеплений тросами.','PLAIN',0.3];
 };
 if (!(isNull (attachedTo _t))) exitWith {
-	50 cutText ['Vehicle is attached to something.','PLAIN',0.3];
+	50 cutText ['Автомобiль прикрiплений до чогось.','PLAIN',0.3];
 };
-private _result = [(format ['Are you sure you want to respawn this %1',(getText (configFile >> 'CfgVehicles' >> (typeOf _t) >> 'displayName'))]),'Warning','Respawn vehicle','Cancel',(findDisplay 46),FALSE,FALSE] call (missionNamespace getVariable 'BIS_fnc_guiMessage'); 
+private _result = [(format ['Ви впевненi, що хочете вiдновити цей %1',(getText (configFile >> 'CfgVehicles' >> (typeOf _t) >> 'displayName'))]),'Попередження','Вiдновлення транспорту','Вiдмiнити',(findDisplay 46),FALSE,FALSE] call (missionNamespace getVariable 'BIS_fnc_guiMessage');
 if (_result) then {
 	player setVariable ['QS_RD_canRespawnVehicle',(diag_tickTime + 120),FALSE];
 	player playAction 'PutDown';
 	playSound 'ClickSoft';
-	50 cutText ['Respawning vehicle','PLAIN DOWN',0.5];
+	50 cutText ['Респаун транспорту','PLAIN DOWN',0.5];
 	if ((_t distance2D (markerPos 'QS_marker_base_marker')) >= 1000) then {
-		_text = format ['%1 has respawned a(n) %2 at grid %3',profileName,(getText (configFile >> 'CfgVehicles' >> (typeOf _t) >> 'displayName')),(mapGridPosition (getPosWorld player))];
+		_text = format ['%1 вiдновив %2 у квадраті %3',profileName,(getText (configFile >> 'CfgVehicles' >> (typeOf _t) >> 'displayName')),(mapGridPosition (getPosWorld player))];
 		['systemChat',_text] remoteExec ['QS_fnc_remoteExecCmd',-2,FALSE];
 	};
 	if (!isNil {player getVariable 'QS_client_createdBoat'}) then {
@@ -61,9 +61,9 @@ if (_result) then {
 	};
 	if ((_t distance (markerPos 'QS_marker_base_marker')) > 1000) then {
 		[46,[player,2]] remoteExec ['QS_fnc_remoteExec',2,FALSE];
-		['ScoreBonus',[(format ['Cleaning up %1',worldName]),'2']] call (missionNamespace getVariable 'QS_fnc_showNotification');	
+		['ScoreBonus',[(format ['Очищення %1',worldName]),'2']] call (missionNamespace getVariable 'QS_fnc_showNotification');
 	};
 	[17,_t] remoteExec ['QS_fnc_remoteExec',2,FALSE];
 } else {
-	50 cutText ['Cancelled','PLAIN',0.3];
+	50 cutText ['Вiдмiнено','PLAIN',0.3];
 };

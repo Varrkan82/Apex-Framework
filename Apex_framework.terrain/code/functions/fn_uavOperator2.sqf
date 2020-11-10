@@ -6,7 +6,7 @@ Author:
 	
 Last modified:
 
-	16/02/2019 A3 1.88 by Quiksilver
+	4/06/2019 A3 1.94 by Quiksilver
 	
 Description:
 
@@ -105,6 +105,15 @@ if ((missionNamespace getVariable ['QS_missionConfig_baseLayout',0]) isEqualTo 0
 			[objNull,(['b_uav_02_dynamicloadout_f',(selectRandomWeighted ['b_uav_02_dynamicloadout_f',0.5,'b_uav_05_f',0.5])] select _isOwnedJets),[100,100,500],0,[],{},TRUE,_uavRespawnDelay]
 		];
 	};
+	if (_worldName isEqualTo 'Enoch') then {
+		_uavLoiterPosition = [0,_worldSize + 2000,(500 + (random 500))];
+		_uavData = [
+			[objNull,'b_ugv_01_rcws_f',(AGLToASL [4287.99,10422.7,0]),134.995,[],{},TRUE,-1],
+			[objNull,'b_ugv_01_f',(AGLToASL [4276.89,10433.9,0]),134.995,[],{},TRUE,-1],
+			[objNull,'b_t_uav_03_dynamicloadout_f',(AGLToASL [4148.64,10428.8,0]),(random 360),[],{},TRUE,_uavRespawnDelay],
+			[objNull,(['b_uav_02_dynamicloadout_f',(selectRandomWeighted ['b_uav_02_dynamicloadout_f',0.5,'b_uav_05_f',0.5])] select _isOwnedJets),[100,100,500],0,[],{},TRUE,_uavRespawnDelay]
+		];
+	};
 };
 if ( (!((missionNamespace getVariable ['QS_missionConfig_baseLayout',0]) isEqualTo 0)) && {(_uavData isEqualTo [])}) exitWith {};
 if (_carrierEnabled) then {
@@ -195,12 +204,16 @@ private _operatorAtFOB = FALSE;
 _uavRespawnDelay = 300;
 _uavInitCodeGeneric = {
 	params ['_uavEntity'];
-	createVehicleCrew _uavEntity;
-	_grp = group (effectiveCommander _uavEntity);
+	_grp = createVehicleCrew _uavEntity;
 	_grp setVariable ['QS_HComm_grp',FALSE,TRUE];
+	{
+		_x disableAI 'LIGHTS';
+	} forEach (units _grp);
+	_uavEntity setPilotLight FALSE;
+	_uavEntity setCollisionLight FALSE;
 	if (_uavEntity isKindOf 'Plane') then {
 		params ['','_loiterPos'];
-		_text = format ['A(n) %1 is available at grid %2',(getText (configFile >> 'CfgVehicles' >> (typeOf _uavEntity) >> 'displayName')),(mapGridPosition _uavEntity),worldName];
+		_text = format ['%1 доступний в квадратi %2',(getText (configFile >> 'CfgVehicles' >> (typeOf _uavEntity) >> 'displayName')),(mapGridPosition _uavEntity),worldName];
 		(missionNamespace getVariable 'QS_managed_hints') pushBack [5,FALSE,7,-1,_text,[],-1];
 		_uavEntity setVariable ['QS_ropeAttached',FALSE,TRUE];
 		_uavEntity enableRopeAttach TRUE;
@@ -257,13 +270,11 @@ _uavInitCodeGeneric = {
 				if ((_vehicle distance2D (markerPos 'QS_marker_base_marker')) < 500) exitWith {
 					deleteVehicle _projectile;
 				};
-				if (!isNull (assignedTarget _vehicle)) then {
-					if (alive (assignedTarget _vehicle)) then {
-						_assignedTarget = assignedTarget _vehicle;
-						if (!isNull (effectiveCommander _assignedTarget)) then {
-							if (isPlayer (effectiveCommander _assignedTarget)) then {
-								[17,_vehicle] remoteExec ['QS_fnc_remoteExec',2,FALSE];
-							};
+				if (alive (getAttackTarget _vehicle)) then {
+					_assignedTarget = getAttackTarget _vehicle;
+					if (!isNull (effectiveCommander _assignedTarget)) then {
+						if (isPlayer (effectiveCommander _assignedTarget)) then {
+							[17,_vehicle] remoteExec ['QS_fnc_remoteExec',2,FALSE];
 						};
 					};
 				};
@@ -325,13 +336,11 @@ _uavInitCodeGeneric = {
 				if ((_vehicle distance2D (markerPos 'QS_marker_base_marker')) < 500) exitWith {
 					deleteVehicle _projectile;
 				};
-				if (!isNull (assignedTarget _vehicle)) then {
-					if (alive (assignedTarget _vehicle)) then {
-						_assignedTarget = assignedTarget _vehicle;
-						if (!isNull (effectiveCommander _assignedTarget)) then {
-							if (isPlayer (effectiveCommander _assignedTarget)) then {
-								[17,_vehicle] remoteExec ['QS_fnc_remoteExec',2,FALSE];
-							};
+				if (alive (getAttackTarget _vehicle)) then {
+					_assignedTarget = getAttackTarget _vehicle;
+					if (!isNull (effectiveCommander _assignedTarget)) then {
+						if (isPlayer (effectiveCommander _assignedTarget)) then {
+							[17,_vehicle] remoteExec ['QS_fnc_remoteExec',2,FALSE];
 						};
 					};
 				};
@@ -443,7 +452,7 @@ for '_i' from 0 to 1 step 0 do {
 				} forEach (crew _uavEntity);
 			};
 			// UAV is still alive, handle various situations
-			if (((getPosASL _uavEntity) select 2) < -1.5) then {
+			if (((getPosASL _uavEntity) # 2) < -1.5) then {
 				_uavEntity setDamage [1,FALSE];
 			};
 		};
