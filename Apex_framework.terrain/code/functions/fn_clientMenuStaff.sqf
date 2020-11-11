@@ -47,7 +47,7 @@ if ((_type2 isEqualType '') && (_type2 isEqualTo 'KeyDown')) exitWith {
 		['4 - Показати пiлотiв',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),6,77,TRUE,TRUE,'','TRUE'],
 		['5 - (Цiль) Вiдремонтувати',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),7,76,TRUE,TRUE,'','TRUE'],
 		['6 - (Цiль) Вибачитись',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),8,75,TRUE,TRUE,'','TRUE'],
-		['7 - (Цiль) Покарати',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),9,75,TRUE,TRUE,'','TRUE']
+		['7 - (Цiль) Покарати',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),9,75,TRUE,TRUE,'','TRUE'],
 		['8 - No function assigned',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),10,74,TRUE,TRUE,'','TRUE'],
 		['9 - No function assigned',(missionNamespace getVariable 'QS_fnc_clientMenuStaff'),11,73,TRUE,TRUE,'','TRUE']
 	];
