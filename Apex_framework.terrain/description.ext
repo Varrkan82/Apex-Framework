@@ -3094,7 +3094,7 @@ class QS_RD_client_dialog_menu_options {
 			y = 0.73 * safezoneH + safezoneY;
 			w = 0.02 * safezoneW;
 			h = 0.04 * safezoneH;
-			tooltip = "Toggle on/off QuackTac Fireteam HUD";
+			tooltip = "Увімкнути або вимкнути QuackTac радар команди";
 			onCheckedChanged = "['QHUDCheckbox',(_this select 0),(_this select 1)] spawn (missionNamespace getVariable 'QS_fnc_clientMenuOptions');";
 		};
 		class QS_RD_client_dialog_menu_options_text_7: QS_RD_dialog_RscText {
@@ -3868,7 +3868,7 @@ class QS_RD_client_dialog_menu_hub {
 			w = 0.13 * safezoneW;
 			h = 0.0340016 * safezoneH;
 			sizeEx = 0.03;
-			onButtonClick = "['Назад',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuHub');";
+			onButtonClick = "['Back',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuHub');";
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 		};
@@ -4055,7 +4055,7 @@ class QS_RD_client_dialog_menu_context {
 			w = 0.13 * safezoneW;
 			h = 0.0340016 * safezoneH;
 			sizeEx = 0.03;
-			onButtonClick = "['Закрити',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuContext');";
+			onButtonClick = "['Close',(_this select 0)] call (missionNamespace getVariable 'QS_fnc_clientMenuContext');";
 			shadow = 0;
 			colorText[] = {1,1,1,1};
 		};
