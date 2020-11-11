@@ -863,7 +863,7 @@ class Mission
 			dataType="Marker";
 			position[]={7066.4141,2.6600001,7378.5259};
 			name="QS_marker_base_toc";
-			text="   TOC";
+			text="   ТОЦ";
 			type="b_hq";
 			colorName="ColorWEST";
 			alpha=0.5;
