@@ -1,3 +1,4 @@
+
 /*
 File: fn_searchNearbyBuilding.sqf
 Author:

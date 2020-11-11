@@ -1,9 +1,9 @@
 /*/
 File: fn_clientDiary.sqf
 Author:
-	
+
 	Quiksilver
-	
+
 Last Modified:
 
 	6/12/2017 A3 1.78 by Quiksilver
@@ -11,7 +11,7 @@ Last Modified:
 Description:
 
 	-
-	
+
 License Notes:
 
 	Part of the EULA for this framework is to ensure this file executes as normal.
@@ -23,27 +23,27 @@ __________________________________________________________/*/
 {
 	player createDiarySubject _x;
 } forEach [
-	['QS_diary_hotkeys','Key Bindings'],
-	['QS_diary_rules','Rules'],
-	['QS_diary_radio','Radio Channels'],
-	['QS_diary_roles','Roles'],
-	['QS_diary_mods','Mods'],
-	['QS_diary_teamspeak','Teamspeak'],
-	['QS_diary_leaderboards','Leaderboards'],
-	['QS_diary_gitmo','Gitmo'],
-	['QS_diary_fobs','FOBs'],
-	['QS_diary_revive','Revive'],
-	['QS_diary_inventory','Inventory']
+	['QS_diary_hotkeys','Гарячi Клавiшi'],
+	['QS_diary_rules','Правила'],
+	['QS_diary_radio','Канали радiо'],
+	['QS_diary_roles','Ролi'],
+	['QS_diary_mods','Модифiкацiї'],
+	['QS_diary_teamspeak','Зв́’язатись з нами'],
+	['QS_diary_leaderboards','Дошка лiдерiв'],
+	['QS_diary_gitmo','В’язниця'],
+	['QS_diary_fobs','FOB-и (ПОБ-и)'],
+	['QS_diary_revive','Оживлення'],
+	['QS_diary_inventory','iнвентар']
 ];
 
 /*/========== Create Diary Records/*/
 
 if ((missionNamespace getVariable ['QS_missionConfig_aoType','']) isEqualTo 'GRID') then {
-	_description = format ['After the war between NATO and CSAT ended in an uneasy truce, an opportunistic insurgency sponsored by surrounding nations crushed local militias and moved in to fill the power vacuum.<br/><br/>They have been destabilizing the region and threatening to pull NATO and CSAT back into open conflict on %1.<br/><br/>Moving around using an old wartime tunnel network, they have thus far thwarted low-cost attempts to destroy the insurgency with drone warfare.<br/><br/>In a last ditch effort, NATO has deployed boots on the ground to root out the determined enemy and bring peace to %1.',worldName];
+	_description = format ['Пiсля вiйни мiж NATO та CSAT що завершилась хитким перемир’ям, опортунiстичнi повстанцi, що спонсувались навколишнiми країнами, протистояли мiсцевiй мiлiцiї та заповнили вакуум, що втворився за вiдсутностi сили.<br/><br/>Вони дестабiлiзували регiон та погружують втягнути NATO та CSAT знову у вiдкрите протистояння на %1.<br/><br/>Використовуючи стару мережу тунелiв часiв вiйни, вони досi перешкоджають кволим спробам знищити повстанськi сили за допомогою дронiв.<br/><br/>В останнiй спробi знищити ворога NATO розгорнула пiдроздiли на мiсцях на %1.',worldName];
 	player createDiaryRecord [
 		'Diary',
 		[
-			(format ['%1 Campaign',worldName]),
+			(format ['%1 Кампанiя',worldName]),
 			_description
 		]
 	];
@@ -54,43 +54,43 @@ if ((missionNamespace getVariable ['QS_missionConfig_aoType','']) isEqualTo 'GRI
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'General channel',
-		'Subscribe to the General channel for Voice communications.<br/><br/>Transmission of music and other non-voice sounds is not permitted on this channel.<br/><br/>Verbal abuse is, of course, not tolerated.'
+		'Загальний канал',
+		'Пiд’єднайтесь до Загального каналу для голосового звязку.<br/><br/>Передача музики та iнших набридливих звукiв не дозволяється на цьому каналi.<br/><br/>Звичайно ж, уснi образи не припустимi також.'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'Platoon channels',
-		'Join a Platoon channel (Alpha, Bravo or Charlie) for inter-squad communications.<br/><br/>You can only be subscribed to one Platoon channel at a time.'
+		'Канал Взводiв',
+		'Приєднуйтесь до канал взводу (Альфа, Браво або Чарлi) для спiлкування в групi.<br/><br/>Одночасно можна пiд’єднуватись лише до одного каналу.'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'AO channels',
-		'If you are subscribed to these channels, you will automatically be added to these channels when within 2km of the Primary AO, and 1km of the Secondary AO (side mission). When you leave this area, you will no longer be able to receive or transmit on it.'
+		'Канали AO',
+		'Якщо ви пiдписанi на цi канали - вас будете автоматично додано до них коли ви будете в радiусi 2км вiд Основної Зони операцiї, та в радiусi 1км вiд Другорядної Зони операцiї (Другорядна цiль). Коли ви залишете цi зони - ви бiльше не зможете спiлкуватись в цiх каналах.'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'Aircraft channel',
-		'Pilots and UAV Operator are active on this channel.<br/><br/>Currently only Pilots and UAV Operator can transmit voice on this channel.<br/><br/>If you are not Pilot or UAV Operator, you can still listen to this channel, if you are in the Air Traffic Control tower or the TOC (map marker at base).'
+		'Канал авiацiї',
+		'Пiлоти та оператор БПЛА активнi на цьому каналi.<br/><br/>Тiльки пiлоти та Оператор БПЛА можуть спiлкуватись на цьому каналi.<br/><br/>Якщо ви не є пiлотом або оператором БПЛА, ви можете прослухати цей канал, якщо ви знаходитесь в баштi керування повiтряним рухом або ЦТО (маркер на картi).'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'Side channel',
-		'Voice communication is disabled on Side channel<br/><br/>Use General channel to transmit voice to all players on the server.'
+		'Додатковий канал',
+		'Голосовий звязок вiдключений на додатковому каналi<br/><br/>Використовуйте Загальний канал для передачi голосу всiм гравцям на серверi.'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_radio',
 	[
-		'Overview',
-		'Beta v0.9<br/><br/>A number of custom radio channels are available for use in-game.<br/><br/>To access: Press [Home] >> [Comm-Link] >> [Radio Management]<br/><br/>A Radio inventory item is required to transmit voice communications.<br/><br/>Transmission of music or other audio is only permitted over Group, Vehicle and Direct channels (when away from base).<br/><br/>Spamming and generally annoying other players using Voice communications can lead to administrative action.'
+		'Огляд',
+		'Бета v0.9<br/><br/>Для використання в грi доступнi цiлий ряд користувацьких радiоканалiв.<br/><br/>Щоб зайти: натиснiть [Home] >> [Комунiкацiя] >> [Налаштування каналiв]<br/><br/>Для передачi голосових повiдомлень потрiбна рацiя..<br/><br/>Передача музики чи звуку дозволена лише в прямий канал i транспортний канал.<br/><br/>Спам, набридлива поведiнка призведе до адмiнiстративних дiй щодо порушника.'
 	]
 ];
 
@@ -99,8 +99,8 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_inventory',
 	[
-		'Inventory Editing',
-		'Near the Crate Area and Inventory markers at base, you are able to easily customize the inventory of vehicles and ammo crates'
+		'Редагування iнвентарю',
+		'Поблизу з Вантажною Зоною та Зоною Інвентаря на базi у вас з’явиться можливiсть редагувати спорядження в транспортi та в ящиках з амунiцiєю.'
 	]
 ];
 
@@ -109,8 +109,8 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_revive',
 	[
-		'Medical Vehicles',
-		'Load incapacitated soldiers into a Medical vehicle (HEMTT Medical, Taru Medical Pod, etc) to revive them.<br/><br/>The vehicle must have sufficient Revive Tickets.<br/>Reviving a player consumes a Revive Ticket.<br/>Revive tickets can be replenished at the Base Service markers.<br/>Revive tickets correspond to number of cargo seats in the vehicle.'
+		'Медичнi транспортнi засоби',
+		'Щоб пiдняти солдата просто завантажте його в медичний транспорт (HEMTT медичний, Медичний модуль Taru i  т.i.)<br/><br/>Транспорт повинен мати потрiбну кiлькiсть квиткiв на вiдродження. Вiдродження гравцiв використовує квитки.<br/>Квитки на вiдродження можуть бути вiдновленi на Сервiсних маркерах на базi.<br/>Кiлькiсть квиткiв на вiдродження вiдповiдає кiлькостi мiсць в транспортi.'
 	]
 ];
 
@@ -119,41 +119,41 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'General',
-		(format ['Forward Operating Bases are scattered around %1.<br/><br/>Some services are available from these FOBs, and they are also locations of interest to the enemy.',worldName])
+		'Загальне',
+		(format ['Forward Operating Bases (Передовi Оперативнi Бази - ПОБ) розкиданi по всьому %1.<br/><br/>Даякi послуги доступнi на цих ПОБах, а також вони є об’єктами пiдвищеного iнтересу супротивника.',worldName])
 	]
 ];
 
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'Radar Services',
-		'When the FOB is active and held by your faction, enemy map data and radar data will be available<br/><br/>To interact with the FOBs, there is a laptop inside the main building.<br/><br/>When certain types of vehicles/crates are within a radius of the FOB, they can activate certain services.'
+		'Послуги радару',
+		'Коли ПОБ активна та утримується вашими силами - ворожi карти та радари будуть для вас доступними.<br/><br/>Для взаємодiї з ПОБами всерединi головного будинку розмiщено ноутбуки.<br/>Коли певнi типи транспорту/ящикiв пiдпадають пiд радiус дiї ПОБа - вони можуть активувати певнi сервiси.<br/>'
 	]
 ];
 
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'Respawning',
-		'Respawning is available at FOBs if several conditions are met:<br/><br/>
-		- The FOB must be online and held by your faction<br/>
-		- You must enable your personal FOB respawn. This can be done at the FOB terminal located inside the FOB HQ building<br/>
-		- You are NOT a pilot<br/>
-		- The FOB has more than 0 Respawn Tickets<br/>
-		- You have not respawned there in the past 3 minutes'
+		'Вiдродження',
+		'Вiдродження на ПОБах можливе коли дотримуються певнi умови:<br/><br/>
+		- ПОБ має працювати та утримуватися вашою фракцiєю<br/>
+		- Ви повиннi активувати ваше персональне вiдродження на ПОБi. Це можна зробити з терминалу ПОБ в головнiй будiвлi<br/>
+		- Ви не є пiлотом<br/>
+		- На ПОБi є бiльше нiж 0 квиткiв на вiдродження<br/>
+		- Ви не вiдроджувались там за останнi 3 хвилини'
 	]
 ];
 
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'Vehicle Services',
-		'Several vehicle services are available at the FOBs for Aircraft and Land Vehicles:<br/><br/>
-		- Respawn - Bring a HEMTT Mover or HEMTT Box truck to the FOB to activate Vehicle Respawn Services<br/>
-		- Repair - Bring a repair truck or crate to the FOB to activate Repair Services<br/>
-		- Fuel - Bring a fuel truck or crate to the FOB to bring Refueling Services online<br/>
-		- Ammo - Bring an Ammo truck or crate to the FOB to bring Ammo Services online<br/>
+		'Транспортнi послуги',
+		'Декiлька транспортних послуг доступнi на ПОБах для повiтрянного та наземного транспорту:<br/><br/>
+		- Вiдродження - Приведiть HEMTT Mover або HEMTT Box на ПОБ для активацiї послуги респавну транспорту (легка техніка)<br/>
+		- Ремонт - Приведiть ремонтну вантажiвку або модуль на ПОБ для активацiї послуг ремонту<br/>
+		- Заправка - Приведiть заправщик або модуль для активацiї послуг заправки<br/>
+		- Спорядження - Приведiть вантажiвку зi спорядженням або модуль для активацiї послуги переспорядження<br/>
 		'
 	]
 ];
@@ -161,16 +161,16 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'Respawn Tickets',
-		'Bring Medical Vehicles and Crates to the FOB to replenish its Revive Tickets'
+		'Квитки вiдродження',
+		'Приведiть Медичну машину або модуль на ПОБ для переспорядження його квитками вiдродження'
 	]
 ];
 
 player createDiaryRecord [
 	'QS_diary_fobs',
 	[
-		'Ammo Crate',
-		'Load Crates at base with gear and Tow or Sling to the FOB to add that gear to the FOB Ammo Crate'
+		'Модулi спорядження',
+		'Завантажте модулi на базi потрiбними речами та транспортуйте його повiтрям або землею до ПОБ щоб переспорядити його модуль спорядження'
 	]
 ];
 
@@ -179,50 +179,50 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Gitmo',
-		'Earn points by imprisoning enemies in "Gitmo".<br/><br/>Multipliers: n/a<br/><br/>Gitmo is marked on your map at base. See "Gitmo" diary tab for further details.'
+		'В’язниця',
+		'Отримуйте бали за розмiщення ворогiв у в’язницi.<br/><br/>Мультиплеєри: n/a<br/><br/>В’зницю позначено на ваших мапах на базi. Дивiться детальну iнформацiю в щоденнику'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Tower Rangers',
-		'Earn points as an infantryman by destroying the radiotower (pilots not eligible).<br/><br/>Multipliers: n/a'
+		'Рейнжер веж',
+		'Отримуйте бали за знищення радiовеж (не доступно для пiлотiв).<br/><br/>Мультиплеєри: n/a'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Gold Diggers',
-		'Earn points by collecting human trophies (gold teeth) from dead enemies (very rare).<br/><br/>Multipliers: n/a'
+		'Золотошукачi',
+		'Отримуйте бали за збирання людських частин (золотi зуби) з вбитих ворогiв (дуже сире).<br/><br/>Мультиплеєри: n/a'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Ear Slicers',
-		'Earn points by collecting human trophies (ears) from dead enemies.<br/><br/>Multipliers: n/a'
+		'Вухорiзи',
+		'Отримуйте бали за збирання людських частин (вуха) з вбитих ворогiв.<br/><br/>Мультиплеєри: n/a'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Revivalists',
-		'Earn points as a Medic by reviving fallen soldiers.<br/><br/>Multipliers: Stamina<br/><br/>Top 3 medics of the week (ending Sunday 23:59h) added to whitelisted medic slot for following week.'
+		'Оживлювач',
+		'Отримуйте бали як Медик за оживлення поранених товаришiв.<br/><br/>Мультиплеєри Топ 3 медика тижня (закiнчується в Недiлю о 23:59) додаються до бiлого списку слотiв медика на наступний тиждень. (Тимчасово не працює)'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'Transporters',
-		'Earn points as a Pilot by safely transporting soldiers to and from missions in helicopters.<br/><br/>Multipliers: Advanced Flight Model<br/><br/>Top 3 pilots of the week (ending Sunday 23:59h) added to whitelisted pilot slot for following week.<br/><br/>Sling loading is not currently supported.<br/>Vehicle cargo is not currently supported.'
+		'Транспортер',
+		'Отримуйте бали за безпечне транспортування солдатiв з/на базу гелiкоптерами.<br/><br/>Мультиплеєри: Розширена модель пiлотування<br/><br/>Топ 3 пiлоти тижня (закiнчується в Недiлю о 23:59) додаються до бiлого списку слотiв пiлотiв на наступний тиждень (Тимчасово не працює).<br/><br/>Транспортування на пiдвiсi не пiдтримується наразi.<br/>Повантаження транспорту не пiдтримується наразi.'
 	]
 ];
 player createDiaryRecord [
 	'QS_diary_leaderboards',
 	[
-		'General Info',
-		format ['<t size="2">Version 1.0</t><br/><br/>Leaderboards are reset each Monday at 00:01h.<br/><br/>Please report bugs and weird shit on the forums or to Quiksilver on TS.<br/><br/>To maintain performance and FPS, the leaderboards are synchronized every 5-10 minutes instead of continuously, and saved to database every 10-15 minutes. For this reason, points accumulated just prior to server restart may not be saved (*sadface*). Since it is new, we are experimenting with the best and most performance-friendly methods.<br/><br/>Thanks for your patience, %1!',profileName]
+		'Загальна iнформацiя',
+		format ['<t size="2">Version 1.0</t><br/><br/>Таблиця рахунку скидається кожного Понедiлка о 00:01.<br/><br/>Please report bugs and weird shit on the forums or to Quiksilver on TS.<br/><br/>To maintain performance and FPS, the leaderboards are synchronized every 5-10 minutes instead of continuously, and saved to database every 10-15 minutes. For this reason, points accumulated just prior to server restart may not be saved (*sadface*). Since it is new, we are experimenting with the best and most performance-friendly methods.<br/><br/>Thanks for your patience, %1!',profileName]
 	]
 ];
 
@@ -231,19 +231,19 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_hotkeys',
 	[
-		'Key Bindings',
+		'Гарячi Клавiшi',
 		(format ['
-		<br/>Client Menu - [Home]
-		<br/>Earplugs - [End]
-		<br/>Holster Weapon - [4]
-		<br/>Magazine Repack - [L.Ctrl]+[%2]
-		<br/>Jump - [%5] while running
-		<br/>Group Manager - [%6]
-		<br/>Tasks - [%3]
-		<br/>Hints - [%4]
-		<br/>Gestures - [Ctrl]+[Numpad x]
-		<br/>Tactical Ping - %1
-		<br/>Open and close doors - [Space]
+		<br/>Меню гравця - [Home]
+		<br/>Берушi - [End]
+		<br/>Сховати зброю за спину - [4]
+		<br/>Перепакувати магазини - [L.Ctrl]+[%2]
+		<br/>Стрибнути - [%5] пiд час бiгу
+		<br/>Менеджер груп - [%6]
+		<br/>Завдання - [%3]
+		<br/>Пiдказки - [%4]
+		<br/>Жести - [Ctrl]+[Numpad x]
+		<br/>Тактичний пiнг - %1
+		<br/>Вiдкрити або закрити дверi - [Space]
 		',(actionKeysNames 'TacticalPing'),(actionKeysNames 'ReloadMagazine'),(actionKeysNames 'Diary'),(actionKeysNames 'Help'),(actionKeysNames 'GetOver'),(actionKeysNames 'Teamswitch')])
 	]
 ];
@@ -252,11 +252,11 @@ if ((getPlayerUID player) in (['ALL'] call (missionNamespace getVariable 'QS_fnc
 	player createDiaryRecord [
 		'QS_diary_hotkeys',
 		[
-			'Staff Bindings',
+			'Клавiшi для персоналу',
 			'
-			<br/>Staff Menu Open - [Shift]+[F2]
-			<br/>Staff Menu Close - [Shift]+[F2]
-			<br/>Exit Spectate - [Shift]+[F2]
+			<br/>Вiдкрити меню персонала - [Shift]+[F2]
+			<br/>Закрити меню персонала - [Shift]+[F2]
+			<br/>Вийти з режиму спостереження - [Shift]+[F2]
 			'
 		]
 	];
@@ -293,15 +293,15 @@ player createDiaryRecord [
 		<br />
 		<br />Guideline for enforcement:
 		<br />
-		<br />-	Innocent rule violation and disruptive behavior: 
+		<br />-	Innocent rule violation and disruptive behavior:
 		<br />
 		<br />		= Verbal / Written request to cease, or warning.
-		<br /> 
+		<br />
 		<br />-	Minor or first-time rule violation:
 		<br />
 		<br />		= Kick, or 0 - 3 day ban.
 		<br />
-		<br />-	Serious or repetitive rule violation: 
+		<br />-	Serious or repetitive rule violation:
 		<br />
 		<br />		= 3 - 7 day ban.
 		<br />
@@ -319,7 +319,7 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_rules',
 	[
-		'General',
+		'Загальне',
 		(missionNamespace getVariable ['QS_missionConfig_splash_serverRules',''])
 	]
 ];
@@ -334,19 +334,19 @@ player createDiaryRecord [
 		<br />1. You MUST be on our Teamspeak server--in the correct channel--and communicable. Exception if TS is down or full.
 		<br />
 		<br />2. You MUST be a pilot to fly an aircraft.
-		<br />	If you are a non-pilot and there are less than 20 players on the server, then you may fly a hummingbird in copilot. 
+		<br />	If you are a non-pilot and there are less than 20 players on the server, then you may fly a hummingbird in copilot.
 		<br />	If there are over 20 players, you may fly a hummingbird to a side mission ONLY.
-		<br />	
+		<br />
 		<br />3. Pilots must not play infantry while in a pilot slot.
 		<br />
 		<br />4a. If you are an inexperienced pilot, please consider the time and enjoyment of others. The editor is there for a reason.
-		<br /> 
+		<br />
 		<br />4b. This is a public server. Helicopters are not private/reserved transport. A Pilots primary role is to provide timely general transport to and from objectives.
-		<br /> 
+		<br />
 		<br />-		* General transport in this context is defined as: Indiscriminate and timely transport for each and all players on the server.
 		<br />
 		<br />5. You must be able to fly AND LAND any aircraft with reasonable competence, if you do not have experience in any aircraft, you may be asked to leave the role.
-		<br />		
+		<br />
 		<br />6. Landing or slinging objects/vehicles inside of infantry spawn may result in a warning or a kick for first offense.
 		<br />
 		<br />7. Ramming enemy or intentional crashing may result in a ban without warning, try to preserve assets.
@@ -376,22 +376,23 @@ player createDiaryRecord [
 	]
 ];
 /*/
-/*/ Enable or change this if you like
+
+/*/ Enable or change this if you like/*/
 player createDiaryRecord [
 	'QS_diary_rules',
 	[
-		'Comms',
+		'Зв’язок',
 		'
-		<br />1. Spamming comms will not be tolerated
-		<br />2. Arguing on comms will not be tolerated
-		<br />3. Shouting/Screaming on comms will not be tolerated. (This includes telling a pilot they suck and can not fly to save their own life)
-		<br />4. Speaking on Global or Side will result in a kick, and if done again a ban will be issued.
-		<br />5. Speaking over side is laggy and no-one can understand you. Type on side. Talk in Group or better join us on TS
-		<br />6. Excessive mic spam will result in a kick, if done again a ban will be issued
+		<br />1. Спам в радіоканалах не допустимий
+		<br />2. Ворожнеча в радіоканалах не допустима
+		<br />3. Стрільба/Крики в радіоканалах не допустимі.
+		<br />4. Розмова у каналах Global або Side може призвести до кіку, при повторному порушенні - може призвести до бану (Ми ще у роздумах...).
+		<br />5. Розмова у каналі Side лагуча тож ніхто вас на зможе нормально розуміти. Краще пишіть в цьому каналі. Для розмови використовуйте канал Group, а ще краще - приєднуйтесь до нас у Discord
+		<br />6. Набридливий спам з використанням мікрофону призведе до кіку, за повторне порушення можна зловити бан
 		'
 	]
 ];
-/*/
+
 
 /*/-------------------------------------------------- Mods/*/
 
@@ -413,8 +414,8 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_gitmo',
 	[
-		'Enemy Capture',
-		'It is possible to capture enemies!<br/><br/>To capture an enemy soldier, you must get within 5m and aim at him. You may get a Command Surrender action on your scroll wheel. To receive full reward, bring the captive back to the Gitmo area at base. To incarcerate a prisoner into Gitmo, walk up to the Phone Booth with your prisoner, look at the Phone Booth, wait 3-5 seconds and Release your prisoner while looking at the phone booth.<br/><br/>Good hunting!'
+		'Захоплення ворогiв',
+		'Є можливiсть брати ворогiв у полон!<br/><br/>Щоб захопити ворожого солдата ви маєти пiдiйти до нього на вiдстань до 5 метрiв та виконати взаємодiю з ним. У вас повинна з’явитись Команда Капiтуляцiї в скролл-меню. Щоб отримати повну винагороду - вiдконвоюйте полоненого до в’язницi на базi. Щоб ув’язнити полоненого у в’язницi - зайдiть з ним на огороджену територiю в’язницi та Вiдпустiть полоненого не залишаючи цю територi.<br/><br/>Гарного полювання!'
 	]
 ];
 
@@ -423,12 +424,22 @@ player createDiaryRecord [
 player createDiaryRecord [
 	'QS_diary_teamspeak',
 	[
-		'TS3 Server',
+		'TeamSpeak Сервер',
 		format ['
-		<br/> Address: %1
+		<br/> Адреса: %1
 		<br/>
-		<br/> Visitors and guests welcome!
+		<br/> Завжди радi новим обличчам (голосам :) )!
 		',(missionNamespace getVariable ['QS_missionConfig_commTS',''])]
+	]
+];
+
+player createDiaryRecord [
+	'QS_diary_teamspeak',
+	[
+		'Discord Сервер',
+		format ['
+		<br/> Адреса: %1
+		',(missionNamespace getVariable ['QS_missionConfig_commDiscord',''])]
 	]
 ];
 
@@ -440,15 +451,15 @@ player createDiarySubject ['QS_diary_credits','Credits'];				// EULA relevant li
 player createDiaryRecord [
 	'QS_diary_credits',
 	[
-		'Community Editors',
-		'Your Name Here'
+		'Редактори',
+		'Prioric, varrkan_ua'
 	]
 ];
 
 ////////////////////////////////// EDIT ABOVE ///////////////////////////////////////
 
 ////////////////////////////////// DO NOT EDIT BELOW ///////////////////////////////////////
-/*/ 
+/*/
 Please do not tamper with the below lines.
 Part of license for use of this framework is to maintain accessibility for players to donate to the Apex Framework developer.
 Servers which have made it difficult or impossible for players to access this link are in violation of the EULA.
