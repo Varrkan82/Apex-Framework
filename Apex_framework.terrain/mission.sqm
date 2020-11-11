@@ -932,7 +932,7 @@ class Mission
 					flags=7;
 					class Attributes
 					{
-						description="Select role ingame";
+						description="Оберiть роль у грi";
 						isPlayable=1;
 					};
 					id=141;
