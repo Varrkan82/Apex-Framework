@@ -297,7 +297,7 @@ QS_fnc_roleDescription = {
 		_description = format ['Медик вiдповiдає за надання першої медичної допомоги дружнiм солдатам та некомбатантам.<br/><br/><img shadow="0" align="center" size="18" image="media\images\roles\%1\%2.jpg"/>',(['arid','tropic'] select (worldName in ['Tanoa'])),(uiNamespace getVariable ['QS_RSS_currentSelectedRole','rifleman'])];
 	};
 	if (_role isEqualTo 'sniper') then {
-		_description = format ['Снайпер (Потрібен DLC).<br/><br/>'Основне завдання Снайпера - розвiдка. Коли мiсiя потребує цього - снайпери можуть дезорiєнтувати та суттєво знизити моральний дух противника кiлькома влучними пострiлами з рушницi. Коли немаєконкретних цiлей снайпер шукає мiшенi по можливостi.<br/><br/><img shadow="0" align="center" size="18" image="media\images\roles\%1\%2.jpg"/>',(['arid','tropic'] select _tropical),(uiNamespace getVariable ['QS_RSS_currentSelectedRole','rifleman'])];
+		_description = format ['Снайпер (Потрібен DLC).<br/><br/>Основне завдання Снайпера - розвiдка. Коли мiсiя потребує цього - снайпери можуть дезорiєнтувати та суттєво знизити моральний дух противника кiлькома влучними пострiлами з рушницi. Коли немаєконкретних цiлей снайпер шукає мiшенi по можливостi.<br/><br/><img shadow="0" align="center" size="18" image="media\images\roles\%1\%2.jpg"/>',(['arid','tropic'] select _tropical),(uiNamespace getVariable ['QS_RSS_currentSelectedRole','rifleman'])];
 	};
 	if (_role isEqualTo 'crewman') then {
 		_description = format ['Член Екiпажу може оперувати в якостi Водiя та Стрiльця броньованої технiки (Nfyrb, БМП та БТРи).<br/><br/><img shadow="0" align="center" size="18" image="media\images\roles\%1\%2.jpg"/>',(['arid','tropic'] select _tropical),(uiNamespace getVariable ['QS_RSS_currentSelectedRole','rifleman'])];
