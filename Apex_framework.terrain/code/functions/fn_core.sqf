@@ -1966,8 +1966,8 @@ for '_x' from 0 to 1 step 0 do {
 						};
 						if (!((missionNamespace getVariable 'QS_virtualSectors_aoMortars') isEqualTo [])) then {
 							if (((missionNamespace getVariable 'QS_virtualSectors_aoMortars') select {((alive _x) && (alive (gunner _x)))}) isEqualTo []) then {
-								['sideChat',[_west,'HQ'],'Enemy mortars neutralized!'] remoteExec ['QS_fnc_remoteExecCmd',-2,_false];
-								['SC_SUB_COMPLETED',['','Mortar pit neutralized']] remoteExec ['QS_fnc_showNotification',-2,_false];
+								['sideChat',[_west,'HQ'],'Ворожі міномети нейтралізовано!'] remoteExec ['QS_fnc_remoteExecCmd',-2,_false];
+								['SC_SUB_COMPLETED',['','Мінометний розрахунок нейтралізовано']] remoteExec ['QS_fnc_showNotification',-2,_false];
 								missionNamespace setVariable ['QS_virtualSectors_aoMortars',[],_false];
 								{
 									if (_x in allMapMarkers) then {
