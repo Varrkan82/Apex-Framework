@@ -27,7 +27,7 @@ if (diag_tickTime > (player getVariable ['QS_RD_earplugging',-1])) then {
 		};
 		player setVariable ['QS_RD_soundVolume',soundVolume,FALSE];
 		player setVariable ['QS_RD_earplugs',TRUE,FALSE];
-		1 fadeSound 0.05;
+		1 fadeSound 0.5;
 	};
 	TRUE;
 };
