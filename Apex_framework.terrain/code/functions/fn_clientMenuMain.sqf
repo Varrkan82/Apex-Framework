@@ -19,7 +19,7 @@ if (_type isEqualTo 'onLoad') exitWith {
 	params ['','_display'];
 	setMousePosition (uiNamespace getVariable ['QS_ui_mousePosition',getMousePosition]);
 	(_display displayCtrl 1600) ctrlEnable TRUE;
-	(_display displayCtrl 1600) ctrlSetText 'Комункiцiя';
+	(_display displayCtrl 1600) ctrlSetText 'Комункацiя';
 	(_display displayCtrl 1600) ctrlSetToolTip 'Community Hub & Radio Control';
 	(_display displayCtrl 1601) ctrlSetText 'Зона 51';
 	(_display displayCtrl 1601) ctrlSetToolTip '';
